@@ -54,7 +54,7 @@ export const getMarkdowns = async ({
   console.log("일");
   const markdowns = await Promise.all(
     postIds.map(async (postId) => {
-      console.log("이");
+      console.log("이", postId, tokenV2, fileToken);
       const markdown = await new NotionExporter(tokenV2, fileToken).getMdString(
         postId
       );
