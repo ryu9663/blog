@@ -51,14 +51,17 @@ export const getMarkdowns = async ({
   fileToken: string;
 }) => {
   "use server";
-
+  console.log("일");
   const markdowns = await Promise.all(
     postIds.map(async (postId) => {
+      console.log("이");
       const markdown = await new NotionExporter(tokenV2, fileToken).getMdString(
         postId
       );
+      console.log("삼");
       return markdown;
     })
   );
+  console.log("사");
   return markdowns;
 };
