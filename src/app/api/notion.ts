@@ -2,7 +2,7 @@ import "server-only";
 import { Client } from "@notionhq/client";
 import { NotionToMarkdown } from "notion-to-md";
 
-export const getPosts = async (): Promise<string[]> => {
+export const getPosts = async () => {
   "use server";
 
   const fileToken = process.env.NOTION_FILE_TOKEN;
@@ -19,10 +19,10 @@ export const getPosts = async (): Promise<string[]> => {
     throw new Error("fileToken을 찾지 못했습니다.");
   }
 
-  const postIds: string[] = await getPostIds(databaseId);
-
   const notion = new Client({ auth: process.env.NOTION_KEY });
 
+  await getPostIds(databaseId);
+  const postIds: string[] = await getPostIds(databaseId);
   const markdowns = await getMarkdowns({ notion, postIds });
 
   return markdowns;
