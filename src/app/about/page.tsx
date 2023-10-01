@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 export default async function About() {
   const posts = await getPosts();
+  console.log("포스트aboutPage.tsx", posts);
 
   return (
     <main>

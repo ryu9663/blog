@@ -20,11 +20,13 @@ export const getPosts = async (): Promise<string[]> => {
   }
 
   const postIds: string[] = await getPostIds(databaseId);
+  console.log("포스트아이디", postIds);
   const markdowns: string[] = await getMarkdowns({
     postIds,
     tokenV2,
     fileToken,
   });
+  console.log("마크다운", markdowns);
 
   return markdowns;
 };
