@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 };
 
 export default async function About() {
-  "use server";
   const posts = await getPosts();
 
   return (
