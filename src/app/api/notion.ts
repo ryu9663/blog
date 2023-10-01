@@ -3,7 +3,7 @@ import NotionExporter from "notion-exporter";
 export async function getPosts() {
   "use server";
 
-  const { fileToken, tokenV2, databaseId } = validateTokens({
+  const { fileToken, tokenV2, databaseId } = await validateTokens({
     fileToken: process.env.NOTION_FILE_TOKEN,
     tokenV2: process.env.NOTION_TOKEN_V2,
     databaseId: process.env.NOTION_DATABASE_ID,
@@ -16,6 +16,8 @@ export async function getPosts() {
 }
 
 export const getPostIds = async (databaseId: string) => {
+  "use server";
+
   const { Client } = require("@notionhq/client");
   const notion = new Client({ auth: process.env.NOTION_KEY });
 
@@ -33,6 +35,8 @@ export const getMarkdowns = async ({
   tokenV2: string;
   fileToken: string;
 }) => {
+  "use server";
+
   const markdowns = await Promise.all(
     postIds.map(async (postId) => {
       const markdown = await new NotionExporter(tokenV2, fileToken).getMdString(
@@ -44,7 +48,7 @@ export const getMarkdowns = async ({
   return markdowns;
 };
 
-const validateTokens = ({
+const validateTokens = async ({
   databaseId,
   tokenV2,
   fileToken,
@@ -53,6 +57,8 @@ const validateTokens = ({
   tokenV2?: string;
   fileToken?: string;
 }) => {
+  "use server";
+
   if (!databaseId) {
     throw new Error("databaseId를 찾지 못했습니다.");
   }
