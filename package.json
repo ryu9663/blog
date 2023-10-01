@@ -10,6 +10,7 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
+    "junyeol-components": "^0.0.49",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest"
