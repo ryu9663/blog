@@ -1,24 +1,37 @@
+import "server-only";
 import NotionExporter from "notion-exporter";
+import { Client } from "@notionhq/client";
 
-export async function getPosts() {
+export const getPosts = async (): Promise<string[]> => {
   "use server";
 
-  const { fileToken, tokenV2, databaseId } = await validateTokens({
-    fileToken: process.env.NOTION_FILE_TOKEN,
-    tokenV2: process.env.NOTION_TOKEN_V2,
-    databaseId: process.env.NOTION_DATABASE_ID,
-  });
+  const fileToken = process.env.NOTION_FILE_TOKEN;
+  const tokenV2 = process.env.NOTION_TOKEN_V2;
+  const databaseId = process.env.NOTION_DATABASE_ID;
+
+  if (!databaseId) {
+    throw new Error("databaseId를 찾지 못했습니다.");
+  }
+  if (!tokenV2) {
+    throw new Error("tokenV2을 찾지 못했습니다.");
+  }
+  if (!fileToken) {
+    throw new Error("fileToken을 찾지 못했습니다.");
+  }
 
   const postIds: string[] = await getPostIds(databaseId);
-  const markdowns = await getMarkdowns({ postIds, tokenV2, fileToken });
+  const markdowns: string[] = await getMarkdowns({
+    postIds,
+    tokenV2,
+    fileToken,
+  });
 
   return markdowns;
-}
+};
 
 export const getPostIds = async (databaseId: string) => {
   "use server";
 
-  const { Client } = require("@notionhq/client");
   const notion = new Client({ auth: process.env.NOTION_KEY });
 
   const data = await notion.databases.query({ database_id: databaseId });
@@ -46,31 +59,4 @@ export const getMarkdowns = async ({
     })
   );
   return markdowns;
-};
-
-const validateTokens = async ({
-  databaseId,
-  tokenV2,
-  fileToken,
-}: {
-  databaseId?: string;
-  tokenV2?: string;
-  fileToken?: string;
-}) => {
-  "use server";
-
-  if (!databaseId) {
-    throw new Error("databaseId를 찾지 못했습니다.");
-  }
-  if (!tokenV2) {
-    throw new Error("tokenV2을 찾지 못했습니다.");
-  }
-  if (!fileToken) {
-    throw new Error("fileToken을 찾지 못했습니다.");
-  }
-  return {
-    databaseId,
-    tokenV2,
-    fileToken,
-  };
 };
