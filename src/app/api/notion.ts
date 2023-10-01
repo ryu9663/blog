@@ -1,5 +1,6 @@
 import "server-only";
 import { Client } from "@notionhq/client";
+import { NotionToMarkdown } from "notion-to-md";
 
 export const getPosts = async (): Promise<string[]> => {
   "use server";
@@ -19,9 +20,12 @@ export const getPosts = async (): Promise<string[]> => {
   }
 
   const postIds: string[] = await getPostIds(databaseId);
-  console.log("포스트아이디", postIds);
 
-  return postIds;
+  const notion = new Client({ auth: process.env.NOTION_KEY });
+
+  const markdowns = await getMarkdowns({ notion, postIds });
+
+  return markdowns;
 };
 
 export const getPostIds = async (databaseId: string) => {
@@ -30,6 +34,28 @@ export const getPostIds = async (databaseId: string) => {
   const notion = new Client({ auth: process.env.NOTION_KEY });
 
   const data = await notion.databases.query({ database_id: databaseId });
+
   const postIds = data.results.map((res: any) => res.id);
   return postIds;
+};
+
+const getMarkdowns = async ({
+  notion,
+  postIds,
+}: {
+  notion: Client;
+  postIds: string[];
+}) => {
+  "use server";
+  const n2m = new NotionToMarkdown({ notionClient: notion });
+
+  const markdowns = Promise.all(
+    postIds.map(async (postId) => {
+      const mdblocks = await n2m.pageToMarkdown(postId);
+      const mdString = n2m.toMarkdownString(mdblocks);
+      return mdString.parent;
+    })
+  );
+
+  return markdowns;
 };
