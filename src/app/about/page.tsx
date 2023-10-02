@@ -1,7 +1,10 @@
-import { getPosts } from "@/app/api/notion";
+import { Cards } from "@/app/_components/Cards";
+import { getPostMetaDatas, getPosts } from "@/app/api/notion";
 import "@/styles/_global.scss";
 import { REVALIDATE_TIME } from "@/utils/revalidate";
+import { Card } from "junyeol-components";
 import { Metadata } from "next";
+import Image from "next/image";
 import Markdown from "react-markdown";
 
 export const metadata: Metadata = {
@@ -12,15 +15,13 @@ export const metadata: Metadata = {
 export const revalidate = REVALIDATE_TIME;
 
 export default async function About() {
-  const posts = await getPosts();
-
+  const metas = await getPostMetaDatas();
+  console.log(metas);
   return (
     <main>
       hello world About
       <div style={{ marginTop: "200px" }}>
-        {posts.map((post, i) => (
-          <Markdown key={i}>{post}</Markdown>
-        ))}
+        <Cards metas={metas} />
       </div>
     </main>
   );
