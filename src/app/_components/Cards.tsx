@@ -1,5 +1,6 @@
 "use client";
-import { PostMetaDataType } from "@/app/api/notion";
+
+import { PostMetaDataType } from "@/app/api/notion/model/notionClient";
 import { Card as StorybookCard } from "junyeol-components";
 import React, { Fragment } from "react";
 interface CardsProps {
