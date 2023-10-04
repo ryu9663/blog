@@ -10,12 +10,11 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@notionhq/client": "^2.2.13",
     "axios": "^1.5.1",
     "encoding": "^0.1.13",
+    "html-react-parser": "^4.2.2",
     "junyeol-components": "^0.0.51",
     "next": "latest",
-    "notion-to-md": "^3.1.1",
     "react": "latest",
     "react-dom": "latest",
     "react-markdown": "^9.0.0",
