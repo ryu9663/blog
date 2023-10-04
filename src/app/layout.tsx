@@ -2,6 +2,7 @@ import { Header } from "@/app/_components/Header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "junyeol-components/style.css";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></Script>
+
       <body className={inter.className}>
         <Header />
         {children}
