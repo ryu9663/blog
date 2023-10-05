@@ -1,13 +1,6 @@
 @use "./palette" as *;
 
 @import url("https://cdn.jsdelivr.net/npm/prismjs@1.25.0/themes/prism.css");
-pre {
-  // pre태그의 스타일
-  //   padding: 20px;
-  //   background-color: $BLUISH-GRAY-100;
-  //   border-radius: 10px;
-  //   width: fit-content;
-}
 
 p {
   code:not([class]) {
