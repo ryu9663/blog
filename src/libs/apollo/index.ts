@@ -17,14 +17,13 @@ const authMiddleware = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-export const { getClient } = registerApolloClient(() => {
-  return new NextSSRApolloClient({
-    cache: new NextSSRInMemoryCache(),
-    link: concat(
-      authMiddleware,
-      new HttpLink({
-        uri: "https://graphql.datocms.com/",
-      })
-    ),
-  });
-});
+const httpLink = new HttpLink({ uri: "https://graphql.datocms.com/" });
+const cache = new NextSSRInMemoryCache();
+
+export const { getClient } = registerApolloClient(
+  () =>
+    new NextSSRApolloClient({
+      cache,
+      link: concat(authMiddleware, httpLink),
+    })
+);
