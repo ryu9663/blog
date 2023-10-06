@@ -10,10 +10,7 @@
     "clean": "rm -rf .next"
   },
   "dependencies": {
-    "@apollo/client": "3.8.0-rc.2",
-    "@apollo/experimental-nextjs-app-support": "^0.4.3",
     "axios": "^1.5.1",
-    "graphql": "^16.8.1",
     "html-react-parser": "^4.2.2",
     "junyeol-components": "^0.0.51",
     "next": "latest",
