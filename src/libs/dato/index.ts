@@ -1,29 +1,26 @@
-import { ApolloLink, HttpLink, concat } from "@apollo/client";
-import {
-  NextSSRInMemoryCache,
-  NextSSRApolloClient,
-} from "@apollo/experimental-nextjs-app-support/ssr";
-import { registerApolloClient } from "@apollo/experimental-nextjs-app-support/rsc";
-
-const authMiddleware = new ApolloLink((operation, forward) => {
-  // add the authorization to the headers
-  operation.setContext(({ headers = {} }) => ({
+export const performRequest = async ({
+  query,
+  variables = {},
+  includeDrafts = false,
+}: any) => {
+  const response = await fetch("https://graphql.datocms.com/", {
     headers: {
-      ...headers,
-      authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}` || null,
+      Authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
+      ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
     },
-  }));
+    method: "POST",
+    body: JSON.stringify({ query, variables }),
+  });
 
-  return forward(operation);
-});
+  const responseBody = await response.json();
 
-const httpLink = new HttpLink({ uri: "https://graphql.datocms.com/" });
-const cache = new NextSSRInMemoryCache();
+  if (!response.ok) {
+    throw new Error(
+      `${response.status} ${response.statusText}: ${JSON.stringify(
+        responseBody
+      )}`
+    );
+  }
 
-export const { getClient } = registerApolloClient(
-  () =>
-    new NextSSRApolloClient({
-      cache,
-      link: concat(authMiddleware, httpLink),
-    })
-);
+  return responseBody;
+};

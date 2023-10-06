@@ -1,4 +1,4 @@
-import { performRequest } from "@/app/api/dato";
+import { performRequest } from "@/libs/dato";
 
 const PAGE_CONTENT_QUERY = `
   query Article($ItemId: ItemId!) {
