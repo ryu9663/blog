@@ -1,7 +1,7 @@
-import parser from "html-react-parser";
 import { Metadata } from "next";
 import { getPostById } from "@/app/api/dato/getPostById";
-import { preventCLS } from "@/utils/preventCLS";
+import { convertImgTag } from "@/utils/convertImgTag";
+import HTMLReactParser from "html-react-parser";
 
 export const metadata: Metadata = {
   title: "류준열 기술 블로그 | 이력서",
@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default async function About() {
-  const { data } = await getPostById({ postId: "198173441" });
-  const markdown = preventCLS(data.aritlcle.markdown);
+  const { aritlcle } = await getPostById({ postId: "198173441" });
+  const markdown = convertImgTag(aritlcle.markdown);
   return (
     <main>
       hello world About
-      <div style={{ marginTop: "200px" }}>{parser(markdown)}</div>
+      <div style={{ marginTop: "200px" }}>{HTMLReactParser(markdown)}</div>
     </main>
   );
 }
