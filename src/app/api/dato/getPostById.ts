@@ -1,8 +1,6 @@
-import { getClient } from "@/libs/apollo";
-import { REVALIDATE_TIME } from "@/utils/revalidate";
-import { gql } from "@apollo/client";
+import { performRequest } from "@/app/api/dato";
 
-const PAGE_CONTENT_QUERY = gql`
+const PAGE_CONTENT_QUERY = `
   query Article($ItemId: ItemId!) {
     aritlcle(filter: { id: { eq: $ItemId } }) {
       id
@@ -12,15 +10,15 @@ const PAGE_CONTENT_QUERY = gql`
 `;
 
 export const getPostById = async ({ postId }: { postId: string }) => {
-  const query = await getClient().query({
-    query: PAGE_CONTENT_QUERY,
-    variables: { ItemId: postId },
-    context: {
-      fetchOptions: {
-        next: { revalidate: REVALIDATE_TIME },
+  try {
+    const { data } = await performRequest({
+      query: PAGE_CONTENT_QUERY,
+      variables: {
+        ItemId: postId,
       },
-    },
-  });
-
-  return query;
+    });
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
 };

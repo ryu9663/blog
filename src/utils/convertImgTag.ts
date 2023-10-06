@@ -1,4 +1,4 @@
-export const preventCLS = (markdown: string) => {
+export const convertImgTag = (markdown: string) => {
   const regex = /<img src="([^?]+)\?w=(\d+)&h=(\d+)" alt="([^"]+)">/g;
   const updatedStr = markdown.replace(
     regex,
