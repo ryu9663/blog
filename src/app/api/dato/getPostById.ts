@@ -1,4 +1,5 @@
 import { performRequest } from "@/libs/dato";
+import { REVALIDATE_TIME } from "@/utils/revalidate";
 
 const PAGE_CONTENT_QUERY = `
   query Article($ItemId: ItemId!) {
@@ -15,6 +16,9 @@ export const getPostById = async ({ postId }: { postId: string }) => {
       query: PAGE_CONTENT_QUERY,
       variables: {
         ItemId: postId,
+      },
+      next: {
+        revalidate: REVALIDATE_TIME,
       },
     });
     return data;
