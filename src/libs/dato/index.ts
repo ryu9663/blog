@@ -1,5 +1,3 @@
-import { REVALIDATE_TIME } from "@/utils/revalidate";
-
 export interface NextOptionType {
   dynamic?: "auto" | "force-dynamic" | "error" | "force-static";
   dynamicParams?: boolean;

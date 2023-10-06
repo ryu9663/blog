@@ -1,7 +1,7 @@
 import { performRequest } from "@/libs/dato";
-import { REVALIDATE_TIME } from "@/utils/revalidate";
+import { REVALIDATE_TIME } from "@/utils/constant";
 
-const PAGE_CONTENT_QUERY = `
+export const PAGE_CONTENT_QUERY = `
   query Article($ItemId: ItemId!) {
     aritlcle(filter: { id: { eq: $ItemId } }) {
       id
