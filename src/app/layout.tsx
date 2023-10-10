@@ -22,7 +22,7 @@ export default function RootLayout({
       <Script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></Script>
       <body className={inter.className}>
         <Header />
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );

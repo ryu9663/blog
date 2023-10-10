@@ -1,5 +1,5 @@
 import { performRequest } from "@/__mocks__/dato";
-import { PAGE_CONTENT_QUERY } from "@/app/api/dato/getPostById";
+import { GET_POST_BY_ID } from "@/app/api/dato/getPostById";
 
 describe("getPostById", () => {
   it("getPostById의 postId에 198173441를 넣으면 이력서 마크다운을 반환한다.", async () => {
@@ -12,7 +12,7 @@ describe("getPostById", () => {
 const getPostById = async ({ postId }: { postId: string }) => {
   try {
     const { data } = await performRequest({
-      query: PAGE_CONTENT_QUERY,
+      query: GET_POST_BY_ID,
       variables: {
         ItemId: postId,
       },

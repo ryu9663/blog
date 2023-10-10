@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+main {
+  margin: 100px 16px;
+}
+
 body {
   color: libs.$BLUISH-GRAY-800;
   font-family: "Pretendard Variable", Pretendard, system-ui, -apple-system,
