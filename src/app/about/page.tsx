@@ -12,9 +12,9 @@ export default async function About() {
   const { aritlcle } = await getPostById({ postId: "198173441" });
   const markdown = convertImgTag(aritlcle.markdown);
   return (
-    <main>
+    <>
       hello world About
       <div style={{ marginTop: "200px" }}>{HTMLReactParser(markdown)}</div>
-    </main>
+    </>
   );
 }

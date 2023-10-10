@@ -1,7 +1,7 @@
 import { performRequest } from "@/libs/dato";
 import { REVALIDATE_TIME } from "@/utils/constant";
 
-export const PAGE_CONTENT_QUERY = `
+export const GET_POST_BY_ID = `
   query Article($ItemId: ItemId!) {
     aritlcle(filter: { id: { eq: $ItemId } }) {
       id
@@ -13,7 +13,7 @@ export const PAGE_CONTENT_QUERY = `
 export const getPostById = async ({ postId }: { postId: string }) => {
   try {
     const { data } = await performRequest({
-      query: PAGE_CONTENT_QUERY,
+      query: GET_POST_BY_ID,
       variables: {
         ItemId: postId,
       },
