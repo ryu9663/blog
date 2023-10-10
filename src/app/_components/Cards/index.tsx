@@ -12,7 +12,7 @@ const Cards = ({ allAritlcles }: any) => {
     <div className={styles.cards_wrapper}>
       {allAritlcles.map((aritlcle: PostWithMeta) => {
         const { metaField, id } = aritlcle;
-        console.log(allAritlcles);
+
         return (
           metaField && (
             <Card
