@@ -19,7 +19,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1.25.0/prism.js"></Script>
       <body className={inter.className}>
         <Header />
         <main>{children}</main>

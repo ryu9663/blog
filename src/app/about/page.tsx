@@ -1,20 +1,29 @@
 import { Metadata } from "next";
 import { getPostById } from "@/app/api/dato/getPostById";
 import { convertImgTag } from "@/utils/convertImgTag";
-import HTMLReactParser from "html-react-parser";
-
-export const metadata: Metadata = {
-  title: "류준열 기술 블로그 | 이력서",
-  description: "프론트엔드 개발자 류준열 이력서",
-};
+import { Post } from "@/app/_components/Post";
 
 export default async function About() {
   const { aritlcle } = await getPostById({ postId: "198173441" });
-  const markdown = convertImgTag(aritlcle.markdown);
+  const { markdown: _markdown } = aritlcle;
+  const markdown = convertImgTag(_markdown);
+
   return (
     <>
-      hello world About
-      <div style={{ marginTop: "200px" }}>{HTMLReactParser(markdown)}</div>
+      <Post markdown={markdown} />
     </>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { aritlcle } = await getPostById({ postId: "198173441" });
+  const { metaField } = aritlcle;
+
+  return {
+    title: metaField.title,
+    openGraph: {
+      images: metaField.image.url,
+    },
+    description: metaField.description,
+  };
 }
