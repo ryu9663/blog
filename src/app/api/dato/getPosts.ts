@@ -1,9 +1,10 @@
 import { performRequest } from "@/libs/dato";
 import { REVALIDATE_TIME } from "@/utils/constant";
 
-export const GET_POSTS = `
+export const GET_META_FIELDS = `
   query AllArticles {
     allAritlcles {
+      id
       metaField {
         description
         title
@@ -19,7 +20,7 @@ export const GET_POSTS = `
 export const getPosts = async () => {
   try {
     const { data } = await performRequest({
-      query: GET_POSTS,
+      query: GET_META_FIELDS,
       next: {
         revalidate: REVALIDATE_TIME,
       },

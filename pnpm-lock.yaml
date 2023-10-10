@@ -12,8 +12,8 @@ dependencies:
     specifier: ^4.2.2
     version: 4.2.2(react@18.2.0)
   junyeol-components:
-    specifier: ^0.0.55
-    version: 0.0.55(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
+    specifier: ^0.0.56
+    version: 0.0.56(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
   next:
     specifier: latest
     version: 13.5.4(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0)
@@ -3860,8 +3860,8 @@ packages:
       object.values: 1.1.7
     dev: true
 
-  /junyeol-components@0.0.55(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0):
-    resolution: {integrity: sha512-ffyjWkqZXkEimobZhIXokQiHf78j9Ir8+92rSv/+hd4utgTR/FoX7uAi6J4sf48f/G96V2xMFINmFDjdmYkcTw==}
+  /junyeol-components@0.0.56(react-dom@18.2.0)(react@18.2.0)(sass@1.68.0):
+    resolution: {integrity: sha512-sMdrdw5sdPEvRo7ac9HJy8UTPS6T7RhW6ZR8PVJ5zkmU+sj5fPOD0cuqAW15AdwChiQxF4oVPrFHgKrwsVPmGQ==}
     peerDependencies:
       react: ^18.2.0
       react-dom: ^18.2.0

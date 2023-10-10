@@ -6,6 +6,14 @@ export const GET_POST_BY_ID = `
     aritlcle(filter: { id: { eq: $ItemId } }) {
       id
       markdown(markdown: true)
+      metaField {
+        description
+        title
+        image {
+          alt
+          url
+        }
+      }
     }
   }
 `;
