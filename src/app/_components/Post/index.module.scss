@@ -1,2 +1,27 @@
+@use "src/styles/libs" as *;
+
 .post_wrapper {
+  ol li {
+    list-style: decimal;
+  }
+
+  ul li {
+    list-style: disc;
+  }
+
+  pre {
+    width: fit-content;
+  }
+
+  section {
+    margin: 50px 16px;
+  }
+  @include markdown-body;
+}
+
+.post_wrapper-img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
 }

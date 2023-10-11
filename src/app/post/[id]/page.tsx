@@ -13,7 +13,6 @@ export default async function PostPage({ params }: { params: { id: string } }) {
   const markdown = convertImgTag(_markdown);
   return (
     <>
-      <span>TODO : router.push로 해도 코드스니펫 스크립트 안날아가게 하기</span>
       <Post markdown={markdown} />
     </>
   );
@@ -24,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { metaField } = aritlcle;
 
   return {
-    title: metaField.title,
+    title: "류준열의 기술 블로그 | " + metaField.title,
     openGraph: {
       images: metaField.image.url,
     },

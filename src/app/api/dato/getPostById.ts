@@ -5,7 +5,7 @@ export const GET_POST_BY_ID = `
   query Article($ItemId: ItemId!) {
     aritlcle(filter: { id: { eq: $ItemId } }) {
       id
-      markdown(markdown: true)
+      markdown(markdown: false)
       metaField {
         description
         title
