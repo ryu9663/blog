@@ -2,7 +2,7 @@ import {
   CardProps as StorybookCardProps,
   Card as StorybookCard,
 } from "junyeol-components";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface CardProps extends StorybookCardProps {
   id: number;
@@ -15,14 +15,14 @@ export const Card = ({
   description,
   boxShadow = true,
 }: CardProps) => {
-  const router = useRouter();
   return (
-    <StorybookCard
-      boxShadow={boxShadow}
-      title={title}
-      description={description}
-      image={image}
-      onClick={() => router.push(`/post/${id}`)}
-    />
+    <Link href={`/post/${id}`}>
+      <StorybookCard
+        boxShadow={boxShadow}
+        title={title}
+        description={description}
+        image={image}
+      />
+    </Link>
   );
 };
