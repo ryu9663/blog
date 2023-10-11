@@ -16,7 +16,7 @@ export const Markdown = ({ children }: { children: string }) => {
             const match = /language-(\w+)/.exec(className || "");
             return match ? (
               <>
-                {/* @ts-expect-error Server Component */}
+                {/* @ts-ignore Server Component */}
                 <SyntaxHighlighter language={match[1]} style={github}>
                   {String(children).replace(/\n$/, "")}
                 </SyntaxHighlighter>
