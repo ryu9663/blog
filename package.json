@@ -11,13 +11,16 @@
     "test": "jest --watch"
   },
   "dependencies": {
+    "@types/react-syntax-highlighter": "^15.5.8",
     "axios": "^1.5.1",
-    "html-react-parser": "^4.2.2",
+    "github-markdown-css": "^5.3.0",
     "junyeol-components": "^0.0.56",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-markdown": "^9.0.0",
+    "react-syntax-highlighter": "^15.5.0",
+    "remark-gfm": "^4.0.0",
     "server-only": "^0.0.1"
   },
   "devDependencies": {
