@@ -8,12 +8,12 @@ import { PostType } from "@/types";
 import { Card } from "@/app/_components/Cards/Card";
 
 interface CardsProps {
-  allArticles: Omit<PostType, "markdown">[];
+  articles: Pick<PostType, "id" | "metaField" | "media">[];
 }
-const Cards = ({ allArticles }: CardsProps) => {
+const Cards = ({ articles }: CardsProps) => {
   return (
     <div className={styles.cards_wrapper}>
-      {allArticles.map((article) => {
+      {articles.map((article) => {
         const { metaField, media, id } = article;
         return (
           metaField &&

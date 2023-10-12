@@ -42,17 +42,16 @@ export const GET_POST_BY_ID = `
   }
 `;
 
-export const getPostById = async <T extends keyof PostType>({
+export const getPostById = async <T>({
   postId,
 }: {
   postId: string;
 }): Promise<{
-  article: Pick<PostType, T>;
+  article: T;
 }> => {
   try {
-    console.log("쿠쿠", postId);
     const { data } = await performRequest<{
-      article: Pick<PostType, T>;
+      article: T;
     }>({
       query: GET_POST_BY_ID,
       variables: {

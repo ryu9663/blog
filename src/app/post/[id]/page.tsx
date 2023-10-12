@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const { article } = await getPostById<"markdown" | "media">({
+  const { article } = await getPostById<Pick<PostType, "markdown" | "media">>({
     postId: params.id,
   });
 
@@ -21,10 +21,10 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getPostById<"metaField">({
+  const data = await getPostById<Pick<PostType, "metaField">>({
     postId: String(params.id),
   });
-  console.log("파랑", data);
+
   const { metaField } = data.article;
 
   return {

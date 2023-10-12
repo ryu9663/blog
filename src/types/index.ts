@@ -1,5 +1,5 @@
-import "./nextSegmentType.ts";
-import "./apiResponseType.ts";
+import "./nextSegmentType";
+import "./apiResponseType";
 
 export * from "./apiResponseType";
 export * from "./nextSegmentType";

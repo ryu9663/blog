@@ -10,14 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const { allArticles } = await getPosts<{
-    allArticles: Omit<PostType, "markdown">[];
+  const { allArticles: articles } = await getPosts<{
+    allArticles: Pick<PostType, "id" | "metaField" | "media">[];
   }>();
 
   return (
     <>
       <h1 className={styles.heading}>{"프론트엔드 개발자 류준열"}</h1>
-      <Cards allArticles={allArticles} />;
+      <Cards articles={articles} />;
     </>
   );
 }
