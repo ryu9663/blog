@@ -9,23 +9,23 @@ type Props = {
 };
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const { article } = await getPostById<"markdown">({
+  const { article } = await getPostById<"markdown" | "media">({
     postId: params.id,
   });
-  const { markdown: _markdown } = article;
-  const markdown = convertImgTag(_markdown);
+
   return (
     <>
-      <Post markdown={markdown} />
+      <Post article={article} />
     </>
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { article } = await getPostById<"metaField">({
+  const data = await getPostById<"metaField">({
     postId: String(params.id),
   });
-  const { metaField } = article;
+  console.log("파랑", data);
+  const { metaField } = data.article;
 
   return {
     title: "류준열의 기술 블로그 | " + metaField.title,

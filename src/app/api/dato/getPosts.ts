@@ -1,5 +1,5 @@
 import { performRequest } from "@/libs/dato";
-import { REVALIDATE_TIME } from "@/utils/constant";
+import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_META_FIELDS = `
   query allArticles {
@@ -11,7 +11,7 @@ export const GET_META_FIELDS = `
       }
       media {
         title
-        responsiveImage {
+        responsiveImage(imgixParams: { fit: crop, w: ${IMAGE_SIZE_IN_POSTS.width}, h: ${IMAGE_SIZE_IN_POSTS.height}, auto: format }) {
           src
           sizes
           height

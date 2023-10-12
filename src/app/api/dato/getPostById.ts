@@ -1,6 +1,6 @@
 import { performRequest } from "@/libs/dato";
 import { PostType } from "@/types";
-import { REVALIDATE_TIME } from "@/utils/constant";
+import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_POST_BY_ID = `
   query Article($ItemId: ItemId!) {
@@ -13,6 +13,29 @@ export const GET_POST_BY_ID = `
         image {
           alt
           url
+        }
+        media {
+          title
+          responsiveImage(imgixParams: { fit: crop, w: ${IMAGE_SIZE_IN_POSTS.width}, h: ${IMAGE_SIZE_IN_POSTS.height}, auto: format }) {
+            src
+            sizes
+            height
+            width
+            alt
+            title
+            base64
+          }
+      }
+      media {
+        title
+        responsiveImage(imgixParams: { fit: crop, w:800 , auto: format }) {
+          src
+          sizes
+          height
+          width
+          alt
+          title
+          base64
         }
       }
     }
@@ -27,6 +50,7 @@ export const getPostById = async <T extends keyof PostType>({
   article: Pick<PostType, T>;
 }> => {
   try {
+    console.log("쿠쿠", postId);
     const { data } = await performRequest<{
       article: Pick<PostType, T>;
     }>({
@@ -36,6 +60,7 @@ export const getPostById = async <T extends keyof PostType>({
       },
       revalidate: REVALIDATE_TIME,
     });
+
     return data;
   } catch (err: unknown) {
     if (err instanceof Error) {

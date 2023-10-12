@@ -7,12 +7,10 @@ export default async function About() {
   const { article } = await getPostById<"markdown">({
     postId: "198173441",
   });
-  const { markdown: _markdown } = article;
-  const markdown = convertImgTag(_markdown);
 
   return (
     <>
-      <Post markdown={markdown} />
+      <Post article={article} />
     </>
   );
 }
