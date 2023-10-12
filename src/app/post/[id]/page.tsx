@@ -1,5 +1,6 @@
 import { Post } from "@/app/_components/Post";
 import { getPostById } from "@/app/api/dato/getPostById";
+import { PostType } from "@/types";
 import { convertImgTag } from "@/utils/convertImgTag";
 import { Metadata } from "next";
 
@@ -8,7 +9,9 @@ type Props = {
 };
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const { article } = await getPostById({ postId: params.id });
+  const { article } = await getPostById<"markdown">({
+    postId: params.id,
+  });
   const { markdown: _markdown } = article;
   const markdown = convertImgTag(_markdown);
   return (
@@ -19,7 +22,9 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { article } = await getPostById({ postId: String(params.id) });
+  const { article } = await getPostById<"metaField">({
+    postId: String(params.id),
+  });
   const { metaField } = article;
 
   return {

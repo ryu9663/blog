@@ -8,26 +8,36 @@ export const GET_META_FIELDS = `
       metaField {
         description
         title
-        image {
+      }
+      media {
+        title
+        responsiveImage {
+          src
+          sizes
+          height
+          width
           alt
-          url
+          title
+          base64
         }
+        
       }
     }
   }
 `;
 
-export const getPosts = async () => {
+export const getPosts = async <T>(): Promise<T> => {
   try {
-    const { data } = await performRequest({
+    const { data } = await performRequest<T>({
       query: GET_META_FIELDS,
-      next: {
-        revalidate: REVALIDATE_TIME,
-      },
+      revalidate: REVALIDATE_TIME,
     });
 
     return data;
-  } catch (err) {
-    console.error(err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+    throw new Error("An unknown error occurred.");
   }
 };

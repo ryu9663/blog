@@ -1,4 +1,5 @@
 import { performRequest } from "@/libs/dato";
+import { PostType } from "@/types";
 import { REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_POST_BY_ID = `
@@ -18,19 +19,28 @@ export const GET_POST_BY_ID = `
   }
 `;
 
-export const getPostById = async ({ postId }: { postId: string }) => {
+export const getPostById = async <T extends keyof PostType>({
+  postId,
+}: {
+  postId: string;
+}): Promise<{
+  article: Pick<PostType, T>;
+}> => {
   try {
-    const { data } = await performRequest({
+    const { data } = await performRequest<{
+      article: Pick<PostType, T>;
+    }>({
       query: GET_POST_BY_ID,
       variables: {
         ItemId: postId,
       },
-      next: {
-        revalidate: REVALIDATE_TIME,
-      },
+      revalidate: REVALIDATE_TIME,
     });
     return data;
-  } catch (err) {
-    console.error(err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+    throw new Error("An unknown error occurred.");
   }
 };
