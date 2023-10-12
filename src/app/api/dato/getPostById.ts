@@ -3,7 +3,7 @@ import { REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_POST_BY_ID = `
   query Article($ItemId: ItemId!) {
-    aritlcle(filter: { id: { eq: $ItemId } }) {
+    article(filter: { id: { eq: $ItemId } }) {
       id
       markdown(markdown: false)
       metaField {

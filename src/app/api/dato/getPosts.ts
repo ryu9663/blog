@@ -2,8 +2,8 @@ import { performRequest } from "@/libs/dato";
 import { REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_META_FIELDS = `
-  query AllArticles {
-    allAritlcles {
+  query allArticles {
+    allArticles {
       id
       metaField {
         description

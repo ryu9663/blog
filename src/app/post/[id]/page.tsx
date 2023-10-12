@@ -8,8 +8,8 @@ type Props = {
 };
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const { aritlcle } = await getPostById({ postId: params.id });
-  const { markdown: _markdown } = aritlcle;
+  const { article } = await getPostById({ postId: params.id });
+  const { markdown: _markdown } = article;
   const markdown = convertImgTag(_markdown);
   return (
     <>
@@ -19,8 +19,8 @@ export default async function PostPage({ params }: { params: { id: string } }) {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { aritlcle } = await getPostById({ postId: String(params.id) });
-  const { metaField } = aritlcle;
+  const { article } = await getPostById({ postId: String(params.id) });
+  const { metaField } = article;
 
   return {
     title: "류준열의 기술 블로그 | " + metaField.title,

@@ -4,8 +4,8 @@ import { convertImgTag } from "@/utils/convertImgTag";
 import { Post } from "@/app/_components/Post";
 
 export default async function About() {
-  const { aritlcle } = await getPostById({ postId: "198173441" });
-  const { markdown: _markdown } = aritlcle;
+  const { article } = await getPostById({ postId: "198173441" });
+  const { markdown: _markdown } = article;
   const markdown = convertImgTag(_markdown);
 
   return (
@@ -16,8 +16,8 @@ export default async function About() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { aritlcle } = await getPostById({ postId: "198173441" });
-  const { metaField } = aritlcle;
+  const { article } = await getPostById({ postId: "198173441" });
+  const { metaField } = article;
 
   return {
     title: metaField.title,

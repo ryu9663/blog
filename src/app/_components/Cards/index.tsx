@@ -7,11 +7,11 @@ import { PostWithMeta } from "@/types";
 
 import { Card } from "@/app/_components/Cards/Card";
 
-const Cards = ({ allAritlcles }: any) => {
+const Cards = ({ allArticles }: any) => {
   return (
     <div className={styles.cards_wrapper}>
-      {allAritlcles.map((aritlcle: PostWithMeta) => {
-        const { metaField, id } = aritlcle;
+      {allArticles.map((article: PostWithMeta) => {
+        const { metaField, id } = article;
 
         return (
           metaField && (

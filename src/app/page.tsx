@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const { allAritlcles } = await getPosts();
+  const { allArticles } = await getPosts();
 
   return (
     <>
       <h1 className={styles.heading}>{"프론트엔드 개발자 류준열"}</h1>
-      <Cards allAritlcles={allAritlcles} />;
+      <Cards allArticles={allArticles} />;
     </>
   );
 }
