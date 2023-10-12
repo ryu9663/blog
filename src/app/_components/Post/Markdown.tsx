@@ -1,7 +1,4 @@
-import { Image as DatoImage } from "react-datocms";
-
 import React from "react";
-import styles from "../Post/index.module.scss";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkdownLibrary from "react-markdown";
 import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -33,22 +30,13 @@ export const Markdown = ({ children, responsiveImage }: MarkdownProps) => {
             );
           },
           img: (image) => (
-            <>
-              {responsiveImage ? (
-                <DatoImage
-                  className={styles["post_wrapper-img"]}
-                  data={responsiveImage}
-                />
-              ) : (
-                <Image
-                  src={image.src || ""}
-                  alt={image.alt || ""}
-                  width={500}
-                  height={300}
-                  className={styles["post_wrapper-img"]}
-                />
-              )}
-            </>
+            <Image
+              src={responsiveImage?.src || ""}
+              alt={image.alt || ""}
+              placeholder="blur"
+              blurDataURL={responsiveImage?.base64}
+              {...responsiveImage}
+            />
           ),
         }}
       >

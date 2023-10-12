@@ -86,4 +86,47 @@
   @media (max-width: 767px) {
     padding: 15px;
   }
+
+  ol li {
+    list-style: decimal;
+  }
+
+  ul li {
+    list-style: disc;
+  }
+
+  pre {
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    overflow: auto;
+  }
+
+  img {
+    margin: 0 auto;
+    display: block;
+    height: auto;
+    object-fit: contain;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  section {
+    margin: 50px 16px;
+  }
+
+  h1 {
+    font-size: vars.$LARGE6X;
+  }
+  h2 {
+    font-size: vars.$LARGE4X;
+  }
+  h3 {
+    font-size: vars.$LARGE2X;
+  }
+  h4 {
+    font-size: vars.$LARGE;
+  }
 }

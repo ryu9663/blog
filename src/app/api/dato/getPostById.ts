@@ -17,7 +17,7 @@ export const GET_POST_BY_ID = `
       }
       media {
         title
-        responsiveImage(imgixParams: { fit: crop, w:800 , auto: format }) {
+        responsiveImage(imgixParams: { fit: crop, w:700 , auto: format }) {
           src
           sizes
           height
