@@ -1,5 +1,6 @@
 import { Post } from "@/app/_components/Post";
 import { getPostById } from "@/app/api/dato/getPostById";
+import { PostType } from "@/types";
 import { convertImgTag } from "@/utils/convertImgTag";
 import { Metadata } from "next";
 
@@ -8,19 +9,23 @@ type Props = {
 };
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const { aritlcle } = await getPostById({ postId: params.id });
-  const { markdown: _markdown } = aritlcle;
-  const markdown = convertImgTag(_markdown);
+  const { article } = await getPostById<Pick<PostType, "markdown" | "media">>({
+    postId: params.id,
+  });
+
   return (
     <>
-      <Post markdown={markdown} />
+      <Post article={article} />
     </>
   );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { aritlcle } = await getPostById({ postId: String(params.id) });
-  const { metaField } = aritlcle;
+  const data = await getPostById<Pick<PostType, "metaField">>({
+    postId: String(params.id),
+  });
+
+  const { metaField } = data.article;
 
   return {
     title: "류준열의 기술 블로그 | " + metaField.title,

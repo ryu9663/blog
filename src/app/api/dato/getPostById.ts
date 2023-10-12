@@ -1,9 +1,10 @@
 import { performRequest } from "@/libs/dato";
+
 import { REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_POST_BY_ID = `
   query Article($ItemId: ItemId!) {
-    aritlcle(filter: { id: { eq: $ItemId } }) {
+    article(filter: { id: { eq: $ItemId } }) {
       id
       markdown(markdown: false)
       metaField {
@@ -14,23 +15,45 @@ export const GET_POST_BY_ID = `
           url
         }
       }
+      media {
+        title
+        responsiveImage(imgixParams: { fit: crop, w:800 , auto: format }) {
+          src
+          sizes
+          height
+          width
+          alt
+          title
+          base64
+        }
+      }
     }
   }
 `;
 
-export const getPostById = async ({ postId }: { postId: string }) => {
+export const getPostById = async <T>({
+  postId,
+}: {
+  postId: string;
+}): Promise<{
+  article: T;
+}> => {
   try {
-    const { data } = await performRequest({
+    const { data } = await performRequest<{
+      article: T;
+    }>({
       query: GET_POST_BY_ID,
       variables: {
         ItemId: postId,
       },
-      next: {
-        revalidate: REVALIDATE_TIME,
-      },
+      revalidate: REVALIDATE_TIME,
     });
+
     return data;
-  } catch (err) {
-    console.error(err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+    throw new Error("An unknown error occurred.");
   }
 };

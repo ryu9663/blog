@@ -1,50 +1,54 @@
-export interface NextOptionType {
-  dynamic?: "auto" | "force-dynamic" | "error" | "force-static";
-  dynamicParams?: boolean;
-  revalidate?: false | number;
-  fetchCache?:
-    | "auto"
-    | "default-cache"
-    | "only-cache"
-    | "force-cache"
-    | "force-no-store"
-    | "default-no-store"
-    | "only-no-store";
-  runtime?: "edge" | "nodejs";
-  preferredRegion?: "auto" | "global" | "home" | ["iad1", "sfo1"];
-  maxDuration?: number;
-}
+import { REVALIDATE_TIME } from "@/utils/constant";
+
 interface DatoParameterType {
   query: string;
   variables?: { [key: string]: any };
   includeDrafts?: boolean;
-  next?: NextOptionType;
+  excludeInvalid?: boolean;
+  visualEditingBaseUrl?: string;
+  revalidate?: NextFetchRequestConfig["revalidate"];
 }
-export const performRequest = async ({
+export const performRequest = async <T>({
   query,
   variables = {},
   includeDrafts = false,
-  next = {},
-}: DatoParameterType) => {
-  const response = await fetch("https://graphql.datocms.com/", {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
-      ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
-    },
-    method: "POST",
-    body: JSON.stringify({ query, variables }),
-    next,
-  });
+  excludeInvalid = false,
+  visualEditingBaseUrl,
+  revalidate = REVALIDATE_TIME,
+}: DatoParameterType): Promise<{ data: T }> => {
+  try {
+    const response = await fetch("https://graphql.datocms.com/", {
+      headers: {
+        Authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
+        ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
+        ...(excludeInvalid ? { "X-Exclude-Invalid": "true" } : {}),
+        ...(visualEditingBaseUrl
+          ? {
+              "X-Visual-Editing": "vercel-v1",
+              "X-Base-Editing-Url": visualEditingBaseUrl,
+            }
+          : {}),
+        ...(process.env.NEXT_DATOCMS_ENVIRONMENT
+          ? { "X-Environment": process.env.NEXT_DATOCMS_ENVIRONMENT }
+          : {}),
+      },
+      method: "POST",
+      body: JSON.stringify({ query, variables }),
+      next: { revalidate },
+    });
 
-  const responseBody = await response.json();
+    const responseBody = await (response.json() as Promise<{ data: T }>);
 
-  if (!response.ok) {
-    throw new Error(
-      `${response.status} ${response.statusText}: ${JSON.stringify(
-        responseBody
-      )}`
-    );
+    if (!response.ok) {
+      throw new Error(
+        `${response.status} ${response.statusText}: ${JSON.stringify(
+          responseBody
+        )}`
+      );
+    }
+
+    return responseBody;
+  } catch (err) {
+    throw new Error((err as Error).message);
   }
-
-  return responseBody;
 };

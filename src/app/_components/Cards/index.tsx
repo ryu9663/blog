@@ -3,24 +3,30 @@
 import React from "react";
 
 import styles from "./index.module.scss";
-import { PostWithMeta } from "@/types";
+import { PostType } from "@/types";
 
 import { Card } from "@/app/_components/Cards/Card";
 
-const Cards = ({ allAritlcles }: any) => {
+interface CardsProps {
+  articles: Pick<PostType, "id" | "metaField" | "media">[];
+}
+const Cards = ({ articles }: CardsProps) => {
   return (
     <div className={styles.cards_wrapper}>
-      {allAritlcles.map((aritlcle: PostWithMeta) => {
-        const { metaField, id } = aritlcle;
-
+      {articles.map((article) => {
+        const { metaField, media, id } = article;
         return (
-          metaField && (
+          metaField &&
+          media && (
             <Card
               id={id as number}
               key={metaField.title}
-              title={metaField.title}
-              description={metaField.description}
-              image={metaField.image}
+              title={metaField?.title || "no title"}
+              description={metaField.description || "no description"}
+              image={{
+                url: media.responsiveImage.src,
+                alt: media.responsiveImage.alt,
+              }}
             />
           )
         );

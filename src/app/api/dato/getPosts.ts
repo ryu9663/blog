@@ -1,33 +1,43 @@
 import { performRequest } from "@/libs/dato";
-import { REVALIDATE_TIME } from "@/utils/constant";
+import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_META_FIELDS = `
-  query AllArticles {
-    allAritlcles {
+  query allArticles {
+    allArticles {
       id
       metaField {
         description
         title
-        image {
+      }
+      media {
+        title
+        responsiveImage(imgixParams: { fit: crop, w: ${IMAGE_SIZE_IN_POSTS.width}, h: ${IMAGE_SIZE_IN_POSTS.height}, auto: format }) {
+          src
+          sizes
+          height
+          width
           alt
-          url
+          title
+          base64
         }
+        
       }
     }
   }
 `;
 
-export const getPosts = async () => {
+export const getPosts = async <T>(): Promise<T> => {
   try {
-    const { data } = await performRequest({
+    const { data } = await performRequest<T>({
       query: GET_META_FIELDS,
-      next: {
-        revalidate: REVALIDATE_TIME,
-      },
+      revalidate: REVALIDATE_TIME,
     });
 
     return data;
-  } catch (err) {
-    console.error(err);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      throw new Error(err.message);
+    }
+    throw new Error("An unknown error occurred.");
   }
 };

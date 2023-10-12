@@ -2,6 +2,7 @@ import Cards from "@/app/_components/Cards";
 import { getPosts } from "@/app/api/dato/getPosts";
 import styles from "./page.module.scss";
 import { Metadata } from "next";
+import { PostType } from "@/types";
 
 export const metadata: Metadata = {
   title: "류준열 기술 블로그",
@@ -9,12 +10,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const { allAritlcles } = await getPosts();
+  const { allArticles: articles } = await getPosts<{
+    allArticles: Pick<PostType, "id" | "metaField" | "media">[];
+  }>();
 
   return (
     <>
       <h1 className={styles.heading}>{"프론트엔드 개발자 류준열"}</h1>
-      <Cards allAritlcles={allAritlcles} />;
+      <Cards articles={articles} />;
     </>
   );
 }

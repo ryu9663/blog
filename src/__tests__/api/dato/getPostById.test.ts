@@ -5,7 +5,7 @@ describe("getPostById", () => {
   it("getPostById의 postId에 198173441를 넣으면 이력서 마크다운을 반환한다.", async () => {
     const response = await getPostById({ postId: "198173441" });
 
-    expect(response.data.aritlcle.markdown).toEqual(cvMarkdown);
+    expect(response.data.article.markdown).toEqual(cvMarkdown);
   });
 });
 
