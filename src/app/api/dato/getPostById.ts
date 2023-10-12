@@ -1,6 +1,6 @@
 import { performRequest } from "@/libs/dato";
-import { PostType } from "@/types";
-import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
+
+import { REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_POST_BY_ID = `
   query Article($ItemId: ItemId!) {
@@ -14,17 +14,6 @@ export const GET_POST_BY_ID = `
           alt
           url
         }
-        media {
-          title
-          responsiveImage(imgixParams: { fit: crop, w: ${IMAGE_SIZE_IN_POSTS.width}, h: ${IMAGE_SIZE_IN_POSTS.height}, auto: format }) {
-            src
-            sizes
-            height
-            width
-            alt
-            title
-            base64
-          }
       }
       media {
         title
