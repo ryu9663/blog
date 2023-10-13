@@ -16,7 +16,7 @@ const Cards = ({ articles }: CardsProps) => {
     <div className={styles.cards_wrapper}>
       {articles.map((article) => {
         const { metaField, media, id } = article;
-        console.log(media);
+
         return (
           metaField &&
           media && (
