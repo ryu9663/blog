@@ -1,21 +1,13 @@
 @use "src/styles/libs" as *;
 
 .cards_wrapper {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 48px;
-
-  /* 768px 미만 */
-  @include mobile {
-    grid-template-columns: repeat(1, 240px);
-  }
-
-  /* 1024px 미만 */
-  @include tablet {
-    grid-template-columns: repeat(2, 240px);
-  }
+  max-width: 550px;
 
   /* 1024px 이상 */
   @include desktop {
-    grid-template-columns: repeat(3, 240px);
+    max-width: 750px;
   }
 }
