@@ -5,8 +5,8 @@ import React from "react";
 import styles from "./index.module.scss";
 import { PostType } from "@/types";
 
-import { Card } from "@/app/_components/Cards/Card";
 import Image from "next/image";
+import { Card } from "@/app/_components/Cards/Card";
 
 interface CardsProps {
   articles: Pick<PostType, "id" | "metaField" | "media">[];

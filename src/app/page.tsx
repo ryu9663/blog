@@ -3,6 +3,7 @@ import { getPosts } from "@/app/api/dato/getPosts";
 import styles from "./page.module.scss";
 import { Metadata } from "next";
 import { PostType } from "@/types";
+import { Posts } from "@/app/_components/Posts";
 
 export const metadata: Metadata = {
   title: "류준열 기술 블로그",
@@ -17,7 +18,10 @@ export default async function Home() {
   return (
     <>
       <h1 className={styles.heading}>{"프론트엔드 개발자 류준열"}</h1>
-      <Cards articles={articles} />;
+
+      <Posts>
+        <Cards articles={articles} />
+      </Posts>
     </>
   );
 }
