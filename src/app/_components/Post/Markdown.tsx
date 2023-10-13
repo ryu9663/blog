@@ -29,13 +29,13 @@ export const Markdown = ({ children, responsiveImage }: MarkdownProps) => {
               <code {...props}>{children}</code>
             );
           },
-          img: (image) => (
+          img: () => (
             <Image
+              {...responsiveImage}
               src={responsiveImage?.src || ""}
-              alt={image.alt || ""}
+              alt={responsiveImage?.alt || ""}
               placeholder="blur"
               blurDataURL={responsiveImage?.base64}
-              {...responsiveImage}
             />
           ),
         }}

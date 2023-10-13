@@ -10,7 +10,7 @@ interface CardProps extends StorybookCardProps {
 
 export const Card = ({
   id,
-  image,
+  Thumbnail,
   title,
   description,
   boxShadow = true,
@@ -21,7 +21,7 @@ export const Card = ({
         boxShadow={boxShadow}
         title={title}
         description={description}
-        image={image}
+        Thumbnail={Thumbnail}
       />
     </Link>
   );
