@@ -1,6 +1,6 @@
 # BLOG
 
-<https://blog-ryu9663.vercel.app/>
+https://wnsdufdl.com
 
 - next 13(app router)
 - typescript
