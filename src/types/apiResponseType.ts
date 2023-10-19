@@ -1,6 +1,9 @@
 import { CategoryType } from "junyeol-components";
 
-export type NestedObject = { [key: string]: NestedObject | string };
+export type NestedObject = {
+  //* 몇 depth인지 모르는 객체 *//
+  [key: string]: NestedObject | string;
+};
 export interface MetaField {
   description?: string;
   title?: string;

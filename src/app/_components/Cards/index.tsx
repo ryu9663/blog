@@ -3,7 +3,7 @@
 import React from "react";
 
 import styles from "./index.module.scss";
-import { NestedObject, PostType } from "@/types";
+import { PostType } from "@/types";
 
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
