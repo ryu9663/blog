@@ -1,3 +1,5 @@
+import { CategoryType } from "junyeol-components";
+
 export interface MetaField {
   description?: string;
   title?: string;
@@ -22,6 +24,8 @@ export interface MediaType {
 }
 export interface PostType {
   id: number;
+  _publishedAt: Date;
+  category: CategoryType;
   markdown: string;
   metaField: MetaField;
   media?: MediaType | null;

@@ -6,6 +6,8 @@ import "@/styles/_global.scss";
 import { Footer } from "@/app/_components/Footer";
 import { RccComponent } from "@/app/_components/RccComponent";
 
+import { Sidebar } from "@/app/_components/Sidebar";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -22,7 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <main>{children}</main>
+
+        <main>
+          {children}
+          <Sidebar />
+        </main>
         <Footer />
         <RccComponent />
       </body>
