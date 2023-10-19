@@ -1,5 +1,4 @@
 "use client";
-import { Sidebar } from "@/app/_components/Sidebar";
 import {
   Button,
   Header as StorybookHeader,
@@ -7,7 +6,7 @@ import {
 } from "junyeol-components";
 import Link from "next/link";
 
-import { SidebarBtn } from "@/app/_components/Header/SidebarBtn";
+import { SidebarBtn } from "@/app/_components/Sidebar/SidebarBtn";
 
 export const Header = () => {
   const toast = useToast();

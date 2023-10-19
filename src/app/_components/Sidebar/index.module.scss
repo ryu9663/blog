@@ -1,4 +1,4 @@
-.sidebar {
+.sidebar_wrapper {
   width: fit-content;
   position: fixed;
   top: 0;
@@ -13,6 +13,10 @@
   flex-direction: row;
   align-items: flex-start;
   gap: 20px;
+
+  .sidebar {
+    margin-top: 80px;
+  }
   &_on {
     right: 0px;
   }

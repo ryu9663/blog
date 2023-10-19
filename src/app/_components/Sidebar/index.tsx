@@ -1,17 +1,15 @@
 "use client";
-
 import {
   Category,
   SubCategoryList,
   Sidebar as StorybookSidebar,
-  Button,
 } from "junyeol-components";
+
 import Link from "next/link";
 import React from "react";
 import styles from "./index.module.scss";
 import { useHeaderStore } from "@/app/_components/Header/index.store";
-import { X } from "react-feather";
-import { SidebarBtn } from "@/app/_components/Header/SidebarBtn";
+import { SidebarBtn } from "@/app/_components/Sidebar/SidebarBtn";
 
 export const Sidebar = () => {
   const [isSidebarOn, setIsSidebarOn] = useHeaderStore((state) => [
@@ -33,68 +31,72 @@ export const Sidebar = () => {
   fourDaysAgo.setDate(currentDate.getDate() - 4);
   return (
     <div
-      className={`${styles.sidebar} ${
-        isSidebarOn ? `${styles.sidebar_on}` : styles.sidebar_off
+      className={`${styles.sidebar_wrapper} ${
+        isSidebarOn
+          ? `${styles.sidebar_wrapper_on}`
+          : styles.sidebar_wrapper_off
       } `}
     >
       <SidebarBtn />
 
-      <StorybookSidebar linkToPosts={<Link href="/">전체 보기</Link>}>
-        <ul>
-          <Category CategoryLink={<Link href="/post/dev">dev</Link>}>
-            <SubCategoryList
-              subCategories={[
-                {
-                  subCategoryLink: <Link href="/posts/dev/react">react</Link>,
-                  publishedAt: yesterday,
-                },
-                {
-                  subCategoryLink: <Link href="/posts/dev/next">next</Link>,
-                  publishedAt: threeDaysAgo,
-                },
-                {
-                  subCategoryLink: (
-                    <Link href="/posts/dev/typescript">typescript</Link>
-                  ),
-                  publishedAt: fourDaysAgo,
-                },
-                {
-                  subCategoryLink: (
-                    <Link href="/posts/dev/graphQL">graphQL</Link>
-                  ),
-                  publishedAt: fourDaysAgo,
-                },
-                {
-                  subCategoryLink: (
-                    <Link href="/posts/dev/react-query">react-query</Link>
-                  ),
-                  publishedAt: fourDaysAgo,
-                },
-                {
-                  subCategoryLink: (
-                    <Link href="/posts/dev/zustand">zustand</Link>
-                  ),
-                  publishedAt: fourDaysAgo,
-                },
-                {
-                  subCategoryLink: (
-                    <Link href="/posts/dev/javascript">javascript</Link>
-                  ),
-                  publishedAt: fourDaysAgo,
-                },
-                {
-                  subCategoryLink: <Link href="/posts/dev/html">html</Link>,
-                  publishedAt: fourDaysAgo,
-                },
-                {
-                  subCategoryLink: <Link href="/posts/dev/css">css</Link>,
-                  publishedAt: fourDaysAgo,
-                },
-              ]}
-            />
-          </Category>
-        </ul>
-      </StorybookSidebar>
+      <div className={styles.sidebar}>
+        <StorybookSidebar linkToPosts={<Link href="/">전체 보기</Link>}>
+          <ul>
+            <Category CategoryLink={<Link href="/post/dev">dev</Link>}>
+              <SubCategoryList
+                subCategories={[
+                  {
+                    subCategoryLink: <Link href="/posts/dev/react">react</Link>,
+                    publishedAt: yesterday,
+                  },
+                  {
+                    subCategoryLink: <Link href="/posts/dev/next">next</Link>,
+                    publishedAt: threeDaysAgo,
+                  },
+                  {
+                    subCategoryLink: (
+                      <Link href="/posts/dev/typescript">typescript</Link>
+                    ),
+                    publishedAt: fourDaysAgo,
+                  },
+                  {
+                    subCategoryLink: (
+                      <Link href="/posts/dev/graphQL">graphQL</Link>
+                    ),
+                    publishedAt: fourDaysAgo,
+                  },
+                  {
+                    subCategoryLink: (
+                      <Link href="/posts/dev/react-query">react-query</Link>
+                    ),
+                    publishedAt: fourDaysAgo,
+                  },
+                  {
+                    subCategoryLink: (
+                      <Link href="/posts/dev/zustand">zustand</Link>
+                    ),
+                    publishedAt: fourDaysAgo,
+                  },
+                  {
+                    subCategoryLink: (
+                      <Link href="/posts/dev/javascript">javascript</Link>
+                    ),
+                    publishedAt: fourDaysAgo,
+                  },
+                  {
+                    subCategoryLink: <Link href="/posts/dev/html">html</Link>,
+                    publishedAt: fourDaysAgo,
+                  },
+                  {
+                    subCategoryLink: <Link href="/posts/dev/css">css</Link>,
+                    publishedAt: fourDaysAgo,
+                  },
+                ]}
+              />
+            </Category>
+          </ul>
+        </StorybookSidebar>
+      </div>
     </div>
   );
 };
