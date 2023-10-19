@@ -1,11 +1,11 @@
 import { create } from "zustand";
 
-export interface HeaderStoreProps {
+export interface SidebarStoreProps {
   isSidebarOn: boolean;
   setIsSidebarOn: (isSidebarOn: boolean) => void;
 }
 
-export const useHeaderStore = create<HeaderStoreProps>((set) => ({
+export const useSidebarStore = create<SidebarStoreProps>((set) => ({
   isSidebarOn: false,
   setIsSidebarOn: (isSidebarOn: boolean) => set({ isSidebarOn }),
 }));
