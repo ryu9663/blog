@@ -4,7 +4,6 @@ import { ToastContainer } from "junyeol-components";
 
 import React from "react";
 
-// hrefastProvider 아님 이름 바꿔야함.
 export const RccComponent = () => {
   const currentDate = new Date();
 

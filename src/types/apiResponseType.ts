@@ -1,5 +1,6 @@
 import { CategoryType } from "junyeol-components";
 
+export type NestedObject = { [key: string]: NestedObject | string };
 export interface MetaField {
   description?: string;
   title?: string;
@@ -25,7 +26,9 @@ export interface MediaType {
 export interface PostType {
   id: number;
   _publishedAt: Date;
-  category: CategoryType;
+  category: {
+    category: Partial<Record<CategoryType, string>>;
+  };
   markdown: string;
   metaField: MetaField;
   media?: MediaType | null;
