@@ -1,3 +1,4 @@
+import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { CategoryType, LinkType } from "junyeol-components";
 import Link from "next/link";
 
@@ -16,31 +17,27 @@ export const formatSidebarData = (
   // 입력 배열을 순회하면서 카테고리와 서브카테고리를 추출하고 그룹화합니다.
   input.forEach((item) => {
     const publishedAt = item._publishedAt;
-    const category = {
-      linkText: Object.values(item.category)[0],
-      linkPath: Object.keys(item.category)[0],
-    };
+    const { mainCategory, subCategory } = devideCategoryObject(item.category);
+    const categoryLink = `/posts/${mainCategory}/${subCategory}`;
 
-    const categoryLink = `/posts/${category.linkPath}/${category.linkText}`;
+    const subCategoryLink = <Link href={categoryLink}>{subCategory}</Link>;
 
-    const categoryKey = Object.keys(item.category)[0] as CategoryType;
-    const subCategoryLink = (
-      <Link href={categoryLink}>{category.linkText}</Link>
-    );
-
-    if (!result[category.linkPath]) {
-      result[categoryKey] = {
-        category: categoryKey,
+    if (!result[mainCategory]) {
+      result[mainCategory] = {
+        category: mainCategory,
         subcategories: [],
       };
     }
     // 중복 제거
     if (
-      !result[categoryKey].subcategories.some(
+      !result[mainCategory].subcategories.some(
         (sub) => sub.subCategoryLink.props.href === subCategoryLink.props.href
       )
     ) {
-      result[categoryKey].subcategories.push({ subCategoryLink, publishedAt });
+      result[mainCategory].subcategories.push({
+        subCategoryLink,
+        publishedAt,
+      });
     }
   });
 
