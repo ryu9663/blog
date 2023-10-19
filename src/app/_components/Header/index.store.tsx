@@ -5,7 +5,6 @@ export interface HeaderStoreProps {
   setIsSidebarOn: (isSidebarOn: boolean) => void;
 }
 
-//zustand store
 export const useHeaderStore = create<HeaderStoreProps>((set) => ({
   isSidebarOn: false,
   setIsSidebarOn: (isSidebarOn: boolean) => set({ isSidebarOn }),
