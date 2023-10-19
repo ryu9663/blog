@@ -5,7 +5,8 @@ import {
   useToast,
 } from "junyeol-components";
 import Link from "next/link";
-import React from "react";
+
+import { SidebarBtn } from "@/app/_components/Sidebar/SidebarBtn";
 
 export const Header = () => {
   const toast = useToast();
@@ -21,6 +22,7 @@ export const Header = () => {
         <Button onClick={() => toast({ type: "success", children: "kk" })}>
           토스트 띄우기
         </Button>
+        <SidebarBtn />
       </StorybookHeader>
     </>
   );
