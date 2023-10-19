@@ -29,7 +29,7 @@ const Cards = ({ articles }: CardsProps) => {
         } = article;
         const publishedAt = new Date(_publishedAt).toLocaleDateString();
         const categoryLink = `/posts/${Object.keys(category)[0]}/${
-          Object.values(category)[1]
+          Object.values(category)[0]
         }`;
         return (
           metaField &&
@@ -40,7 +40,11 @@ const Cards = ({ articles }: CardsProps) => {
               title={metaField?.title || "no title"}
               description={metaField.description || "no description"}
               publishedAt={publishedAt}
-              subCategoryLink={<Link href="/posts">{categoryLink}</Link>}
+              subCategoryLink={
+                <Link href={`/posts/${categoryLink}`}>
+                  {Object.values(category)[1]}
+                </Link>
+              }
               Thumbnail={
                 <Image
                   {...media.responsiveImage}

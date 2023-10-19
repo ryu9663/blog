@@ -5,8 +5,7 @@ import "@/styles/_global.scss";
 import { Footer } from "@/app/_components/Footer";
 import { RccComponent } from "@/app/_components/RccComponent";
 
-import { Header } from "@/app/_components/Header";
-import { Sidebar } from "@/app/_components/Sidebar";
+import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Sidebar />
+        <SidebarWrapper />
         <main>{children}</main>
         <Footer />
         <RccComponent />
