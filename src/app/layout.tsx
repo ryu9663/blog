@@ -1,4 +1,3 @@
-import { Header } from "@/app/_components/Header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "junyeol-components/style.css";
@@ -6,6 +5,7 @@ import "@/styles/_global.scss";
 import { Footer } from "@/app/_components/Footer";
 import { RccComponent } from "@/app/_components/RccComponent";
 
+import { Header } from "@/app/_components/Header";
 import { Sidebar } from "@/app/_components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,12 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-
-        <main>
-          {children}
-          <Sidebar />
-        </main>
+        <Sidebar />
+        <main>{children}</main>
         <Footer />
         <RccComponent />
       </body>

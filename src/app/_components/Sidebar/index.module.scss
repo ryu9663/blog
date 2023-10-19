@@ -1,6 +1,23 @@
 .sidebar {
   width: fit-content;
   position: fixed;
-  right: 100px;
-  top: 80px;
+  top: 0;
+  z-index: 9999;
+  background-color: white;
+  padding: 20px 50px 20px 10px;
+  height: 100%;
+  border-left: 1px gray solid;
+  transition: all 0.5s linear;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  &_on {
+    right: 0px;
+  }
+
+  &_off {
+    right: -280px;
+  }
 }
