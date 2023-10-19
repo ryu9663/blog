@@ -7,16 +7,30 @@ import { PostType } from "@/types";
 
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
+import Link from "next/link";
 
 interface CardsProps {
-  articles: Pick<PostType, "id" | "metaField" | "media">[];
+  articles: Pick<
+    PostType,
+    "id" | "metaField" | "media" | "category" | "_publishedAt"
+  >[];
 }
+
 const Cards = ({ articles }: CardsProps) => {
   return (
     <div className={styles.cards_wrapper}>
       {articles.map((article) => {
-        const { metaField, media, id } = article;
-
+        const {
+          metaField,
+          media,
+          id,
+          _publishedAt,
+          category: { category },
+        } = article;
+        const publishedAt = new Date(_publishedAt).toLocaleDateString();
+        const categoryLink = `/posts/${Object.keys(category)[0]}/${
+          Object.values(category)[1]
+        }`;
         return (
           metaField &&
           media && (
@@ -25,6 +39,8 @@ const Cards = ({ articles }: CardsProps) => {
               key={metaField.title}
               title={metaField?.title || "no title"}
               description={metaField.description || "no description"}
+              publishedAt={publishedAt}
+              subCategoryLink={<Link href="/posts">{categoryLink}</Link>}
               Thumbnail={
                 <Image
                   {...media.responsiveImage}

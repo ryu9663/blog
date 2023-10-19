@@ -12,7 +12,10 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const { allArticles: articles } = await getPosts<{
-    allArticles: Pick<PostType, "id" | "metaField" | "media">[];
+    allArticles: Pick<
+      PostType,
+      "id" | "metaField" | "media" | "category" | "_publishedAt"
+    >[];
   }>();
 
   return (

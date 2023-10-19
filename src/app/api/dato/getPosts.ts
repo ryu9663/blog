@@ -5,6 +5,8 @@ export const GET_META_FIELDS = `
   query allArticles {
     allArticles {
       id
+      category
+      _publishedAt
       metaField {
         description
         title
@@ -32,7 +34,6 @@ export const getPosts = async <T>(): Promise<T> => {
       query: GET_META_FIELDS,
       revalidate: REVALIDATE_TIME,
     });
-
     return data;
   } catch (err: unknown) {
     if (err instanceof Error) {
