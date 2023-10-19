@@ -8,6 +8,7 @@ import { PostType } from "@/types";
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
 import Link from "next/link";
+import { devideCategoryObject } from "@/utils/getCategoryLink";
 
 interface CardsProps {
   articles: Pick<
@@ -28,9 +29,8 @@ const Cards = ({ articles }: CardsProps) => {
           category: { category },
         } = article;
         const publishedAt = new Date(_publishedAt).toLocaleDateString();
-        const categoryLink = `/posts/${Object.keys(category)[0]}/${
-          Object.values(category)[0]
-        }`;
+        const { mainCategory, subCategory } = devideCategoryObject(category);
+        const categoryLink = `/posts/${mainCategory}/${subCategory}`;
         return (
           metaField &&
           media && (
@@ -41,9 +41,7 @@ const Cards = ({ articles }: CardsProps) => {
               description={metaField.description || "no description"}
               publishedAt={publishedAt}
               subCategoryLink={
-                <Link href={`/posts/${categoryLink}`}>
-                  {Object.values(category)[1]}
-                </Link>
+                <Link href={`/posts/${categoryLink}`}>{subCategory}</Link>
               }
               Thumbnail={
                 <Image
