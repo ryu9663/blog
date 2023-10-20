@@ -9,12 +9,12 @@ import { formatSidebarData } from "@/app/_components/SidebarWrapper/utils";
 
 export const SidebarWrapper = async () => {
   const { allArticles: _subCategories } = await getCategories<{
-    allArticles: Pick<PostType, "category" | "_publishedAt">[];
+    allArticles: Pick<PostType, "category" | "_createdAt">[];
   }>();
 
   const subCategories = _subCategories.map(
-    ({ category: _category, _publishedAt }) => {
-      return { category: _category.category, _publishedAt };
+    ({ category: _category, _createdAt }) => {
+      return { category: _category.category, _createdAt };
     }
   );
 

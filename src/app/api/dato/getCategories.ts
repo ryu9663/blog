@@ -1,10 +1,10 @@
 import { performRequest } from "@/libs/dato";
-import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
+import { REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_CATEGORIES = `
   query allArticles {
     allArticles {
-        _publishedAt
+        _createdAt
         category
     }
   }

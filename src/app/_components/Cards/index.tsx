@@ -13,7 +13,7 @@ import { devideCategoryObject } from "@/utils/getCategoryLink";
 interface CardsProps {
   articles: Pick<
     PostType,
-    "id" | "metaField" | "media" | "category" | "_publishedAt"
+    "id" | "metaField" | "media" | "category" | "_createdAt"
   >[];
 }
 
@@ -25,10 +25,10 @@ const Cards = ({ articles }: CardsProps) => {
           metaField,
           media,
           id,
-          _publishedAt,
+          _createdAt,
           category: { category },
         } = article;
-        const publishedAt = new Date(_publishedAt).toLocaleDateString();
+        const createdAt = new Date(_createdAt).toLocaleDateString();
         const { mainCategory, subCategory } = devideCategoryObject(category);
         const categoryLink = `/posts/${mainCategory}/${subCategory}`;
         return (
@@ -39,7 +39,7 @@ const Cards = ({ articles }: CardsProps) => {
               key={metaField.title}
               title={metaField?.title || "no title"}
               description={metaField.description || "no description"}
-              publishedAt={publishedAt}
+              createdAt={createdAt}
               subCategoryLink={
                 <Link href={`/posts/${categoryLink}`}>{subCategory}</Link>
               }

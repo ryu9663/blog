@@ -6,6 +6,6 @@ export interface SidebarStoreProps {
 }
 
 export const useSidebarStore = create<SidebarStoreProps>((set) => ({
-  isSidebarOn: false,
+  isSidebarOn: true,
   setIsSidebarOn: (isSidebarOn: boolean) => set({ isSidebarOn }),
 }));

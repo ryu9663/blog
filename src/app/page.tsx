@@ -14,7 +14,7 @@ export default async function Home() {
   const { allArticles: articles } = await getPosts<{
     allArticles: Pick<
       PostType,
-      "id" | "metaField" | "media" | "category" | "_publishedAt"
+      "id" | "metaField" | "media" | "category" | "_createdAt"
     >[];
   }>();
 

@@ -5,18 +5,18 @@ import Link from "next/link";
 export const formatSidebarData = (
   input: {
     category: Partial<Record<CategoryType, string>>;
-    _publishedAt: Date;
+    _createdAt: string;
   }[]
 ) => {
   const result: {
     [key: string]: {
       category: CategoryType;
-      subcategories: { subCategoryLink: LinkType; publishedAt: Date }[];
+      subcategories: { subCategoryLink: LinkType; createdAt: string }[];
     };
   } = {};
   // 입력 배열을 순회하면서 카테고리와 서브카테고리를 추출하고 그룹화합니다.
   input.forEach((item) => {
-    const publishedAt = item._publishedAt;
+    const createdAt = item._createdAt;
     const { mainCategory, subCategory } = devideCategoryObject(item.category);
     const categoryLink = `/posts/${mainCategory}/${subCategory}`;
 
@@ -36,7 +36,7 @@ export const formatSidebarData = (
     ) {
       result[mainCategory].subcategories.push({
         subCategoryLink,
-        publishedAt,
+        createdAt,
       });
     }
   });

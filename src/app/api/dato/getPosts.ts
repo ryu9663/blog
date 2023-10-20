@@ -6,7 +6,7 @@ export const GET_META_FIELDS = `
     allArticles {
       id
       category
-      _publishedAt
+      _createdAt
       metaField {
         description
         title

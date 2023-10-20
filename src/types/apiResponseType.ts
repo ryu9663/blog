@@ -28,7 +28,7 @@ export interface MediaType {
 }
 export interface PostType {
   id: number;
-  _publishedAt: Date;
+  _createdAt: string;
   category: {
     category: Partial<Record<CategoryType, string>>;
   };

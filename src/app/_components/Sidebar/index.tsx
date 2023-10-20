@@ -4,7 +4,7 @@ import {
   SubCategoryList,
   Sidebar as StorybookSidebar,
   CategoryType,
-  LinkType,
+  SubCategoryType,
 } from "junyeol-components";
 
 import Link from "next/link";
@@ -17,10 +17,7 @@ import { useSidebarStore } from "@/app/_components/Sidebar/index.store";
 export interface SidebarProps {
   categories: {
     category: CategoryType;
-    subcategories: {
-      subCategoryLink: LinkType;
-      publishedAt: Date;
-    }[];
+    subcategories: SubCategoryType[];
   }[];
 }
 export const Sidebar = ({ categories }: SidebarProps) => {

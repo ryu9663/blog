@@ -14,13 +14,13 @@ export const Card = ({
   title,
   description,
   boxShadow = true,
-  publishedAt,
+  createdAt,
   subCategoryLink,
 }: CardProps) => {
   return (
     <Link href={`/post/${id}`}>
       <StorybookCard
-        publishedAt={publishedAt}
+        createdAt={createdAt}
         subCategoryLink={subCategoryLink}
         boxShadow={boxShadow}
         title={title}
