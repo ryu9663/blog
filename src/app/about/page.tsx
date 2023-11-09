@@ -5,7 +5,9 @@ import { Post } from "@/app/_components/Post";
 import { PostType } from "@/types";
 
 export default async function About() {
-  const { article } = await getPostById<Pick<PostType, "markdown">>({
+  const { article } = await getPostById<
+    Pick<PostType, "markdown" | "metaField">
+  >({
     postId: "198173441",
   });
 

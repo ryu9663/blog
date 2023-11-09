@@ -5,22 +5,22 @@ import styles from "./index.module.scss";
 import "github-markdown-css/github-markdown-light.css";
 
 import { Markdown } from "@/app/_components/Post/Markdown";
-import { MediaType, PostType } from "@/types";
+import { PostType } from "@/types";
 
 interface PostProps {
   article: {
+    metaField: PostType["metaField"];
     markdown: PostType["markdown"];
-    media?: PostType["media"];
   };
 }
 export const Post = ({ article }: PostProps) => {
-  const { markdown, media } = article;
+  const { markdown, metaField } = article;
 
   return (
     <>
       <div className={`${styles.post_wrapper} markdown-body`}>
         <section>
-          <Markdown responsiveImage={media?.responsiveImage}>
+          <Markdown responsiveImage={metaField.image.responsiveImage}>
             {markdown}
           </Markdown>
         </section>
