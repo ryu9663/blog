@@ -34,7 +34,6 @@ const Cards = ({ articles }: CardsProps) => {
         const categoryLink = `/posts/${mainCategory}/${subCategory}`;
 
         return (
-          metaField &&
           metaField.image.responsiveImage && (
             <Card
               id={id as number}
@@ -47,8 +46,6 @@ const Cards = ({ articles }: CardsProps) => {
               }
               Thumbnail={
                 <Image
-                  // {...media.responsiveImage}
-                  // src={media.responsiveImage?.src || ""}
                   width={IMAGE_SIZE_IN_POSTS.width}
                   height={IMAGE_SIZE_IN_POSTS.height}
                   src={metaField.image.responsiveImage.src || ""}
