@@ -10,6 +10,7 @@ export interface MetaField {
   image: {
     alt: string;
     url: string;
+    responsiveImage: ResponsiveImageType;
   };
 }
 

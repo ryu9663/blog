@@ -9,7 +9,9 @@ type Props = {
 };
 
 export default async function PostPage({ params }: { params: { id: string } }) {
-  const { article } = await getPostById<Pick<PostType, "markdown" | "media">>({
+  const { article } = await getPostById<
+    Pick<PostType, "markdown" | "metaField">
+  >({
     postId: params.id,
   });
 

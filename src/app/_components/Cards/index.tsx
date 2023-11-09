@@ -9,6 +9,7 @@ import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
 import Link from "next/link";
 import { devideCategoryObject } from "@/utils/getCategoryLink";
+import { IMAGE_SIZE_IN_POSTS } from "@/utils/constant";
 
 interface CardsProps {
   articles: Pick<
@@ -31,9 +32,10 @@ const Cards = ({ articles }: CardsProps) => {
         const createdAt = new Date(_createdAt).toLocaleDateString();
         const { mainCategory, subCategory } = devideCategoryObject(category);
         const categoryLink = `/posts/${mainCategory}/${subCategory}`;
+
         return (
           metaField &&
-          media && (
+          metaField.image.responsiveImage && (
             <Card
               id={id as number}
               key={metaField.title}
@@ -45,11 +47,14 @@ const Cards = ({ articles }: CardsProps) => {
               }
               Thumbnail={
                 <Image
-                  {...media.responsiveImage}
-                  src={media.responsiveImage?.src || ""}
-                  alt={media.responsiveImage?.alt || ""}
+                  // {...media.responsiveImage}
+                  // src={media.responsiveImage?.src || ""}
+                  width={IMAGE_SIZE_IN_POSTS.width}
+                  height={IMAGE_SIZE_IN_POSTS.height}
+                  src={metaField.image.responsiveImage.src || ""}
+                  alt={metaField.image.responsiveImage.alt || ""}
                   placeholder="blur"
-                  blurDataURL={media.responsiveImage?.base64}
+                  blurDataURL={metaField.image.responsiveImage.base64}
                 />
               }
             />

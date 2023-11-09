@@ -4,11 +4,11 @@ import MarkdownLibrary from "react-markdown";
 import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import remarkGfm from "remark-gfm";
 import Image from "next/image";
-import { MediaType } from "@/types";
+import { ResponsiveImageType } from "@/types";
 
 interface MarkdownProps {
   children: string;
-  responsiveImage?: MediaType["responsiveImage"] | null;
+  responsiveImage?: ResponsiveImageType;
 }
 export const Markdown = ({ children, responsiveImage }: MarkdownProps) => {
   return (
@@ -29,15 +29,6 @@ export const Markdown = ({ children, responsiveImage }: MarkdownProps) => {
               <code {...props}>{children}</code>
             );
           },
-          img: () => (
-            <Image
-              {...responsiveImage}
-              src={responsiveImage?.src || ""}
-              alt={responsiveImage?.alt || ""}
-              placeholder="blur"
-              blurDataURL={responsiveImage?.base64}
-            />
-          ),
         }}
       >
         {children}
