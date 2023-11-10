@@ -29,6 +29,16 @@ export const Markdown = ({ children, responsiveImage }: MarkdownProps) => {
               <code {...props}>{children}</code>
             );
           },
+          img: (img) => {
+            return (
+              <Image
+                width={700}
+                height={300}
+                src={img.src as string}
+                alt={img.alt as string}
+              />
+            );
+          },
         }}
       >
         {children}
