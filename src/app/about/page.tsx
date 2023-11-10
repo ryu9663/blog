@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getPostById } from "@/app/api/dato/getPostById";
-import { convertImgTag } from "@/utils/convertImgTag";
 import { Post } from "@/app/_components/Post";
 import { PostType } from "@/types";
 
