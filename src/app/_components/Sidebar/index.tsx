@@ -49,6 +49,27 @@ export const Sidebar = ({ categories }: SidebarProps) => {
             ))}
           </ul>
         </StorybookSidebar>
+        <hr />
+        <ul className={styles.other_links}>
+          <li>
+            <a href="https://wnsdufdl.tistory.com" target="_blank">
+              티스토리 블로그(이전 블로그)
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://blog.naver.com/annyeong-nicetomeetu"
+              target="_blank"
+            >
+              네이버 블로그
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/ryu9663/" target="_blank">
+              깃허브
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   );

@@ -24,6 +24,10 @@ html {
 a {
   text-decoration: none;
   color: libs.$BLUISH-GRAY-800;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 h1 {

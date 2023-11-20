@@ -12,7 +12,7 @@ export const GET_META_FIELDS = `
         title
         image {
           responsiveImage(imgixParams: { fit: crop, w: ${IMAGE_SIZE_IN_POSTS.width}, h: ${IMAGE_SIZE_IN_POSTS.height}, auto: format }) {
-            src
+            src 
             sizes
             height
             width
