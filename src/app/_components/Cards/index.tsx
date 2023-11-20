@@ -42,7 +42,7 @@ const Cards = ({ articles }: CardsProps) => {
               description={metaField.description || "no description"}
               createdAt={createdAt}
               subCategoryLink={
-                <Link href={`/posts/${categoryLink}`}>{subCategory}</Link>
+                <Link href={`${categoryLink}`}>{subCategory}</Link>
               }
               Thumbnail={
                 <Image

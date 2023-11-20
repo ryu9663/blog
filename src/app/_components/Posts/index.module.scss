@@ -1,6 +1,6 @@
 @use "src/styles/libs" as *;
 
 .post_wrapper {
-  margin-top: 100px;
+  margin: 100px 0 150px;
   @include flex-column-centerize;
 }

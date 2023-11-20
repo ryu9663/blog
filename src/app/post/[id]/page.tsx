@@ -4,11 +4,11 @@ import { PostType } from "@/types";
 import { convertImgTag } from "@/utils/convertImgTag";
 import { Metadata } from "next";
 
-type Props = {
+interface PostPageParams {
   params: { id: string };
-};
+}
 
-export default async function PostPage({ params }: { params: { id: string } }) {
+export default async function PostPage({ params }: PostPageParams) {
   const { article } = await getPostById<
     Pick<PostType, "markdown" | "metaField">
   >({
@@ -22,7 +22,9 @@ export default async function PostPage({ params }: { params: { id: string } }) {
   );
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PostPageParams): Promise<Metadata> {
   const data = await getPostById<Pick<PostType, "metaField">>({
     postId: String(params.id),
   });

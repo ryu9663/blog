@@ -20,8 +20,6 @@ export default async function Home() {
 
   return (
     <>
-      <h1 className={styles.heading}>{"프론트엔드 개발자 류준열"}</h1>
-
       <Posts>
         <Cards articles={articles} />
       </Posts>
