@@ -1,6 +1,5 @@
 import Cards from "@/app/_components/Cards";
 import { getPosts } from "@/app/api/dato/getPosts";
-import styles from "./page.module.scss";
 import { Metadata } from "next";
 import { PostType } from "@/types";
 import { Posts } from "@/app/_components/Posts";

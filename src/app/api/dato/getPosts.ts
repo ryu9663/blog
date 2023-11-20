@@ -3,7 +3,7 @@ import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_META_FIELDS = `
   query allArticles {
-    allArticles {
+    allArticles(orderBy: _createdAt_DESC) {
       id
       category
       _createdAt
