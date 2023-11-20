@@ -1,8 +1,13 @@
 "use client";
 
 import { Footer as StorybookFooter } from "junyeol-components";
-import React from "react";
+
+import styles from "./index.module.scss";
 
 export const Footer = () => {
-  return <StorybookFooter />;
+  return (
+    <div className={styles.footer_wrapper}>
+      <StorybookFooter />
+    </div>
+  );
 };

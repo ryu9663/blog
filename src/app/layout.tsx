@@ -4,8 +4,10 @@ import "junyeol-components/style.css";
 import "@/styles/_global.scss";
 import { Footer } from "@/app/_components/Footer";
 import { RccComponent } from "@/app/_components/RccComponent";
+import styles from "./page.module.scss";
 
 import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +25,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SidebarWrapper />
-        <main>{children}</main>
+        <main>
+          <Link className={styles.link} href="/">
+            <h1 className={styles.heading}>{"프론트엔드 개발자 류준열"}</h1>
+          </Link>
+
+          {children}
+        </main>
         <Footer />
         <RccComponent />
       </body>
