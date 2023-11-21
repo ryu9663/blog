@@ -9,9 +9,8 @@ import { NO_IMAGE } from "@/utils/constant";
 
 interface MarkdownProps {
   children: string;
-  responsiveImage?: ResponsiveImageType;
 }
-export const Markdown = ({ children, responsiveImage }: MarkdownProps) => {
+export const Markdown = ({ children }: MarkdownProps) => {
   return (
     <>
       <MarkdownLibrary
@@ -33,7 +32,7 @@ export const Markdown = ({ children, responsiveImage }: MarkdownProps) => {
           img: (data) => {
             return (
               <Image
-                width={700}
+                width={600}
                 height={300}
                 src={data.src || NO_IMAGE.src}
                 alt={data.alt || NO_IMAGE.alt}

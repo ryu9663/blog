@@ -15,6 +15,7 @@ const nextConfig = {
       "junesdevlog-s3.s3.ap-northeast-2.amazonaws.com",
       "img1.daumcdn.net",
       "www.datocms-assets.com",
+      "image4.coupangcdn.com",
     ],
   },
 };

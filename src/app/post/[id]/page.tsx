@@ -1,7 +1,6 @@
 import { Post } from "@/app/_components/Post";
 import { getPostById } from "@/app/api/dato/getPostById";
 import { PostType } from "@/types";
-import { convertImgTag } from "@/utils/convertImgTag";
 import { Metadata } from "next";
 
 interface PostPageParams {

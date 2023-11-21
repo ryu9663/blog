@@ -20,9 +20,7 @@ export const Post = ({ article }: PostProps) => {
     <>
       <div className={`${styles.post_wrapper} markdown-body`}>
         <section>
-          <Markdown responsiveImage={metaField.image.responsiveImage}>
-            {markdown}
-          </Markdown>
+          <Markdown>{markdown}</Markdown>
         </section>
       </div>
     </>

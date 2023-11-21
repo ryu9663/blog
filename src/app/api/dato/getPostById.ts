@@ -15,18 +15,6 @@ export const GET_POST_BY_ID = `
           url
         }
       }
-      media {
-        title
-        responsiveImage(imgixParams: { fit: crop, w:700 , auto: format }) {
-          src
-          sizes
-          height
-          width
-          alt
-          title
-          base64
-        }
-      }
     }
   }
 `;
