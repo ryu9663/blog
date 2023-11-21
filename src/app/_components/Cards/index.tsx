@@ -12,10 +12,7 @@ import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { IMAGE_SIZE_IN_POSTS } from "@/utils/constant";
 
 interface CardsProps {
-  articles: Pick<
-    PostType,
-    "id" | "metaField" | "media" | "category" | "_createdAt"
-  >[];
+  articles: Pick<PostType, "id" | "metaField" | "category" | "_createdAt">[];
 }
 
 const Cards = ({ articles }: CardsProps) => {
@@ -24,7 +21,6 @@ const Cards = ({ articles }: CardsProps) => {
       {articles.map((article) => {
         const {
           metaField,
-          media,
           id,
           _createdAt,
           category: { category },
@@ -42,7 +38,8 @@ const Cards = ({ articles }: CardsProps) => {
               description={metaField.description || "no description"}
               createdAt={createdAt}
               subCategoryLink={
-                <Link href={`${categoryLink}`}>{subCategory}</Link>
+                //  <Link href={`${categoryLink}`}>{subCategory}</Link>
+                <>{subCategory}</>
               }
               Thumbnail={
                 <Image
