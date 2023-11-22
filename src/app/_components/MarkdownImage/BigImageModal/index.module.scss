@@ -1,0 +1,24 @@
+@use "src/styles/libs" as *;
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 998;
+  cursor: pointer;
+
+  @include flex-row-centerize;
+  @include priority-background-layer;
+}
+
+.fill_img_wrapper {
+  overflow: auto;
+  width: 90%;
+  height: 90%;
+  @include priority-focus-layer;
+  & > .img {
+    cursor: auto;
+  }
+}
