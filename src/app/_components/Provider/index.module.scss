@@ -1,0 +1,13 @@
+@use "src/styles/libs" as *;
+
+.provider {
+  @include tablet_screen {
+    width: calc(100% - $SIDEBAR_CLOSED);
+  }
+  &.sidebar_opened {
+    @include tablet_screen {
+      width: calc(100% - $SIDEBAR_OPENED);
+    }
+  }
+  transition: width 1s;
+}

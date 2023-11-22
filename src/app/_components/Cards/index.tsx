@@ -1,10 +1,8 @@
 "use client";
 
 import React from "react";
-
 import styles from "./index.module.scss";
 import { PostType } from "@/types";
-
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
 import Link from "next/link";

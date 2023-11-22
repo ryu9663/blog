@@ -1,4 +1,5 @@
-import { Post } from "@/app/_components/Post";
+import Post from "@/app/_components/Post";
+import { useSidebarStore } from "@/app/_components/Sidebar/index.store";
 import { getPostById } from "@/app/api/dato/getPostById";
 import { PostType } from "@/types";
 import { Metadata } from "next";
@@ -7,18 +8,15 @@ interface PostPageParams {
   params: { id: string };
 }
 
-export default async function PostPage({ params }: PostPageParams) {
+export default async function PostPageFilteredById({ params }: PostPageParams) {
   const { article } = await getPostById<
     Pick<PostType, "markdown" | "metaField">
   >({
     postId: params.id,
   });
 
-  return (
-    <>
-      <Post article={article} />
-    </>
-  );
+  console.log("안녕", params.id);
+  return <Post article={article} />;
 }
 
 export async function generateMetadata({

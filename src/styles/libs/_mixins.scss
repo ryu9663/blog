@@ -80,12 +80,10 @@
   //https://github.com/sindresorhus/github-markdown-css#usage
   box-sizing: border-box;
   min-width: 200px;
-  max-width: 980px;
+  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
   padding: 45px;
-  @media (max-width: 767px) {
-    padding: 15px;
-  }
 
   ol li {
     list-style: decimal;
@@ -98,7 +96,6 @@
   pre {
     margin-left: auto;
     margin-right: auto;
-    width: 800px;
     overflow: auto;
   }
 
@@ -118,15 +115,42 @@
   }
 
   h1 {
-    font-size: vars.$LARGE6X;
+    font-size: vars.$LARGE3X;
+    @include desktop_screen {
+      font-size: vars.$LARGE6X;
+    }
   }
   h2 {
-    font-size: vars.$LARGE4X;
+    font-size: vars.$LARGE2X;
+    @include desktop_screen {
+      font-size: vars.$LARGE4X;
+    }
   }
   h3 {
-    font-size: vars.$LARGE2X;
+    font-size: vars.$LARGE;
+    @include desktop_screen {
+      font-size: vars.$LARGE2X;
+    }
   }
   h4 {
-    font-size: vars.$LARGE;
+    font-size: vars.$MEDIUM;
+    @include desktop_screen {
+      font-size: vars.$LARGE;
+    }
+  }
+}
+@mixin mobile_screen {
+  @media (max-width: #{vars.$TABLET}) {
+    @content;
+  }
+}
+@mixin tablet_screen {
+  @media (min-width: #{vars.$TABLET}) {
+    @content;
+  }
+}
+@mixin desktop_screen {
+  @media (min-width: #{vars.$DESKTOP}) {
+    @content;
   }
 }

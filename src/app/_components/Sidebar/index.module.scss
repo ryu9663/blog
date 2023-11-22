@@ -1,14 +1,15 @@
+@use "src/styles/libs" as *;
+
 .sidebar_wrapper {
   width: fit-content;
   position: fixed;
   top: 0;
   z-index: 9999;
   background-color: white;
-  padding: 20px 50px 20px 10px;
+  padding: 20px 30px;
   height: 100%;
   border-left: 1px gray solid;
   transition: all 0.5s linear;
-
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -22,11 +23,18 @@
   }
 
   &_off {
-    right: -280px;
+    right: -$SIDEBAR_OPENED;
   }
 }
 
 .other_links {
   display: flex;
   flex-direction: column;
+}
+
+.mobile_sidebar_btn {
+  display: block;
+  position: fixed;
+  top: 20px;
+  right: 20px;
 }

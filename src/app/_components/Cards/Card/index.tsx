@@ -3,6 +3,7 @@ import {
   Card as StorybookCard,
 } from "junyeol-components";
 import Link from "next/link";
+import styles from "./index.module.scss";
 
 interface CardProps extends StorybookCardProps {
   id: number;
@@ -20,6 +21,7 @@ export const Card = ({
   return (
     <Link href={`/post/${id}`}>
       <StorybookCard
+        className={styles.card}
         createdAt={createdAt}
         subCategoryLink={subCategoryLink}
         boxShadow={boxShadow}

@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 48px;
   max-width: 550px;
+  padding: 30px;
 
   /* 1024px 이상 */
   @include desktop {
