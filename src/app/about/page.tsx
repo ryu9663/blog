@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { getPostById } from "@/app/api/dato/getPostById";
-import { Post } from "@/app/_components/Post";
 import { PostType } from "@/types";
+import Post from "@/app/_components/Post";
 
 export default async function About() {
   const { article } = await getPostById<

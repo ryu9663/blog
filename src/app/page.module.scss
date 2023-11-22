@@ -1,4 +1,15 @@
-.heading {
+@use "src/styles/libs" as *;
+.heading_1 {
   text-align: center;
   margin-bottom: 30px;
+  font-size: $LARGE3X;
+  @include desktop_screen {
+    font-size: $LARGE6X;
+  }
+
+  br {
+    @include desktop_screen {
+      display: none;
+    }
+  }
 }

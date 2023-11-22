@@ -8,6 +8,7 @@ import styles from "./page.module.scss";
 
 import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
+import { Provider } from "@/app/_components/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +29,16 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <SidebarWrapper />
-        <main>
+        <Provider>
           <Link className={styles.link} href="/">
-            <h1 className={styles.heading}>{"프론트엔드 개발자 류준열"}</h1>
+            <h1 className={styles.heading_1}>
+              프론트엔드 개발자
+              <br /> 류준열
+            </h1>
           </Link>
 
           {children}
-        </main>
+        </Provider>
         <Footer />
         <RccComponent />
       </body>

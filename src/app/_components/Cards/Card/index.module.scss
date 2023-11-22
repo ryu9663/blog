@@ -1,0 +1,8 @@
+@use "src/styles/libs" as *;
+.card {
+  @include mobile_screen {
+    img {
+      display: none;
+    }
+  }
+}

@@ -1,10 +1,8 @@
-"use client";
 import React from "react";
-
 import styles from "./index.module.scss";
 import "github-markdown-css/github-markdown-light.css";
 
-import { Markdown } from "@/app/_components/Post/Markdown";
+import { Markdown } from "@/app/post/[id]/Markdown";
 import { PostType } from "@/types";
 
 interface PostProps {
@@ -13,16 +11,14 @@ interface PostProps {
     markdown: PostType["markdown"];
   };
 }
-export const Post = ({ article }: PostProps) => {
-  const { markdown, metaField } = article;
+export default function Post({ article }: PostProps) {
+  const { markdown } = article;
 
   return (
-    <>
-      <div className={`${styles.post_wrapper} markdown-body`}>
-        <section>
-          <Markdown>{markdown}</Markdown>
-        </section>
-      </div>
-    </>
+    <div className={`${styles.post_wrapper} markdown-body `}>
+      <section>
+        <Markdown>{markdown}</Markdown>
+      </section>
+    </div>
   );
-};
+}
