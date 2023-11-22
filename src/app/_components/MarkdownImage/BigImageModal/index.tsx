@@ -22,11 +22,13 @@ export const BigImageModal = ({
           className={`${styles.backdrop} ${styles["priority-0"]}`}
           onClick={handleClose}
         >
-          <div
-            className={`${styles.fill_img_wrapper} ${styles["priority-0"]}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Image className={styles.img} fill src={src} alt={alt} />
+          <div className={`${styles.fill_img_wrapper} ${styles["priority-0"]}`}>
+            <img
+              onClick={(e) => e.stopPropagation()}
+              className={styles.img}
+              src={src}
+              alt={alt}
+            />
           </div>
         </div>
       )}
