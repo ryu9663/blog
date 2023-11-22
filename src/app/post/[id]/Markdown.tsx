@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkdownLibrary from "react-markdown";
@@ -21,7 +20,6 @@ export const Markdown = ({ children }: MarkdownProps) => {
             const match = /language-(\w+)/.exec(className || "");
             return match ? (
               <>
-                {/* @ts-ignore Server Component */}
                 <SyntaxHighlighter language={match[1]} style={github}>
                   {String(children).replace(/\n$/, "")}
                 </SyntaxHighlighter>
@@ -31,12 +29,19 @@ export const Markdown = ({ children }: MarkdownProps) => {
             );
           },
           img: (data) => {
+            const { src, alt } = data;
+            const urlParams = new URLSearchParams(
+              new URL(src || NO_IMAGE.src).search
+            );
+            const width = Number(urlParams.get("w"));
+            const height = Number(urlParams.get("h"));
+
             return (
               <Image
-                width={600}
-                height={300}
-                src={data.src || NO_IMAGE.src}
-                alt={data.alt || NO_IMAGE.alt}
+                width={width || 600}
+                height={height || 300}
+                src={src || NO_IMAGE.src}
+                alt={alt || NO_IMAGE.alt}
               />
             );
           },
