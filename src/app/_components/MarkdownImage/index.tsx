@@ -25,9 +25,7 @@ export const MarkdownImage = ({
     const height = Number(urlParams.get("h"));
     const preloadImg = new Image();
     preloadImg.src = src || NO_IMAGE.src;
-    console.log(preloadImg.src);
-
-    setImg({ ...img, src: img.src, width, height });
+    setImg({ ...img, src: preloadImg.src, width, height });
   };
 
   return (
