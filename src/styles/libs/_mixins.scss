@@ -1,4 +1,5 @@
 @use "vars" as vars;
+@use "palette" as palette;
 
 @mixin border($color, $lineWidth) {
   box-shadow: inset 0 0 0 $lineWidth $color;
@@ -120,26 +121,31 @@
     margin: 50px 16px;
   }
 
-  h1 {
+  h2 {
     font-size: vars.$LARGE3X;
+    color: palette.$BLUISH-GRAY-800;
     @include desktop_screen {
       font-size: vars.$LARGE6X;
     }
   }
-  h2 {
+  h3 {
     font-size: vars.$LARGE2X;
+    color: palette.$BLUISH-GRAY-800;
     @include desktop_screen {
       font-size: vars.$LARGE4X;
     }
   }
-  h3 {
+  h4 {
     font-size: vars.$LARGE;
+    color: palette.$BLUISH-GRAY-800;
     @include desktop_screen {
       font-size: vars.$LARGE2X;
     }
   }
-  h4 {
+  h5,
+  h6 {
     font-size: vars.$MEDIUM;
+    color: palette.$BLUISH-GRAY-800;
     @include desktop_screen {
       font-size: vars.$LARGE;
     }
