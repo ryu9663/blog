@@ -15,7 +15,6 @@ export default async function PostPageFilteredById({ params }: PostPageParams) {
     postId: params.id,
   });
 
-  console.log("안녕", params.id);
   return <Post article={article} />;
 }
 
