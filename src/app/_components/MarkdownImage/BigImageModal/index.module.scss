@@ -10,11 +10,11 @@
   cursor: pointer;
 
   @include flex-row-centerize;
+  @include priority-background-layer;
 }
 
 .fill_img_wrapper {
   position: relative;
-  z-index: 999;
   width: 350px;
   height: 300px;
   @include tablet_screen {
@@ -25,6 +25,7 @@
     width: 1000px;
     height: 800px;
   }
+  @include priority-focus-layer;
   & > .img {
     cursor: auto;
   }
