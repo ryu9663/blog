@@ -14,17 +14,9 @@
 }
 
 .fill_img_wrapper {
-  position: relative;
-  width: 350px;
-  height: 300px;
-  @include tablet_screen {
-    width: 700px;
-    height: 600px;
-  }
-  @include desktop_screen {
-    width: 1000px;
-    height: 800px;
-  }
+  overflow: auto;
+  width: 90%;
+  height: 90%;
   @include priority-focus-layer;
   & > .img {
     cursor: auto;
