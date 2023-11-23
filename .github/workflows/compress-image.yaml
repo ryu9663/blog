@@ -18,3 +18,49 @@ jobs:
         uses: calibreapp/image-actions@main
         with:
           githubToken: ${{ secrets.VERCEL_TOKEN }}
+          - name: Save image sizes after compression
+        id: afterCompress
+        run: |
+          AFTER_SIZES=()
+          for file in **/*.{jpg,jpeg,png,webp}; do
+            AFTER_SIZES+=($(du -b "$file" | cut -f1))
+          done
+          echo "::set-output name=afterSizes::${AFTER_SIZES[*]}"
+
+      - name: Get Compression Results
+        run: |
+          BEFORE_SIZES=(${{ steps.beforeCompress.outputs.beforeSizes }})
+          AFTER_SIZES=(${{ steps.afterCompress.outputs.afterSizes }})
+
+          for ((i=0; i<${#BEFORE_SIZES[@]}; i++)); do
+            BEFORE_SIZE=${BEFORE_SIZES[$i]}
+            AFTER_SIZE=${AFTER_SIZES[$i]}
+            PERCENTAGE=$((100 - ((AFTER_SIZE * 100) / BEFORE_SIZE)))
+            echo "Image $i: Compression - $PERCENTAGE%"
+          done
+
+      - name: Comment on PR
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const beforeSizes = context.payload.beforeSizes;
+            const afterSizes = context.payload.afterSizes;
+
+            let comment = "📸 Image compression results:\n";
+
+            for (let i = 0; i < beforeSizes.length; i++) {
+              const beforeSize = beforeSizes[i];
+              const afterSize = afterSizes[i];
+              const percentage = 100 - (afterSize * 100) / beforeSize;
+              comment += `Image ${i + 1}: Compression - ${percentage.toFixed(2)}%\n`;
+              comment += `  Before: ${beforeSize} bytes\n`;
+              comment += `  After: ${afterSize} bytes\n`;
+            }
+
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment,
+            });
