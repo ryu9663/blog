@@ -29,25 +29,25 @@ interface SitemapType {
 const getCategoriesAndSubCategories = (
   _categories: Pick<PostType, "category">[]
 ) => {
-  const __categories = _categories.map(({ category }) => category.category);
+  const categories = _categories.map(({ category }) => category.category);
 
   const categoriesSet = new Set(
-    __categories.flatMap((item) => Object.keys(item))
+    categories.flatMap((item) => Object.keys(item))
   );
   const subCategoriesSet = new Set(
-    __categories.flatMap((item) =>
+    categories.flatMap((item) =>
       Object.entries(item).map(([key, value]) => `${key}/${value}`)
     )
   );
 
-  const categories = Array.from(categoriesSet).map(
+  const mainCategoriesUrlPath = Array.from(categoriesSet).map(
     (category) => `posts/${category}`
   );
-  const subCategories = Array.from(subCategoriesSet).map(
+  const subCategoriesUrlPath = Array.from(subCategoriesSet).map(
     (subCategory) => `posts/${subCategory}`
   );
 
-  return { categories, subCategories };
+  return { mainCategoriesUrlPath, subCategoriesUrlPath };
 };
 
 export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -60,18 +60,17 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }`);
 
-  const postIds = allPostIds.map(({ id }) => `post/${id}`);
-  const { categories, subCategories } =
+  const postIdsUrlPath = allPostIds.map(({ id }) => `post/${id}`);
+  const { mainCategoriesUrlPath, subCategoriesUrlPath } =
     getCategoriesAndSubCategories(_categories);
 
   const changeFrequency: ChangeFrequencyType = "daily";
   const routes: SitemapType[] = [
     "",
     "about",
-    "posts",
-    ...postIds,
-    ...categories,
-    ...subCategories,
+    ...postIdsUrlPath,
+    ...mainCategoriesUrlPath,
+    ...subCategoriesUrlPath,
   ].map((route) => ({
     url: `https://www.wnsdufdl.com/${route}`,
     lastModified: new Date().toISOString(),
