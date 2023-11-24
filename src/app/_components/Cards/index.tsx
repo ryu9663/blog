@@ -1,11 +1,9 @@
-"use client";
-
 import React from "react";
 import styles from "./index.module.scss";
 import { PostType } from "@/types";
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
-import Link from "next/link";
+// import Link from "next/link";
 import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { IMAGE_SIZE_IN_POSTS } from "@/utils/constant";
 
@@ -26,7 +24,6 @@ const Cards = ({ articles }: CardsProps) => {
         const createdAt = new Date(_createdAt).toLocaleDateString();
         const { mainCategory, subCategory } = devideCategoryObject(category);
         const categoryLink = `/posts/${mainCategory}/${subCategory}`;
-
         return (
           metaField.image.responsiveImage && (
             <Card
@@ -36,7 +33,7 @@ const Cards = ({ articles }: CardsProps) => {
               description={metaField.description || "no description"}
               createdAt={createdAt}
               subCategoryLink={
-                //  <Link href={`${categoryLink}`}>{subCategory}</Link>
+                // <Link href={`${categoryLink}`}>{subCategory}</Link>
                 <>{subCategory}</>
               }
               Thumbnail={
