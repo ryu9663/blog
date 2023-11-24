@@ -1,7 +1,6 @@
 import { getPostIds } from "@/app/api/dato/getPostIds";
 import { getPosts } from "@/app/api/dato/getPosts";
 import { PostType } from "@/types";
-import { Category } from "junyeol-components";
 import { MetadataRoute } from "next";
 
 type ChangeFrequencyType =
