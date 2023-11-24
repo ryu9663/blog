@@ -26,10 +26,11 @@ export const GET_META_FIELDS = `
   }
 `;
 
-export const getPosts = async <T>(): Promise<T> => {
+// ! TODO : 다음 티켓에서 다 query 넣어서 커스텀 할 수 있게 하기
+export const getPosts = async <T>(query = GET_META_FIELDS): Promise<T> => {
   try {
     const { data } = await performRequest<T>({
-      query: GET_META_FIELDS,
+      query,
       revalidate: REVALIDATE_TIME,
     });
 
