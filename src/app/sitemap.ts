@@ -26,7 +26,7 @@ interface SitemapType {
   priority?: number;
 }
 
-const getCategoriesAndSubCategories = (
+export const getCategoriesAndSubCategories = (
   _categories: Pick<PostType, "category">[]
 ) => {
   const categories = _categories.map(({ category }) => category.category);

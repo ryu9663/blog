@@ -10,10 +10,10 @@ export const GET_CATEGORIES = `
   }
 `;
 
-export const getCategories = async <T>(): Promise<T> => {
+export const getCategories = async <T>(query = GET_CATEGORIES): Promise<T> => {
   try {
     const { data } = await performRequest<T>({
-      query: GET_CATEGORIES,
+      query,
       revalidate: REVALIDATE_TIME,
     });
     return data;

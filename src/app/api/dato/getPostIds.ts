@@ -9,10 +9,12 @@ export const GET_POSTIDS = `
   }
 `;
 
-export const getPostIds = async <T>(): Promise<{ allArticles: T }> => {
+export const getPostIds = async <T>(
+  query = GET_POSTIDS
+): Promise<{ allArticles: T }> => {
   try {
     const { data } = await performRequest<{ allArticles: T }>({
-      query: GET_POSTIDS,
+      query,
       revalidate: REVALIDATE_TIME,
     });
     return data;
