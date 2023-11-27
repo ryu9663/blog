@@ -40,9 +40,15 @@ export const getCategoriesAndSubCategories = (
     )
   );
 
+  /**
+   * @description 'posts/dev
+   */
   const mainCategoriesUrlPath = Array.from(categoriesSet).map(
     (category) => `posts/${category}`
   );
+  /**
+   * @description 'posts/dev/browser
+   */
   const subCategoriesUrlPath = Array.from(subCategoriesSet).map(
     (subCategory) => `posts/${subCategory}`
   );

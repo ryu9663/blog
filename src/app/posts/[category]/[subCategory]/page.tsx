@@ -28,10 +28,14 @@ export async function generateStaticParams() {
 `);
   const { subCategoriesUrlPath } = getCategoriesAndSubCategories(categories);
 
-  return subCategoriesUrlPath.map((el) => ({
-    category: el.split("/")[1],
-    subCategory: el.split("/")[2],
-  }));
+  return subCategoriesUrlPath.map((subCategories) => {
+    const category = subCategories.split("/")[1];
+    const subCategory = subCategories.split("/")[2];
+    return {
+      category,
+      subCategory,
+    };
+  });
 }
 
 export default async function PostsPageFilteredBySubCategory({

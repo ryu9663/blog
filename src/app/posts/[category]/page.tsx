@@ -17,7 +17,7 @@ interface PostsPageFilteredByCategory {
 
 export async function generateStaticParams() {
   const { allArticles: categories } = await getCategories<{
-    allArticles: Pick<PostType, "category" | "_createdAt">[];
+    allArticles: Pick<PostType, "category">[];
   }>(`
   query allArticles {
     allArticles {
