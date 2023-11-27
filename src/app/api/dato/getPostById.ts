@@ -19,18 +19,21 @@ export const GET_POST_BY_ID = `
   }
 `;
 
-export const getPostById = async <T>({
-  postId,
-}: {
-  postId: string;
-}): Promise<{
+export const getPostById = async <T>(
+  {
+    postId,
+  }: {
+    postId: string;
+  },
+  query = GET_POST_BY_ID
+): Promise<{
   article: T;
 }> => {
   try {
     const { data } = await performRequest<{
       article: T;
     }>({
-      query: GET_POST_BY_ID,
+      query,
       variables: {
         ItemId: postId,
       },

@@ -1,11 +1,26 @@
 import Post from "@/app/_components/Post";
-import { useSidebarStore } from "@/app/_components/Sidebar/index.store";
 import { getPostById } from "@/app/api/dato/getPostById";
+import { getPosts } from "@/app/api/dato/getPosts";
 import { PostType } from "@/types";
 import { Metadata } from "next";
 
 interface PostPageParams {
   params: { id: string };
+}
+
+export async function generateStaticParams() {
+  const { allArticles: articles } = await getPosts<{
+    allArticles: Pick<PostType, "id">[];
+  }>(`
+  query allArticles {
+    allArticles(orderBy: _createdAt_DESC) {
+      id
+    }
+  }
+`);
+  return articles.map(({ id }) => ({
+    postId: id,
+  }));
 }
 
 export default async function PostPageFilteredById({ params }: PostPageParams) {

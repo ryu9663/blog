@@ -6,6 +6,8 @@ import { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
 import React from "react";
 import styles from "../page.module.scss";
+import { getCategories } from "@/app/api/dato/getCategories";
+import { getCategoriesAndSubCategories } from "@/app/sitemap";
 
 interface PostsPageFilteredBySubCategory {
   params: {
@@ -13,11 +15,33 @@ interface PostsPageFilteredBySubCategory {
     subCategory: string;
   };
 }
+
+export async function generateStaticParams() {
+  const { allArticles: categories } = await getCategories<{
+    allArticles: Pick<PostType, "category" | "_createdAt">[];
+  }>(`
+  query allArticles {
+    allArticles {
+        category
+    }
+  }
+`);
+  const { subCategoriesUrlPath } = getCategoriesAndSubCategories(categories);
+
+  return subCategoriesUrlPath.map((subCategories) => {
+    const category = subCategories.split("/")[1];
+    const subCategory = subCategories.split("/")[2];
+    return {
+      category,
+      subCategory,
+    };
+  });
+}
+
 export default async function PostsPageFilteredBySubCategory({
   params,
 }: PostsPageFilteredBySubCategory) {
   const { category, subCategory } = params;
-
   const { allArticles: articles } = await getPosts<{
     allArticles: Pick<
       PostType,
