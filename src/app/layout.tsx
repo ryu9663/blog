@@ -13,8 +13,40 @@ import { Provider } from "@/app/_components/Provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "류준열의 기술 블로그",
+  metadataBase: new URL("https://www.wnsdufdl.com/"),
+  openGraph: {
+    title: {
+      default: "류준열의 기술 블로그",
+      template: "류준열의 기술 블로그 | %s",
+    },
+    description: "프론트엔드 개발자 류준열의 기술 블로그",
+    url: "https://www.wnsdufdl.com/",
+    siteName: "류준열의 기술 블로그",
+    images: [
+      {
+        url: "/android-chrome-192x192.png",
+        width: 800,
+        height: 600,
+      },
+      { url: "/android-chrome-512x512.png", width: 1800, height: 1600 },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  title: {
+    default: "류준열의 기술 블로그",
+    template: "류준열의 기술 블로그 | %s",
+  },
   description: "류준열의 기술 블로그",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+    other: {
+      rel: "favicon-16x16.png",
+      url: "/favicon-16x16.png",
+    },
+  },
 };
 
 export default function RootLayout({

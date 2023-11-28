@@ -65,7 +65,7 @@ export async function generateMetadata({
   const { category } = params;
 
   return {
-    title: "류준열의 기술 블로그 | " + category,
+    title: category,
     // openGraph: {
     //   images: metaField.image.url,
     // },

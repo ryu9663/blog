@@ -43,7 +43,7 @@ export async function generateMetadata({
   const { metaField } = data.article;
 
   return {
-    title: "류준열의 기술 블로그 | " + metaField.title,
+    title: metaField.title,
     openGraph: {
       images: metaField.image.url,
     },
