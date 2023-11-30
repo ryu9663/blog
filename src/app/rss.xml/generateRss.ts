@@ -34,14 +34,14 @@ export const generateRss = async () => {
       title: "류준열의 기술 블로그",
       description: "류준열의 기술 블로그",
       copyright: `All rights reserved ${date.getFullYear()}, 류준열`,
-      feed_url: `${BASE_URL}/rss.xml`,
+      feed_url: `${BASE_URL}rss.xml`,
       site_url: BASE_URL,
       language: "ko",
       pubDate: date.toUTCString(),
     });
 
     posts.forEach(({ id, title, description, _createdAt }) => {
-      const url = `${BASE_URL}/post/${id}`;
+      const url = `${BASE_URL}post/${id}`;
       feed.item({
         title,
         url,
