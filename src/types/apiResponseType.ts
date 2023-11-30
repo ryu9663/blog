@@ -5,8 +5,8 @@ export type NestedObject = {
   [key: string]: NestedObject | string;
 };
 export interface MetaField {
-  description?: string;
-  title?: string;
+  description: string;
+  title: string;
   image: {
     alt: string;
     url: string;
@@ -23,10 +23,7 @@ export interface ResponsiveImageType {
   title: string;
   base64: string;
 }
-export interface MediaType {
-  title?: string;
-  responsiveImage: ResponsiveImageType;
-}
+
 export interface PostType {
   id: number;
   _createdAt: string;
@@ -35,5 +32,4 @@ export interface PostType {
   };
   markdown: string;
   metaField: MetaField;
-  media?: MediaType | null;
 }

@@ -3,9 +3,7 @@ import { Inter } from "next/font/google";
 import "junyeol-components/style.css";
 import "@/styles/_global.scss";
 import { Footer } from "@/app/_components/Footer";
-import { RccComponent } from "@/app/_components/RccComponent";
 import styles from "./page.module.scss";
-
 import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
 import { Provider } from "@/app/_components/Provider";
@@ -76,7 +74,6 @@ export default function RootLayout({
           {children}
         </Provider>
         <Footer />
-        <RccComponent />
       </body>
     </html>
   );
