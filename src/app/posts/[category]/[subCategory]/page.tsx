@@ -45,7 +45,7 @@ export default async function PostsPageFilteredBySubCategory({
   const { allArticles: articles } = await getPosts<{
     allArticles: Pick<
       PostType,
-      "id" | "metaField" | "media" | "category" | "_createdAt"
+      "id" | "metaField" | "category" | "_createdAt"
     >[];
   }>();
 

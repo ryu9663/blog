@@ -3,24 +3,23 @@ import { Inter } from "next/font/google";
 import "junyeol-components/style.css";
 import "@/styles/_global.scss";
 import { Footer } from "@/app/_components/Footer";
-import { RccComponent } from "@/app/_components/RccComponent";
 import styles from "./page.module.scss";
-
 import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
 import { Provider } from "@/app/_components/Provider";
+import { BASE_URL } from "@/utils/constant";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.wnsdufdl.com/"),
+  metadataBase: new URL(BASE_URL),
   openGraph: {
     title: {
       default: "류준열의 기술 블로그",
       template: "류준열의 기술 블로그 | %s",
     },
     description: "프론트엔드 개발자 류준열의 기술 블로그",
-    url: "https://www.wnsdufdl.com/",
+    url: BASE_URL,
     siteName: "류준열의 기술 블로그",
     images: [
       {
@@ -76,7 +75,6 @@ export default function RootLayout({
           {children}
         </Provider>
         <Footer />
-        <RccComponent />
       </body>
     </html>
   );

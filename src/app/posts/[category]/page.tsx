@@ -40,7 +40,7 @@ export default async function PostsPageFilteredByCategory({
   const { allArticles: articles } = await getPosts<{
     allArticles: Pick<
       PostType,
-      "id" | "metaField" | "media" | "category" | "_createdAt"
+      "id" | "metaField" | "category" | "_createdAt"
     >[];
   }>();
 

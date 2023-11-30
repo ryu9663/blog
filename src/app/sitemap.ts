@@ -1,6 +1,7 @@
 import { getPostIds } from "@/app/api/dato/getPostIds";
 import { getPosts } from "@/app/api/dato/getPosts";
 import { PostType } from "@/types";
+import { BASE_URL } from "@/utils/constant";
 import { MetadataRoute } from "next";
 
 type ChangeFrequencyType =
@@ -78,7 +79,7 @@ export default async function Sitemap(): Promise<MetadataRoute.Sitemap> {
     ...mainCategoriesUrlPath,
     ...subCategoriesUrlPath,
   ].map((route) => ({
-    url: `https://www.wnsdufdl.com/${route}`,
+    url: `${BASE_URL}${route}`,
     lastModified: new Date().toISOString(),
     changeFrequency,
     priority: 1,

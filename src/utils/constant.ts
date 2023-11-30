@@ -10,3 +10,5 @@ export const NO_IMAGE = {
   src: "https://www.datocms-assets.com/107137/1699598396-noimage.jpg",
   alt: "No image",
 };
+
+export const BASE_URL = "https://www.wnsdufdl.com/";
