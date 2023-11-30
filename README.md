@@ -1,6 +1,6 @@
 # BLOG
 
-https://wnsdufdl.com
+<https://wnsdufdl.com>
 
 - next 13(app router)
 - typescript
