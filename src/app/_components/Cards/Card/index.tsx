@@ -18,6 +18,7 @@ export const Card = ({
   createdAt,
   subCategoryLink,
 }: CardProps) => {
+  console.log("hi");
   return (
     <Link href={`/post/${id}`}>
       <StorybookCard
