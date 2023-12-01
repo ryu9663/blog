@@ -7,17 +7,26 @@ on:
     branches:
       - main
 jobs:
-  Deploy-Production:
+  version_up_and_deploy_production:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set new version on main merge
+        if: github.event_name == 'push' && github.event.ref == 'refs/heads/main'
+        run: |
+          if [[ $(grep -E '^\s*-\s*name:\s*Set new patch version' .github/workflows/cd.yml) ]]; then
+            npm version patch -m 'ver: %s'
+          elif [[ $(grep -E '^\s*-\s*name:\s*Set new minor version' .github/workflows/cd.yml) ]]; then
+            npm version minor -m 'ver: %s'
+          elif [[ $(grep -E '^\s*-\s*name:\s*Set new major version' .github/workflows/cd.yml) ]]; then
+            npm version major -m 'ver: %s'
+          fi
+
+      - name: Push changes to main branch
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git push origin main
