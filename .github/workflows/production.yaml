@@ -1,16 +1,72 @@
 name: Vercel Production Deployment
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 on:
   push:
     branches:
       - main
+
 jobs:
-  Deploy-Production:
+  version_up:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v2
+      - run: git config --global user.email "github-actions@example.com"
+      - run: git config --global user.name "GitHub Actions"
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Set new patch version
+        if: "!contains(github.event.head_commit.message, '+m')"
+        run: "npm version patch -m 'ver: %s'"
+
+      - name: Set new minor version
+        if: "contains(github.event.head_commit.message, '+minor')"
+        run: "npm version minor -m 'ver: %s'"
+
+      - name: Set new major version
+        if: "contains(github.event.head_commit.message, '+major')"
+        run: "npm version major -m 'ver: %s'"
+
+      - name: push branch
+        run: git push
+      - uses: actions/upload-artifact@v2
+        with:
+          name: src
+          path: ./
+
+  tag:
+    needs: version_up
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Pull branch
+        run: git pull
+
+      - name: Get version
+        id: get-version
+        uses: beaconbrigade/package-json-version@v0.3
+        with:
+          path: .
+
+      - name: Create release & tag
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.get-version.outputs.version }}
+          release_name: ${{ steps.get-version.outputs.version }}
+  Deploy-Production:
+    needs: ["tag"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
       - name: Install pnpm
