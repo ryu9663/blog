@@ -78,6 +78,11 @@ export const Sidebar = ({ categories }: SidebarProps) => {
                 깃허브
               </a>
             </li>
+            <li>
+              <a href="https://portfolio.wnsdufdl.com/" target="_blank">
+                포트폴리오
+              </a>
+            </li>
           </ul>
         </div>
         <SidebarBtn />
