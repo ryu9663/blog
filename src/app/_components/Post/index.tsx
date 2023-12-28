@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./index.module.scss";
 import "github-markdown-css/github-markdown-light.css";
 
 import { Markdown } from "@/app/_components/Post/Markdown";

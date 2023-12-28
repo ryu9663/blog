@@ -50,9 +50,9 @@ export default async function PostsPageFilteredBySubCategory({
   }>();
 
   const filteredArticles = articles.filter((article) =>
-    !!article.category.category[category]
+    article.category.category[category]
       ? !!article.category.category[category]?.includes(subCategory)
-      : false
+      : false,
   );
 
   return (
@@ -69,7 +69,7 @@ export default async function PostsPageFilteredBySubCategory({
 export async function generateMetadata({
   params,
 }: PostsPageFilteredBySubCategory): Promise<Metadata> {
-  const { category, subCategory } = params;
+  const { subCategory } = params;
 
   return {
     title: subCategory,

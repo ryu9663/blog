@@ -25,7 +25,7 @@ export const getPostById = async <T>(
   }: {
     postId: string;
   },
-  query = GET_POST_BY_ID
+  query = GET_POST_BY_ID,
 ): Promise<{
   article: T;
 }> => {
