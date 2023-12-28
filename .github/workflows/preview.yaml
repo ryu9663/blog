@@ -20,7 +20,7 @@ jobs:
       # Install Dependencies
       - name: Install Dependencies
         run: pnpm install
-      # Run build:lib
+      # Run build
       - name: Build Library
         run: pnpm run build
       - name: Build Project Artifacts
