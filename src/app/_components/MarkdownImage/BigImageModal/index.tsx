@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { ImageSrcAltType } from "@/app/_components/MarkdownImage";
-import Image from "next/image";
 import styles from "./index.module.scss";
 
 type RequiredImageSrcAltType = {
@@ -14,24 +15,22 @@ export const BigImageModal = ({
   handleClose,
   src,
   alt,
-}: BigImageModalProps) => {
-  return (
-    <>
-      {isOpen && (
-        <div
-          className={`${styles.backdrop} ${styles["priority-0"]}`}
-          onClick={handleClose}
-        >
-          <div className={`${styles.fill_img_wrapper} ${styles["priority-0"]}`}>
-            <img
-              onClick={(e) => e.stopPropagation()}
-              className={styles.img}
-              src={src}
-              alt={alt}
-            />
-          </div>
+}: BigImageModalProps) => (
+  <>
+    {isOpen && (
+      <div
+        className={`${styles.backdrop} ${styles["priority-0"]}`}
+        onClick={handleClose}
+      >
+        <div className={`${styles.fill_img_wrapper} ${styles["priority-0"]}`}>
+          <img
+            onClick={(e) => e.stopPropagation()}
+            className={styles.img}
+            src={src}
+            alt={alt}
+          />
         </div>
-      )}
-    </>
-  );
-};
+      </div>
+    )}
+  </>
+);

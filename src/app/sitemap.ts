@@ -28,30 +28,30 @@ interface SitemapType {
 }
 
 export const getCategoriesAndSubCategories = (
-  _categories: Pick<PostType, "category">[]
+  _categories: Pick<PostType, "category">[],
 ) => {
   const categories = _categories.map(({ category }) => category.category);
 
   const categoriesSet = new Set(
-    categories.flatMap((item) => Object.keys(item))
+    categories.flatMap((item) => Object.keys(item)),
   );
   const subCategoriesSet = new Set(
     categories.flatMap((item) =>
-      Object.entries(item).map(([key, value]) => `${key}/${value}`)
-    )
+      Object.entries(item).map(([key, value]) => `${key}/${value}`),
+    ),
   );
 
   /**
    * @description 'posts/dev
    */
   const mainCategoriesUrlPath = Array.from(categoriesSet).map(
-    (category) => `posts/${category}`
+    (category) => `posts/${category}`,
   );
   /**
    * @description 'posts/dev/browser
    */
   const subCategoriesUrlPath = Array.from(subCategoriesSet).map(
-    (subCategory) => `posts/${subCategory}`
+    (subCategory) => `posts/${subCategory}`,
   );
 
   return { mainCategoriesUrlPath, subCategoriesUrlPath };

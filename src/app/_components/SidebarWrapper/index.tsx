@@ -13,9 +13,10 @@ export const SidebarWrapper = async () => {
   }>();
 
   const subCategories = _subCategories.map(
-    ({ category: _category, _createdAt }) => {
-      return { category: _category.category, _createdAt };
-    }
+    ({ category: _category, _createdAt }) => ({
+      category: _category.category,
+      _createdAt,
+    }),
   );
 
   const transformedCategories = formatSidebarData(subCategories);

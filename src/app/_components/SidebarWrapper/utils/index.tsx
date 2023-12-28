@@ -6,7 +6,7 @@ export const formatSidebarData = (
   input: {
     category: Partial<Record<CategoryType, string>>;
     _createdAt: string;
-  }[]
+  }[],
 ) => {
   const result: {
     [key: string]: {
@@ -31,7 +31,7 @@ export const formatSidebarData = (
     // 중복 제거
     if (
       !result[mainCategory].subcategories.some(
-        (sub) => sub.subCategoryLink.props.href === subCategoryLink.props.href
+        (sub) => sub.subCategoryLink.props.href === subCategoryLink.props.href,
       )
     ) {
       result[mainCategory].subcategories.push({

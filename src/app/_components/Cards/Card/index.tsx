@@ -17,18 +17,16 @@ export const Card = ({
   boxShadow = true,
   createdAt,
   subCategoryLink,
-}: CardProps) => {
-  return (
-    <Link href={`/post/${id}`}>
-      <StorybookCard
-        className={styles.card}
-        createdAt={createdAt}
-        subCategoryLink={subCategoryLink}
-        boxShadow={boxShadow}
-        title={title}
-        description={description}
-        Thumbnail={Thumbnail}
-      />
-    </Link>
-  );
-};
+}: CardProps) => (
+  <Link href={`/post/${id}`}>
+    <StorybookCard
+      className={styles.card}
+      createdAt={createdAt}
+      subCategoryLink={subCategoryLink}
+      boxShadow={boxShadow}
+      title={title}
+      description={description}
+      Thumbnail={Thumbnail}
+    />
+  </Link>
+);

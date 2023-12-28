@@ -10,7 +10,7 @@ export const GET_POSTIDS = `
 `;
 
 export const getPostIds = async <T>(
-  query = GET_POSTIDS
+  query = GET_POSTIDS,
 ): Promise<{ allArticles: T }> => {
   try {
     const { data } = await performRequest<{ allArticles: T }>({

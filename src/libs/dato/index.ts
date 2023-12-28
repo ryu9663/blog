@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { REVALIDATE_TIME } from "@/utils/constant";
 
 interface DatoParameterType {
@@ -42,8 +43,8 @@ export const performRequest = async <T>({
     if (!response.ok) {
       throw new Error(
         `${response.status} ${response.statusText}: ${JSON.stringify(
-          responseBody
-        )}`
+          responseBody,
+        )}`,
       );
     }
 

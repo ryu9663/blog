@@ -45,7 +45,7 @@ export default async function PostsPageFilteredByCategory({
   }>();
 
   const filteredArticles = articles.filter(
-    (article) => !!article.category.category[category]
+    (article) => !!article.category.category[category],
   );
 
   return (
