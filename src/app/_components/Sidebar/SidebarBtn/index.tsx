@@ -3,6 +3,7 @@ import { useSidebarStore } from "@/app/_components/Sidebar/index.store";
 import { Button } from "junyeol-components";
 import React from "react";
 import { X } from "react-feather";
+import styles from "../index.module.scss";
 
 export const SidebarBtn = () => {
   const [isSidebarOn, setIsSidebarOn] = useSidebarStore((state) => [
@@ -11,7 +12,7 @@ export const SidebarBtn = () => {
   ]);
   return (
     <Button
-      className={""}
+      className={styles.close_btn}
       onClick={() => {
         setIsSidebarOn(!isSidebarOn);
       }}

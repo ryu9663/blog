@@ -30,13 +30,16 @@ export const Sidebar = ({ categories }: SidebarProps) => {
   return (
     <>
       <Button
-        className={styles.mobile_sidebar_btn}
-        onClick={() => setIsSidebarOn(true)}
+        className={`${styles.sidebar_btn} ${styles["priority-0"]}`}
+        onClick={() => {
+          setIsSidebarOn(true);
+        }}
       >
         <Menu />
       </Button>
+
       <div
-        className={`${styles.sidebar_wrapper} ${
+        className={`${styles.sidebar_wrapper} ${styles["priority-0"]} ${
           isSidebarOn
             ? `${styles.sidebar_wrapper_on}`
             : styles.sidebar_wrapper_off
@@ -62,7 +65,7 @@ export const Sidebar = ({ categories }: SidebarProps) => {
           <ul className={styles.other_links}>
             <li>
               <a href="https://wnsdufdl.tistory.com" target="_blank">
-                티스토리 블로그(이전 블로그)
+                티스토리 블로그(이전 블로그 )
               </a>
             </li>
             <li>

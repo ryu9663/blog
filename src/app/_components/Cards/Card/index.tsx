@@ -1,3 +1,5 @@
+"use client";
+
 import {
   CardProps as StorybookCardProps,
   Card as StorybookCard,
