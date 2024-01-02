@@ -1,37 +1,69 @@
-name: Vercel Preview Deployment
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+# name: Vercel Preview Deployment
+# env:
+#   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+#   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+# on:
+#   push:
+
+# jobs:
+#   Preview:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Install Vercel CLI
+#         run: npm install --global vercel@latest
+#       - name: Install pnpm
+#         run: npm install -g pnpm
+#       - name: Pull Vercel Environment Information
+#         run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+#       # Install Dependencies
+#       - name: Install Dependencies
+#         run: pnpm install
+#       - name: access to secrets
+#         run: |
+#           echo "NEXT_DATOCMS_API_TOKEN=$NEXT_DATOCMS_API_TOKEN" >> .env
+#         env:
+#           NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
+#       # Run build
+#       - name: Build Library
+#         run: pnpm run build
+#       - name: Build Project Artifacts
+#         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+#       - name: Deploy Project Artifacts to Vercel
+#         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+#       # Analyze Bundle
+#       - name: Analyze bundle sizes
+#         uses: transferwise/actions-next-bundle-analyzer@master
+#         with:
+#           workflow-id: preview.yml
+#           base-branch: main
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+name: preview
+
 on:
   push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - something
 
 jobs:
-  Preview:
+  run-bundle-analysis:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Install pnpm
-        run: npm install -g pnpm
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
-      # Install Dependencies
-      - name: Install Dependencies
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
         run: pnpm install
-      - name: access to secrets
-        run: |
-          echo "NEXT_DATOCMS_API_TOKEN=$NEXT_DATOCMS_API_TOKEN" >> .env
-        env:
-          NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
-      # Run build
-      - name: Build Library
-        run: pnpm run build
-      - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
-      # Analyze Bundle
+
+      - name: Build
+        run: pnpm build
+
       - name: Analyze bundle sizes
         uses: transferwise/actions-next-bundle-analyzer@master
         with:
