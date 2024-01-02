@@ -1,4 +1,5 @@
 "use client";
+import "github-markdown-css/github-markdown-light.css";
 import React from "react";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import MarkdownLibrary from "react-markdown";
@@ -9,7 +10,7 @@ import { MarkdownImage } from "@/app/_components/MarkdownImage";
 interface MarkdownProps {
   children: string;
 }
-export const Markdown = ({ children }: MarkdownProps) => (
+const Markdown = ({ children }: MarkdownProps) => (
   <>
     <MarkdownLibrary
       remarkPlugins={[remarkGfm]}
@@ -36,3 +37,5 @@ export const Markdown = ({ children }: MarkdownProps) => (
     </MarkdownLibrary>
   </>
 );
+
+export default Markdown;

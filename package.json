@@ -1,12 +1,12 @@
 {
-  "name": "my-new-app-name",
+  "name": "blog",
   "version": "1.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "rm -rf .next && next build",
     "analyze": "ANALYZE=true next build",
-    "start": "next start",
+    "start": "next start -p 8080",
     "lint": "eslint .",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx,js,jsx}'",
     "clean": "rm -rf .next",

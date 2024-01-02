@@ -15,7 +15,7 @@ interface CardsProps {
 
 const Cards = ({ articles }: CardsProps) => (
   <div className={styles.cards_wrapper}>
-    {articles.map((article) => {
+    {articles.map((article, i) => {
       const {
         metaField,
         id,
@@ -23,8 +23,8 @@ const Cards = ({ articles }: CardsProps) => (
         category: { category },
       } = article;
       const createdAt = new Date(_createdAt).toLocaleDateString();
-      const { mainCategory, subCategory } = devideCategoryObject(category);
-      const categoryLink = `/posts/${mainCategory}/${subCategory}`;
+      const { subCategory } = devideCategoryObject(category);
+      // const categoryLink = `/posts/${mainCategory}/${subCategory}`;
       return (
         metaField.image.responsiveImage && (
           <Card
@@ -45,6 +45,7 @@ const Cards = ({ articles }: CardsProps) => (
                 alt={metaField.image.responsiveImage.alt || ""}
                 placeholder="blur"
                 blurDataURL={metaField.image.responsiveImage.base64}
+                loading={i < 3 ? "eager" : "lazy"}
               />
             }
           />

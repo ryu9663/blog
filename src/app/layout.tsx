@@ -6,8 +6,12 @@ import { Footer } from "@/app/_components/Footer";
 import styles from "./page.module.scss";
 import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
-import { Provider } from "@/app/_components/Provider";
 import { BASE_URL } from "@/utils/constant";
+import dynamic from "next/dynamic";
+
+const Provider = dynamic(() => import("@/app/_components/Provider"), {
+  ssr: false,
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -71,7 +75,6 @@ export default function RootLayout({
               <br /> 류준열
             </h1>
           </Link>
-
           {children}
         </Provider>
         <Footer />
