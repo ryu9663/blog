@@ -29,6 +29,14 @@ jobs:
       - name: Build Library
         run: pnpm run build
 
+      # Analyze Bundle
+      - name: Analyze bundle sizes
+        uses: transferwise/actions-next-bundle-analyzer@master
+        with:
+          workflow-id: preview.yaml
+          base-branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
