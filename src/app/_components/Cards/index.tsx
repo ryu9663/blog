@@ -23,8 +23,8 @@ const Cards = ({ articles }: CardsProps) => (
         category: { category },
       } = article;
       const createdAt = new Date(_createdAt).toLocaleDateString();
-      const { subCategory } = devideCategoryObject(category);
-      // const categoryLink = `/posts/${mainCategory}/${subCategory}`;
+      const { mainCategory, subCategory } = devideCategoryObject(category);
+      const categoryLink = `/posts/${mainCategory}/${subCategory}`;
       return (
         metaField.image.responsiveImage && (
           <Card
