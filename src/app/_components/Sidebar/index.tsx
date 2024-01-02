@@ -30,7 +30,7 @@ export const Sidebar = ({ categories }: SidebarProps) => {
   return (
     <>
       <Button
-        className={styles.mobile_sidebar_btn}
+        className={`${styles.sidebar_btn} ${styles["priority-0"]}`}
         onClick={() => {
           setIsSidebarOn(true);
         }}
@@ -39,7 +39,7 @@ export const Sidebar = ({ categories }: SidebarProps) => {
       </Button>
 
       <div
-        className={`${styles.sidebar_wrapper} ${
+        className={`${styles.sidebar_wrapper} ${styles["priority-0"]} ${
           isSidebarOn
             ? `${styles.sidebar_wrapper_on}`
             : styles.sidebar_wrapper_off
