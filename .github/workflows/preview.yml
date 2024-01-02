@@ -61,6 +61,12 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
+      - name: access to secrets
+        run: |
+          echo "NEXT_DATOCMS_API_TOKEN=$NEXT_DATOCMS_API_TOKEN" >> .env
+        env:
+          NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
+
       - name: Install dependencies
         run: pnpm install
 
