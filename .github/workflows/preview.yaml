@@ -34,7 +34,7 @@ jobs:
         uses: transferwise/actions-next-bundle-analyzer@master
         with:
           workflow-id: preview.yaml
-          base-branch: test/2
+          base-branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build Project Artifacts
