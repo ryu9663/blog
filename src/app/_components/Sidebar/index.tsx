@@ -65,7 +65,7 @@ export const Sidebar = ({ categories }: SidebarProps) => {
           <ul className={styles.other_links}>
             <li>
               <a href="https://wnsdufdl.tistory.com" target="_blank">
-                티스토리 블로그(이전 블로그 )
+                티스토리 블로그(이전 블로그)
               </a>
             </li>
             <li>
