@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
 
 /** @type {import('next').NextConfig} */
@@ -17,4 +18,13 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+const shouldAnalyzeBundles = process.env.ANALYZE === "true";
+
+const withBundleAnalyzer = shouldAnalyzeBundles
+  ? require("@next/bundle-analyzer")({
+      enabled: true,
+      openAnalyzer: true,
+    })
+  : (config) => config;
+
+module.exports = withBundleAnalyzer(nextConfig);

@@ -31,10 +31,13 @@ export const Sidebar = ({ categories }: SidebarProps) => {
     <>
       <Button
         className={styles.mobile_sidebar_btn}
-        onClick={() => setIsSidebarOn(true)}
+        onClick={() => {
+          setIsSidebarOn(true);
+        }}
       >
         <Menu />
       </Button>
+
       <div
         className={`${styles.sidebar_wrapper} ${
           isSidebarOn
