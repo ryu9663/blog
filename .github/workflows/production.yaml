@@ -3,14 +3,13 @@ name: Vercel Production Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-
 on:
   push:
     branches:
       - main
 
 jobs:
-  version_up:
+  Production:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +34,5 @@ jobs:
       - name: Analyze bundle sizes
         uses: transferwise/actions-next-bundle-analyzer@master
         with:
-          workflow-id: preview.yaml
+          workflow-id: production.yaml
           base-branch: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

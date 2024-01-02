@@ -1,13 +1,14 @@
-name: Vercel Preview Deployment
+name: Preview Deployment
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
-  push:
-    branches-ignore:
+  pull_request:
+    branches:
       - main
+      - something
 jobs:
-  Deploy-Preview:
+  Preview:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -33,3 +34,11 @@ jobs:
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+      # Analyze Bundle
+      - name: Analyze bundle sizes
+        uses: transferwise/actions-next-bundle-analyzer@master
+        with:
+          workflow-id: production.yaml
+          base-branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
