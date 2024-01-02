@@ -21,7 +21,7 @@ export interface SidebarProps {
     subcategories: SubCategoryType[];
   }[];
 }
-export const Sidebar = ({ categories }: SidebarProps) => {
+const Sidebar = ({ categories }: SidebarProps) => {
   const [isSidebarOn, setIsSidebarOn] = useSidebarStore((state) => [
     state.isSidebarOn,
     state.setIsSidebarOn,
@@ -93,3 +93,4 @@ export const Sidebar = ({ categories }: SidebarProps) => {
     </>
   );
 };
+export default Sidebar;
