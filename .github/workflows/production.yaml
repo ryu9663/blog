@@ -36,3 +36,5 @@ jobs:
         with:
           workflow-id: production.yaml
           base-branch: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

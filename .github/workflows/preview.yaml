@@ -38,7 +38,7 @@ jobs:
       - name: Analyze bundle sizes
         uses: transferwise/actions-next-bundle-analyzer@master
         with:
-          workflow-id: production.yaml
+          workflow-id: preview.yaml
           base-branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
