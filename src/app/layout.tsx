@@ -13,8 +13,6 @@ const Provider = dynamic(() => import("@/app/_components/Provider"), {
   ssr: false,
 });
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   openGraph: {
