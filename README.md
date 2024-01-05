@@ -2,7 +2,7 @@
 
 <https://wnsdufdl.com>
 
-- next 13(app router)
+- next
 - typescript
 - sass
 - pnpm
