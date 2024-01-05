@@ -9,5 +9,6 @@
       width: calc(100% - $SIDEBAR_OPENED);
     }
   }
-  transition: width 1s;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;
 }

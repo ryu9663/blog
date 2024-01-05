@@ -1,5 +1,4 @@
 import React from "react";
-
 import { PostType } from "@/types";
 import { getCategories } from "@/app/api/dato/getCategories";
 
