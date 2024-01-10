@@ -1,8 +1,88 @@
 @use "src/styles/libs" as *;
+
+@mixin multi-line-ellipse($line) {
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+}
+
 .card {
-  @include mobile_screen {
-    img {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+
+  cursor: pointer;
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.01);
+  }
+
+  align-items: center;
+  background-color: $WHITE;
+
+  border-radius: 20px;
+
+  color: $GRAY-600;
+  background-color: $WHITE;
+
+  img {
+    @include mobile_screen {
       display: none;
     }
+    background-color: #ffffff;
+    border-radius: 20px 0 0 20px;
+    object-fit: cover;
+  }
+
+  &_content {
+    display: flex;
+    flex-direction: column;
+    max-width: 508px;
+    padding: 10px;
+    gap: 10px;
+    &-title {
+      @include font-size;
+      @include multi-line-ellipse(1);
+      font-size: $NORMAL;
+      margin: 0;
+    }
+
+    &-description {
+      max-height: 80px;
+
+      font-size: $SMALL;
+      @include multi-line-ellipse(1);
+    }
+
+    &-tagbox {
+      display: flex;
+      gap: 10px;
+      font-size: $SMALL;
+
+      & > &-createdAt {
+        vertical-align: middle;
+        padding: 3px;
+      }
+      & > &-tag {
+        background-color: $GRAY-200;
+        padding: 3px 6px;
+        border-radius: 6px;
+        &:hover {
+          color: $GRAY-500;
+        }
+
+        & > a {
+          text-decoration: none;
+          color: $BLACK;
+        }
+      }
+    }
+  }
+
+  &_box-shadow {
+    box-shadow: 5px 5px 5px 5px gray;
   }
 }

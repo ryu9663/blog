@@ -7,11 +7,7 @@ import styles from "./page.module.scss";
 import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
 import { BASE_URL } from "@/utils/constant";
-import dynamic from "next/dynamic";
-
-const Provider = dynamic(() => import("@/app/_components/Provider"), {
-  ssr: false,
-});
+import Provider from "@/app/_components/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 

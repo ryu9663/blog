@@ -5,7 +5,6 @@ import styles from "./index.module.scss";
 import { PostType } from "@/types";
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
-// import Link from "next/link";
 import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { IMAGE_SIZE_IN_POSTS } from "@/utils/constant";
 
@@ -33,10 +32,7 @@ const Cards = ({ articles }: CardsProps) => (
             title={metaField?.title || "no title"}
             description={metaField.description || "no description"}
             createdAt={createdAt}
-            subCategoryLink={
-              // <Link href={`${categoryLink}`}>{subCategory}</Link>
-              <>{subCategory}</>
-            }
+            subCategory={<>{subCategory}</>}
             Thumbnail={
               <Image
                 width={IMAGE_SIZE_IN_POSTS.width}
