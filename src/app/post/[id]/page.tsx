@@ -1,6 +1,6 @@
-import Post from "@/app/_components/Post";
 import { getPostById } from "@/app/api/dato/getPostById";
 import { getPosts } from "@/app/api/dato/getPosts";
+import Markdown from "@/app/post/[id]/Markdown";
 import { PostType } from "@/types";
 import { Metadata } from "next";
 
@@ -30,7 +30,7 @@ export default async function PostPageFilteredById({ params }: PostPageParams) {
     postId: params.id,
   });
 
-  return <Post article={article} />;
+  return <Markdown article={article} />;
 }
 
 export async function generateMetadata({
