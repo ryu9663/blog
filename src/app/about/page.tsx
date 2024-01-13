@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { getPostById } from "@/app/api/dato/getPostById";
 import { PostType } from "@/types";
-import Post from "@/app/_components/Post";
+import Markdown from "@/app/post/[id]/Markdown";
 
 export default async function About() {
   const { article } = await getPostById<
@@ -10,11 +10,7 @@ export default async function About() {
     postId: "198173441",
   });
 
-  return (
-    <>
-      <Post article={article} />
-    </>
-  );
+  return <Markdown article={article} />;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
