@@ -20,7 +20,7 @@ export const performRequest = async <T>({
   try {
     const response = await fetch("https://graphql.datocms.com/", {
       headers: {
-        Authorization: `Bearer ${process.env.NEXT_DATOCMS_API_TOKEN}`,
+        Authorization: `Bearer ${process.env.API_TOKEN}`,
         ...(includeDrafts ? { "X-Include-Drafts": "true" } : {}),
         ...(excludeInvalid ? { "X-Exclude-Invalid": "true" } : {}),
         ...(visualEditingBaseUrl
@@ -28,9 +28,6 @@ export const performRequest = async <T>({
               "X-Visual-Editing": "vercel-v1",
               "X-Base-Editing-Url": visualEditingBaseUrl,
             }
-          : {}),
-        ...(process.env.NEXT_DATOCMS_ENVIRONMENT
-          ? { "X-Environment": process.env.NEXT_DATOCMS_ENVIRONMENT }
           : {}),
       },
       method: "POST",
