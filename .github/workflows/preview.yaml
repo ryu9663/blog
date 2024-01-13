@@ -23,9 +23,9 @@ jobs:
         run: pnpm install
       - name: access to secrets
         run: |
-          echo "NEXT_DATOCMS_API_TOKEN=$NEXT_DATOCMS_API_TOKEN" >> .env
+          echo "API_TOKEN=$API_TOKEN" >> .env
         env:
-          NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
+          API_TOKEN: ${{secrets.API_TOKEN}}
       # Run build
       - name: Build Library
         run: pnpm run build
