@@ -8,7 +8,7 @@
   padding: 30px;
 
   /* 1024px 이상 */
-  @include desktop {
+  @include desktop_screen {
     max-width: 750px;
   }
 }
