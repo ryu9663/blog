@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     type: "website",
   },
   title: {
-    default: "류준열의 기술 블로그",
+    default: "류준열의 기술 블로f그",
     template: "류준열의 기술 블로그 | %s",
   },
   description: "류준열의 기술 블로그",
