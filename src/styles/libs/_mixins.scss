@@ -151,16 +151,21 @@
     }
   }
 }
+/* Mobile :  768px 미만 */
 @mixin mobile_screen {
   @media (max-width: #{vars.$TABLET}) {
     @content;
   }
 }
+
+/* Tablet :  768px ~ */
 @mixin tablet_screen {
   @media (min-width: #{vars.$TABLET}) {
     @content;
   }
 }
+
+/* Desktop : 1024px ~ */
 @mixin desktop_screen {
   @media (min-width: #{vars.$DESKTOP}) {
     @content;

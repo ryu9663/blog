@@ -23,9 +23,5 @@ export const SidebarWrapper = async () => {
 
   const transformedCategories = formatSidebarData(subCategories);
 
-  return (
-    <>
-      <Sidebar categories={transformedCategories} />
-    </>
-  );
+  return <Sidebar categories={transformedCategories} />;
 };
