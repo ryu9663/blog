@@ -4,15 +4,14 @@
   display: none;
   @include desktop_screen {
     position: sticky;
-    left: 10px;
     top: 100px;
-    margin-inline: 30px;
-
-    width: 300px;
+    left: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 300px;
     height: fit-content;
+    margin-inline: 30px;
     .heading_index {
       & a {
         color: $BLUISH-GRAY-500;

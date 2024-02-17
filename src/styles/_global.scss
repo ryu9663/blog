@@ -11,7 +11,6 @@ main {
 }
 
 body {
-  color: libs.$BLUISH-GRAY-800;
   font-family:
     "Pretendard Variable",
     Pretendard,
@@ -26,6 +25,7 @@ body {
     "Open Sans",
     "Helvetica Neue",
     sans-serif;
+  color: libs.$BLUISH-GRAY-800;
 }
 
 html {
@@ -34,8 +34,8 @@ html {
 }
 
 a {
-  text-decoration: none;
   color: libs.$BLUISH-GRAY-800;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
