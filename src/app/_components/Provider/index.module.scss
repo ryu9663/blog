@@ -9,8 +9,8 @@
       width: calc(100% - $SIDEBAR_OPENED);
     }
   }
-  -webkit-transition: width 0.5s;
-  transition: width 0.5s;
 
   min-height: 100vh;
+  -webkit-transition: width 0.5s;
+  transition: width 0.5s;
 }

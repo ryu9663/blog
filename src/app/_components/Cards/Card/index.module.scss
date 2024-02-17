@@ -1,10 +1,10 @@
 @use "src/styles/libs" as *;
 
 @mixin multi-line-ellipse($line) {
-  overflow: hidden;
-  white-space: normal;
-  text-overflow: ellipsis;
   display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
   -webkit-line-clamp: $line;
   -webkit-box-orient: vertical;
 }
@@ -12,27 +12,24 @@
 .card {
   display: flex;
   gap: 10px;
+  align-items: center;
   width: 100%;
-
+  color: $GRAY-600;
   cursor: pointer;
+  background-color: $WHITE;
+  background-color: $WHITE;
+  border-radius: 20px;
   &:hover {
     transition: all 0.2s ease-in-out;
     transform: scale(1.01);
   }
 
-  align-items: center;
-  background-color: $WHITE;
-
-  border-radius: 20px;
-
-  color: $GRAY-600;
-  background-color: $WHITE;
-
   img {
     @include mobile_screen {
       display: none;
     }
-    background-color: #ffffff;
+
+    background-color: #fff;
     border-radius: 20px 0 0 20px;
     object-fit: cover;
   }
@@ -40,19 +37,19 @@
   &_content {
     display: flex;
     flex-direction: column;
+    gap: 10px;
     max-width: 508px;
     padding: 10px;
-    gap: 10px;
     &-title {
       @include font-size;
       @include multi-line-ellipse(1);
-      font-size: $NORMAL;
+
       margin: 0;
+      font-size: $NORMAL;
     }
 
     &-description {
       max-height: 80px;
-
       font-size: $SMALL;
       @include multi-line-ellipse(1);
     }
@@ -63,20 +60,20 @@
       font-size: $SMALL;
 
       & > &-createdAt {
-        vertical-align: middle;
         padding: 3px;
+        vertical-align: middle;
       }
       & > &-tag {
-        background-color: $GRAY-200;
         padding: 3px 6px;
+        background-color: $GRAY-200;
         border-radius: 6px;
         &:hover {
           color: $GRAY-500;
         }
 
         & > a {
-          text-decoration: none;
           color: $BLACK;
+          text-decoration: none;
         }
       }
     }
