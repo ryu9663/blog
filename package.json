@@ -8,6 +8,8 @@
     "analyze": "ANALYZE=true next build",
     "start": "next start -p 8080",
     "lint": "eslint .",
+    "lint:style": "stylelint --fix '**/*.scss'",
+    "lint:style:fix": "stylelint --fix '**/*.scss' --fix",
     "lint:fix": "eslint --fix './src/**/*.{ts,tsx,js,jsx}'",
     "clean": "rm -rf .next",
     "test": "jest --watch"
@@ -56,6 +58,12 @@
     "sass": "^1.68.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths-jest": "^0.0.1",
-    "typescript": "latest"
+    "typescript": "latest",
+    "stylelint": "^13.8.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recess-order": "^2.3.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.18.0"
   }
 }
