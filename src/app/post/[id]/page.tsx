@@ -1,8 +1,10 @@
 import { getPostById } from "@/app/api/dato/getPostById";
 import { getPosts } from "@/app/api/dato/getPosts";
+import { HeadingIndexNav } from "@/app/_components/HeadingIndexNav";
 import Markdown from "@/app/post/[id]/Markdown";
 import { PostType } from "@/types";
 import { Metadata } from "next";
+import styles from "./index.module.scss";
 
 interface PostPageParams {
   params: { id: string };
@@ -30,7 +32,14 @@ export default async function PostPageFilteredById({ params }: PostPageParams) {
     postId: params.id,
   });
 
-  return <Markdown article={article} />;
+  return (
+    <div className={`${styles.post_wrapper} markdown-body `}>
+      <section className="markdown-body">
+        <Markdown article={article} />
+      </section>
+      <HeadingIndexNav markdown={article.markdown} />
+    </div>
+  );
 }
 
 export async function generateMetadata({
