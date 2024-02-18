@@ -12,7 +12,11 @@ export const HeadingIndexNav = ({ markdown }: HeadingIndexProps) => {
       {headingIndexes.map((heading, i) => (
         <li className={styles.heading_index} key={i}>
           <a
-            href={`#${heading.split(" ").join("-").toLowerCase()}`}
+            href={`#${heading
+              .split(" ")
+              .join("-")
+              .replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\w\s-]/g, "")
+              .toLowerCase()}`}
           >{`${heading}`}</a>
         </li>
       ))}
