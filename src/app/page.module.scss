@@ -6,6 +6,11 @@
   @include desktop_screen {
     font-size: $LARGE6X;
   }
+  @include priority-background-layer;
+  position: sticky;
+  backdrop-filter: blur(10px);
+  padding: 10px;
+  top: 0;
 
   br {
     @include desktop_screen {
