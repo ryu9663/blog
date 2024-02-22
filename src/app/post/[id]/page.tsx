@@ -26,18 +26,18 @@ export async function generateStaticParams() {
 }
 
 export default async function PostPageFilteredById({ params }: PostPageParams) {
-  const { article } = await getPostById<
-    Pick<PostType, "markdown" | "metaField">
-  >({
+  const {
+    article: { markdown },
+  } = await getPostById<Pick<PostType, "markdown" | "metaField">>({
     postId: params.id,
   });
 
   return (
     <div className={`${styles.post_wrapper} markdown-body `}>
       <section className="markdown-body">
-        <Markdown article={article} />
+        <Markdown markdown={markdown} />
       </section>
-      <HeadingIndexNav markdown={article.markdown} />
+      <HeadingIndexNav markdown={markdown} />
     </div>
   );
 }

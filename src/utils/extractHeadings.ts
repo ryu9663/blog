@@ -10,6 +10,13 @@ export const extractHeadings = (markdown: string): string[] => {
     headings.push(`${"#".repeat(level)} ${title}`);
   }
 
-  const cleanIndexes = headings.map((heading) => heading.replace(/^#+\s*/, ""));
+  const cleanIndexes = headings.map((heading) =>
+    heading
+      .replace(/^#+\s*/, "")
+      .split(" ")
+      .join("-")
+      .replace(/[^\uAC00-\uD7AF\u1100-\u11FF\u3130-\u318F\w\s-]/g, "")
+      .toLowerCase(),
+  );
   return cleanIndexes;
 };
