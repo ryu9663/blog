@@ -4,13 +4,13 @@ import { PostType } from "@/types";
 import Markdown from "@/app/post/[id]/Markdown";
 
 export default async function About() {
-  const { article } = await getPostById<
-    Pick<PostType, "markdown" | "metaField">
-  >({
+  const {
+    article: { markdown },
+  } = await getPostById<Pick<PostType, "markdown" | "metaField">>({
     postId: "198173441",
   });
 
-  return <Markdown article={article} />;
+  return <Markdown markdown={markdown} />;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
