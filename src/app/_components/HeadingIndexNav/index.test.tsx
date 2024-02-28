@@ -17,12 +17,12 @@ describe("HeadingIndexNav", () => {
     expect(listItems[1]).toHaveTextContent("Heading3-2");
   });
 
-  it("a tag의 id는 parsing되어 소문자, 공백은 '-'로 변경의 과정을 거친다.", () => {
+  it("h3의 id와 동일한 a태그의 href가 있다.", () => {
     render(<HeadingIndexNav markdown={MARKDOWN} />);
     const links = screen.getAllByRole("link");
 
-    expect(links[0]).toHaveAttribute("href", "#heading-3");
-    expect(links[1]).toHaveAttribute("href", "#heading3-2");
+    expect(links[0]).toHaveAttribute("href", "#Heading 3");
+    expect(links[1]).toHaveAttribute("href", "#Heading3-2");
   });
 
   it("heading tag가 없으면 heading index 컴포넌트가 나타나지 않는다.", () => {

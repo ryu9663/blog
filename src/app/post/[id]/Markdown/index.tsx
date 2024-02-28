@@ -8,8 +8,8 @@ import MarkdownLibrary from "react-markdown";
 import { github } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import remarkGfm from "remark-gfm";
 import { MarkdownImage } from "@/app/_components/MarkdownImage";
-import slug from "rehype-slug";
-import { PluggableList } from "react-markdown/lib";
+import styles from "./index.module.scss";
+
 interface PostProps {
   markdown: PostType["markdown"];
 }
@@ -17,8 +17,12 @@ export default function Markdown({ markdown }: PostProps) {
   return (
     <MarkdownLibrary
       remarkPlugins={[remarkGfm]}
-      rehypePlugins={[slug] as PluggableList}
       components={{
+        h3: ({ children }) => (
+          <h3 className={styles.anchor} id={children as string}>
+            {children}
+          </h3>
+        ),
         code({ className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
           return match ? (
