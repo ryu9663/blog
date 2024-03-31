@@ -4,7 +4,9 @@ import { REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_POST_BY_ID = `
   query Article($ItemId: ItemId!) {
-    article(filter: { id: { eq: $ItemId } }) {
+    article(filter: { 
+      id: { eq: $ItemId },
+    }) {
       id
       markdown(markdown: false)
       metaField {
@@ -36,6 +38,7 @@ export const getPostById = async <T>(
       query,
       variables: {
         ItemId: postId,
+        BooleanType: true,
       },
       revalidate: REVALIDATE_TIME,
     });

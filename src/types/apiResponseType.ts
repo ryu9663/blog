@@ -32,4 +32,5 @@ export interface PostType {
   };
   markdown: string;
   metaField: MetaField;
+  isPublic?: boolean;
 }

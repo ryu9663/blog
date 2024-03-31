@@ -3,7 +3,9 @@ import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
 
 export const GET_META_FIELDS = `
   query allArticles {
-    allArticles(orderBy: _createdAt_DESC) {
+    allArticles(orderBy: _createdAt_DESC,filter:{
+      ispublic: {eq: true}
+    }) {
       id
       category
       _createdAt
