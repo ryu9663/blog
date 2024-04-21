@@ -15,7 +15,7 @@ interface PostProps {
 }
 export default function Markdown({ markdown }: PostProps) {
   return (
-    <section className={`${styles.markdown} markdown-body`}>
+    <section className={`markdown-body ${styles.markdown}`}>
       <MarkdownLibrary
         remarkPlugins={[remarkGfm]}
         components={{

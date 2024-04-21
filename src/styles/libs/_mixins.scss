@@ -88,12 +88,15 @@
   box-sizing: border-box;
   width: 100%;
   min-width: 200px;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 45px;
   margin: 0 auto;
 
   pre > code {
-    font-size: vars.$NORMAL;
+    font-size: vars.$SMALL;
+    @include desktop_screen {
+      font-size: vars.$NORMAL;
+    }
   }
 
   ol li {
