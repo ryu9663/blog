@@ -33,10 +33,8 @@ export default async function PostPageFilteredById({ params }: PostPageParams) {
   });
 
   return (
-    <div className={`${styles.post_wrapper} markdown-body `}>
-      <section className="markdown-body">
-        <Markdown markdown={markdown} />
-      </section>
+    <div className={`${styles.post_wrapper}`}>
+      <Markdown markdown={markdown} />
       <HeadingIndexNav markdown={markdown} />
     </div>
   );

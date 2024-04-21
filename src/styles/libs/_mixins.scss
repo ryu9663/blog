@@ -92,6 +92,10 @@
   padding: 45px;
   margin: 0 auto;
 
+  pre > code {
+    font-size: vars.$NORMAL;
+  }
+
   ol li {
     list-style: decimal;
   }
