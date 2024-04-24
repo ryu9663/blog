@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React from "react";
 import { PostType } from "@/types";
 import "github-markdown-css/github-markdown-light.css";
 import SyntaxHighlighter from "react-syntax-highlighter";
