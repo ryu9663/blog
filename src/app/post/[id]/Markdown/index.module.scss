@@ -1,7 +1,78 @@
 @use "src/styles/libs" as *;
 
 .markdown {
-  @include markdown-body;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 200px;
+  max-width: 1000px;
+  padding: 45px;
+  margin: 0 auto;
+
+  pre > code {
+    font-size: $SMALL;
+    @include desktop_screen {
+      font-size: $NORMAL;
+    }
+  }
+
+  ol li {
+    list-style: decimal;
+  }
+
+  ul li {
+    list-style: disc;
+  }
+
+  pre {
+    margin-right: auto;
+    margin-left: auto;
+    overflow: auto;
+  }
+
+  img {
+    display: block;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  section {
+    margin: 50px 16px;
+  }
+
+  h2 {
+    font-size: $LARGE3X;
+    color: $BLUISH-GRAY-800;
+    @include desktop_screen {
+      font-size: $LARGE6X;
+    }
+  }
+  h3 {
+    font-size: $LARGE2X;
+    color: $BLUISH-GRAY-800;
+    @include desktop_screen {
+      font-size: $LARGE4X;
+    }
+  }
+  h4 {
+    font-size: $LARGE;
+    color: $BLUISH-GRAY-800;
+    @include desktop_screen {
+      font-size: $LARGE2X;
+    }
+  }
+  h5,
+  h6 {
+    font-size: $MEDIUM;
+    color: $BLUISH-GRAY-800;
+    @include desktop_screen {
+      font-size: $LARGE;
+    }
+  }
 }
 
 .anchor {
