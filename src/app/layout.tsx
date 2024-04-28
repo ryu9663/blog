@@ -8,6 +8,8 @@ import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
 import { BASE_URL } from "@/utils/constant";
 import Provider from "@/app/_components/Provider";
+import { Suspense } from "react";
+import Analytics from "@/utils/thirdParty/Analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,6 +65,9 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
       </head>
       <body className={inter.className}>
+        <Suspense>
+          <Analytics />
+        </Suspense>
         <SidebarWrapper />
         <Provider>
           <Link className={styles.link} href="/">
