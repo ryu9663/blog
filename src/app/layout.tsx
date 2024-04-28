@@ -8,6 +8,8 @@ import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
 import { BASE_URL } from "@/utils/constant";
 import Provider from "@/app/_components/Provider";
+import { Suspense } from "react";
+import Analytics from "@/utils/thirdParty/Analytics";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -74,6 +76,9 @@ export default function RootLayout({
           {children}
         </Provider>
         <Footer />
+        <Suspense>
+          <Analytics />
+        </Suspense>
       </body>
     </html>
   );
