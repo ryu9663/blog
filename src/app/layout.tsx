@@ -65,9 +65,6 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
       </head>
       <body className={inter.className}>
-        <Suspense>
-          <Analytics />
-        </Suspense>
         <SidebarWrapper />
         <Provider>
           <Link className={styles.link} href="/">
@@ -79,6 +76,9 @@ export default function RootLayout({
           {children}
         </Provider>
         <Footer />
+        <Suspense>
+          <Analytics />
+        </Suspense>
       </body>
     </html>
   );
