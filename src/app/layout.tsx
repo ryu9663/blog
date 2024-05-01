@@ -69,7 +69,7 @@ export default function RootLayout({
         <Provider>
           <Link className={styles.link} href="/">
             <h1 className={`${styles.heading_1} ${styles["priority-0"]}`}>
-              프론트엔드 개발자
+              개발자
               <br /> 류준열
             </h1>
           </Link>

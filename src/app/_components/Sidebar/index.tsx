@@ -69,14 +69,6 @@ const Sidebar = ({ categories }: SidebarProps) => {
               </a>
             </li>
             <li>
-              <a
-                href="https://blog.naver.com/annyeong-nicetomeetu"
-                target="_blank"
-              >
-                네이버 블로그
-              </a>
-            </li>
-            <li>
               <a href="https://github.com/ryu9663/" target="_blank">
                 깃허브
               </a>
