@@ -78,11 +78,11 @@ const Sidebar = ({ categories }: SidebarProps) => {
                 포트폴리오
               </a>
             </li> */}
-            <li>
+            {/* <li>
               <a href="https://www.wnsdufdl.com/post/198173441" target="_blank">
                 이력서
               </a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <SidebarBtn />
