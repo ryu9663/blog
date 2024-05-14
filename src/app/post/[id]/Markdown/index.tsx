@@ -7,6 +7,7 @@ import remarkGfm from "remark-gfm";
 import { MarkdownImage } from "@/app/_components/MarkdownImage";
 import styles from "./index.module.scss";
 import { Suspense, lazy } from "react";
+import Heading3 from "@/app/post/[id]/Markdown/Heading3";
 
 const Code = lazy(() => import("@/app/post/[id]/Markdown/Code"));
 
@@ -20,9 +21,9 @@ export default function Markdown({ markdown }: PostProps) {
         remarkPlugins={[remarkGfm]}
         components={{
           h3: ({ children }) => (
-            <h3 className={styles.anchor} id={children as string}>
-              {children}
-            </h3>
+            <div className={styles.heading}>
+              <Heading3>{children}</Heading3>
+            </div>
           ),
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
