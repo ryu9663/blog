@@ -20,11 +20,7 @@ export default function Markdown({ markdown }: PostProps) {
       <MarkdownLibrary
         remarkPlugins={[remarkGfm]}
         components={{
-          h3: ({ children }) => (
-            <div className={styles.heading}>
-              <Heading3>{children}</Heading3>
-            </div>
-          ),
+          h3: ({ children }) => <Heading3>{children}</Heading3>,
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
             if (match === null) {
