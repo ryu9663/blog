@@ -1,5 +1,4 @@
 import { extractHeadings } from "@/utils/extractHeadings";
-import React from "react";
 import styles from "./index.module.scss";
 
 interface HeadingIndexProps {

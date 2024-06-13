@@ -70,7 +70,7 @@ const Sidebar = ({ categories }: SidebarProps) => {
             </li>
             <li>
               <a href="https://github.com/ryu9663/" target="_blank">
-                깃허브
+                깃허브f
               </a>
             </li>
             {/* <li>
