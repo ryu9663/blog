@@ -7,7 +7,7 @@ interface HeadingIndexProps {
 }
 export const HeadingIndexNav = ({ markdown }: HeadingIndexProps) => {
   const headingIndexes = extractHeadings(markdown);
-  console.log("h2i");
+  console.log("h32i");
   return (
     <nav className={styles.heading_index_nav}>
       {headingIndexes.map((heading, i) => (
