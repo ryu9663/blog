@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: git config --global user.email "github-actions@example.com"
       - run: git config --global user.name "GitHub Actions"
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 18.18
       - uses: actions/checkout@v3
