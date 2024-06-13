@@ -33,11 +33,11 @@ jobs:
 
       - name: Trigger deploy hook
         run: curl -X POST -d {} ${{ secrets.VERCEL_DEPLOY_HOOK }}
-      # Analyze Bundle
-      - name: Analyze bundle sizes
-        uses: transferwise/actions-next-bundle-analyzer@master
-        with:
-          workflow-id: production.yaml
-          base-branch: main
+        #   # Analyze Bundle
+        #   - name: Analyze bundle sizes
+        #     uses: transferwise/actions-next-bundle-analyzer@master
+        #     with:
+        #       workflow-id: production.yaml
+        #       base-branch: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
