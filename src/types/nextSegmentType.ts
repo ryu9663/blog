@@ -14,3 +14,7 @@ export interface NextSegmentType {
   preferredRegion?: "auto" | "global" | "home" | ["iad1", "sfo1"];
   maxDuration?: number;
 }
+
+export interface SearchParamsType {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
