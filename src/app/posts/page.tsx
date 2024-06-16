@@ -1,4 +1,3 @@
-import Cards from "@/app/_components/Cards";
 import { getPosts } from "@/app/api/dato/getPosts";
 import { Metadata } from "next";
 import { PostType, SearchParamsType } from "@/types";
@@ -27,9 +26,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
   return (
     <>
       <h2 className={styles.heading}>{`게시글 전체 보기`}</h2>
-      <Posts>
-        <Cards articles={posts} />
-      </Posts>
+      <Posts posts={posts} />
     </>
   );
 }
