@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "junyeol-components/style.css";
 import "@/styles/_global.scss";
 import { Footer } from "@/app/_components/Footer";
-import styles from "./page.module.scss";
+import styles from "./layout.module.scss";
 import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
 import { BASE_URL } from "@/utils/constant";
