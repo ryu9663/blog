@@ -1,6 +1,6 @@
 import Cards from "@/app/_components/Cards";
 import { Posts } from "@/app/_components/Posts";
-import { getPosts } from "@/app/api/dato/getPosts2";
+import { getPosts } from "@/app/api/dato/getPosts";
 import { PostType, SearchParamsType } from "@/types";
 import { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
@@ -8,6 +8,7 @@ import React from "react";
 import styles from "../../page.module.scss";
 import { getCategories } from "@/app/api/dato/getCategories";
 import { getCategoriesAndSubCategories } from "@/app/sitemap";
+import { paginatePosts } from "@/libs/paginate";
 
 interface PostsPageFilteredBySubCategory extends SearchParamsType {
   params: {
@@ -47,11 +48,8 @@ export default async function PostsPageFilteredBySubCategory({
   const pageSize = Number(searchParams.pageSize);
 
   const { allArticles: articles } = await getPosts<{
-    allArticles: Pick<
-      PostType,
-      "id" | "metaField" | "category" | "_createdAt"
-    >[];
-  }>({ pageSize, currentPage });
+    allArticles: PostType[];
+  }>();
 
   const filteredArticles = articles.filter((article) =>
     article.category.category[category]
@@ -59,12 +57,18 @@ export default async function PostsPageFilteredBySubCategory({
       : false,
   );
 
+  const posts = paginatePosts({
+    posts: filteredArticles,
+    currentPage,
+    pageSize,
+  });
+
   return (
     <>
       <h2 className={styles.heading}>{`${subCategory}`}</h2>
 
       <Posts>
-        <Cards articles={filteredArticles} />
+        <Cards articles={posts} />
       </Posts>
     </>
   );
