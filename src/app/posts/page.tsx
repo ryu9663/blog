@@ -20,13 +20,13 @@ export default async function Home({ searchParams }: SearchParamsType) {
       "id" | "metaField" | "category" | "_createdAt"
     >[];
   }>({
-    pageSize: pageSize || 5,
-    currentPage: currentPage || 1,
+    pageSize,
+    currentPage,
   });
 
   return (
     <>
-      <h2 className={styles.heading_2}>{`게시글 전체 보기`}</h2>
+      <h2 className={styles.heading}>{`게시글 전체 보기`}</h2>
       <Posts>
         <Cards articles={articles} />
       </Posts>

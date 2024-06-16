@@ -5,7 +5,7 @@ import { PostType, SearchParamsType } from "@/types";
 import { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
 import React from "react";
-import styles from "./page.module.scss";
+import styles from "../page.module.scss";
 import { getCategories } from "@/app/api/dato/getCategories";
 import { getCategoriesAndSubCategories } from "@/app/sitemap";
 
@@ -45,8 +45,8 @@ export default async function PostsPageFilteredByCategory({
       "id" | "metaField" | "category" | "_createdAt"
     >[];
   }>({
-    pageSize: pageSize || 5,
-    currentPage: currentPage || 1,
+    pageSize,
+    currentPage,
   });
 
   const filteredArticles = articles.filter(
