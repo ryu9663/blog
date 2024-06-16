@@ -1,4 +1,3 @@
-import Cards from "@/app/_components/Cards";
 import { Posts } from "@/app/_components/Posts";
 import { getPosts } from "@/app/api/dato/getPosts";
 import { PostType, SearchParamsType } from "@/types";
@@ -58,9 +57,7 @@ export default async function PostsPageFilteredByCategory({
     <>
       <h2 className={styles.heading}>{`${category}`}</h2>
 
-      <Posts>
-        <Cards articles={posts} />
-      </Posts>
+      <Posts posts={posts} />
     </>
   );
 }
