@@ -26,10 +26,6 @@
   &_off {
     right: -$SIDEBAR_OPENED;
   }
-  .close_btn {
-    padding: 10px 0;
-    box-shadow: none;
-  }
 }
 
 .other_links {
@@ -41,6 +37,7 @@
   position: fixed;
   top: 20px;
   right: 20px;
+  width: fit-content;
   display: block;
   padding: 10px 0;
   box-shadow: none;
