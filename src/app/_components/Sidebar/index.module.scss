@@ -37,8 +37,8 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  width: fit-content;
   display: block;
+  width: fit-content;
   padding: 10px 0;
   box-shadow: none;
   @include priority-focus-layer;

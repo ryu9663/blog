@@ -25,7 +25,7 @@ export const Card = ({
       <div className={styles["card_content"]}>
         <h3 className={`${styles["card_content-title"]}`}>{title}</h3>
         <div className={`${styles["card_content-description"]}`}>
-          {description}
+          <p>{description}</p>
         </div>
         <div className={`${styles["card_content-tagbox"]}`}>
           <div className={`${styles["card_content-tagbox-createdAt"]}`}>
