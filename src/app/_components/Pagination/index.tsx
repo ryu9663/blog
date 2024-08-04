@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
 import styles from "./index.module.scss";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export const Pagination = () => {
   const searchParams = useSearchParams();
