@@ -4,7 +4,12 @@ import Link from "next/link";
 import styles from "./index.module.scss";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export const Pagination = () => {
+interface PaginationProps {
+  hasNext: boolean;
+  hasPrev: boolean;
+}
+
+export const Pagination = ({ hasNext, hasPrev }: PaginationProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const currentPage = Number(searchParams.get("currentPage"));
@@ -12,7 +17,7 @@ export const Pagination = () => {
 
   return (
     <ul className={styles.pagination_wrapper}>
-      <li>
+      <li className={`${styles.prev} ${hasPrev || styles.disabled}`}>
         <Link
           href={{
             pathname: `${pathname}`,
@@ -25,7 +30,7 @@ export const Pagination = () => {
           이전 페이지
         </Link>
       </li>
-      <li>
+      <li className={`${styles.next} ${hasNext || styles.disabled}`}>
         <Link
           href={{
             pathname: `${pathname}`,

@@ -6,10 +6,15 @@ import { PostType } from "@/types";
 
 interface PostsProps {
   posts: PostType[];
+  hasNext: boolean;
+  hasPrev: boolean;
 }
-export const Posts = ({ posts }: PostsProps) => (
+
+export const Posts = ({ posts, hasNext, hasPrev }: PostsProps) => (
   <section className={styles["post_wrapper"]}>
-    <Cards articles={posts} />
-    <Pagination />
+    <div className={styles["post_inside_wrapper"]}>
+      <Cards articles={posts} />
+      <Pagination hasNext={hasNext} hasPrev={hasPrev} />
+    </div>
   </section>
 );

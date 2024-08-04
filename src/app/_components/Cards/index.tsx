@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
-import styles from "./index.module.scss";
 import { PostType } from "@/types";
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
@@ -13,7 +12,7 @@ interface CardsProps {
 }
 
 const Cards = ({ articles }: CardsProps) => (
-  <div className={styles.cards_wrapper}>
+  <>
     {articles.map((article, i) => {
       const {
         metaField,
@@ -48,7 +47,7 @@ const Cards = ({ articles }: CardsProps) => (
         )
       );
     })}
-  </div>
+  </>
 );
 
 export default Cards;
