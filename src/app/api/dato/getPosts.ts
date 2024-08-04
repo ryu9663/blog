@@ -5,7 +5,7 @@ export const GET_META_FIELDS = `
   query allArticles {
     allArticles(orderBy: _createdAt_DESC,filter:{
       ispublic: {eq: true}
-    }) {
+    },first: "100") {
       id
       category
       _createdAt
