@@ -13,5 +13,13 @@ export const paginatePosts = ({
   const starts = (currentPage - 1) * pageSize;
   const ends = currentPage * pageSize;
   const paginatedArticles = posts.slice(starts, ends);
-  return paginatedArticles;
+
+  const hasPrev = currentPage > 1;
+  const hasNext = ends < posts.length;
+
+  return {
+    paginatedArticles,
+    hasPrev,
+    hasNext,
+  };
 };

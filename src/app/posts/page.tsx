@@ -18,7 +18,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
     allArticles: PostType[];
   }>();
 
-  const posts = paginatePosts({
+  const { paginatedArticles, hasNext, hasPrev } = paginatePosts({
     posts: articles,
     currentPage,
     pageSize,
@@ -26,7 +26,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
   return (
     <>
       <h2 className={styles.heading}>{`게시글 전체 보기`}</h2>
-      <Posts posts={posts} />
+      <Posts posts={paginatedArticles} hasNext={hasNext} hasPrev={hasPrev} />
     </>
   );
 }

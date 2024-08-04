@@ -4,3 +4,16 @@
   margin: 100px 0 150px;
   @include flex-column-centerize;
 }
+
+.post_inside_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 550px;
+  padding: 30px;
+
+  /* 1024px 이상 */
+  @include desktop_screen {
+    max-width: 750px;
+  }
+}

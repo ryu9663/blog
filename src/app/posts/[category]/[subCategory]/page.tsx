@@ -56,7 +56,7 @@ export default async function PostsPageFilteredBySubCategory({
       : false,
   );
 
-  const posts = paginatePosts({
+  const { paginatedArticles, hasNext, hasPrev } = paginatePosts({
     posts: filteredArticles,
     currentPage,
     pageSize,
@@ -66,7 +66,7 @@ export default async function PostsPageFilteredBySubCategory({
     <>
       <h2 className={styles.heading}>{`${subCategory}`}</h2>
 
-      <Posts posts={posts} />
+      <Posts posts={paginatedArticles} hasNext={hasNext} hasPrev={hasPrev} />
     </>
   );
 }
