@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Category,
   SubCategoryList,
@@ -15,17 +16,25 @@ import styles from "./index.module.scss";
 import { SidebarBtn } from "@/app/_components/Sidebar/SidebarBtn";
 import { useSidebarStore } from "@/app/_components/Sidebar/index.store";
 import { Menu } from "react-feather";
+import { PostType } from "@/types";
+import { getPublishedSubCategories } from "@/app/_components/SidebarWrapper/utils";
 export interface SidebarProps {
   categories: {
     category: CategoryType;
     subcategories: SubCategoryType[];
   }[];
+  posts: PostType[];
 }
-const Sidebar = ({ categories }: SidebarProps) => {
+const Sidebar = ({ categories, posts }: SidebarProps) => {
   const [isSidebarOn, setIsSidebarOn] = useSidebarStore((state) => [
     state.isSidebarOn,
     state.setIsSidebarOn,
   ]);
+
+  const publishedSubCategories = getPublishedSubCategories({
+    posts,
+    categories,
+  });
 
   return (
     <>
@@ -48,7 +57,7 @@ const Sidebar = ({ categories }: SidebarProps) => {
         <div className={styles.sidebar}>
           <StorybookSidebar linkToPosts={<Link href="/">전체 보기</Link>}>
             <ul>
-              {categories.map((el, i) => (
+              {publishedSubCategories.map((el, i) => (
                 <li key={i}>
                   <Category
                     CategoryLink={
