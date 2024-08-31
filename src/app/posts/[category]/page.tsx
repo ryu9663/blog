@@ -37,8 +37,8 @@ export default async function PostsPageFilteredByCategory({
   searchParams,
 }: PostsPageFilteredByCategory) {
   const { category } = params;
-  const currentPage = Number(searchParams.currentPage);
-  const pageSize = Number(searchParams.pageSize);
+  // const currentPage = Number(searchParams.currentPage);
+  // const pageSize = Number(searchParams.pageSize);
   const { allArticles: articles } = await getPosts<{
     allArticles: PostType[];
   }>();
@@ -46,18 +46,20 @@ export default async function PostsPageFilteredByCategory({
   const filteredArticles = articles.filter(
     (article) => !!article.category.category[category],
   );
+  // ** pagination으로 바꿀때 주석 해제 **//
 
-  const { paginatedArticles, hasNext, hasPrev } = paginatePosts({
-    posts: filteredArticles,
-    currentPage,
-    pageSize,
-  });
+  // const { paginatedArticles, hasNext, hasPrev } = paginatePosts({
+  //   posts: filteredArticles,
+  //   currentPage,
+  //   pageSize,
+  // });
 
   return (
     <>
       <h2 className={styles.heading}>{`${category}`}</h2>
 
-      <Posts posts={paginatedArticles} hasNext={hasNext} hasPrev={hasPrev} />
+      {/* <Posts posts={paginatedArticles} hasNext={hasNext} hasPrev={hasPrev} /> */}
+      <Posts posts={filteredArticles} />
     </>
   );
 }
