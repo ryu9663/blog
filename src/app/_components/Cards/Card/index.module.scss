@@ -44,9 +44,6 @@
     &:hover {
       .card_content-description {
         & > p {
-          position: absolute;
-          top: 0;
-          left: 0;
           display: flex;
           flex-wrap: wrap;
           min-height: 62px;
