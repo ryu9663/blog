@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
+
 import { PostType } from "@/types";
 import "github-markdown-css/github-markdown-light.css";
 import MarkdownLibrary from "react-markdown";
@@ -7,9 +8,10 @@ import remarkGfm from "remark-gfm";
 import { MarkdownImage } from "@/app/_components/MarkdownImage";
 import styles from "./index.module.scss";
 import { Suspense, lazy } from "react";
-import Heading3 from "@/app/post/[id]/Markdown/Heading3";
+import Heading3 from "@/app/post/[id]/Markdown/_components/Heading3";
+import CommentScript from "@/app/post/[id]/Markdown/_components/CommnetScript";
 
-const Code = lazy(() => import("@/app/post/[id]/Markdown/Code"));
+const Code = lazy(() => import("@/app/post/[id]/Markdown/_components/Code"));
 
 interface PostProps {
   markdown: PostType["markdown"];
@@ -40,6 +42,8 @@ export default function Markdown({ markdown }: PostProps) {
       >
         {markdown}
       </MarkdownLibrary>
+
+      <CommentScript />
     </section>
   );
 }
