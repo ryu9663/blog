@@ -57,14 +57,14 @@ const Sidebar = ({ categories, posts }: SidebarProps) => {
         <div className={styles.sidebar}>
           <StorybookSidebar linkToPosts={<Link href="/">전체 보기</Link>}>
             <ul>
-              {publishedSubCategories.map((el, i) => (
+              {publishedSubCategories.map(({ category, subcategories }, i) => (
                 <li key={i}>
                   <Category
                     CategoryLink={
-                      <Link href={`/posts/${el.category}`}>{el.category}</Link>
+                      <Link href={`/posts/${category}`}>{category}</Link>
                     }
                   >
-                    <SubCategoryList subCategories={el.subcategories} />
+                    <SubCategoryList subCategories={subcategories} />
                   </Category>
                 </li>
               ))}
@@ -83,15 +83,8 @@ const Sidebar = ({ categories, posts }: SidebarProps) => {
               </a>
             </li>
             <li>
-              <a href="https://portfolio.wnsdufdl.com/" target="_blank">
-                포트폴리오
-              </a>
+              <Link href="/post/198173441">이력서</Link>
             </li>
-            {/* <li>
-              <a href="https://www.wnsdufdl.com/post/198173441" target="_blank">
-                이력서
-              </a>
-            </li> */}
           </ul>
         </div>
         <SidebarBtn />

@@ -67,9 +67,6 @@ export const getPublishedSubCategories = ({
     return {
       category,
       subcategories: subcategories.filter((e) => {
-        console.log(
-          !!publishedSubCategories.includes(e.subCategoryLink.props.children),
-        );
         return !!publishedSubCategories.includes(
           e.subCategoryLink.props.children,
         );
