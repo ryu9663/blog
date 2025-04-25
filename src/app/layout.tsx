@@ -62,6 +62,10 @@ export default function RootLayout({
           name="google-site-verification"
           content="68-iOKYYrEPp2KDfr6ERlG1WN9dJG3QCWYGBfLja4BA"
         />
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-7611913966171206"
+        ></meta>
         <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
       </head>
       <body className={inter.className}>
