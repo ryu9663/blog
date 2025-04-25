@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: git config --global user.email "github-actions@example.com"
       - run: git config --global user.name "GitHub Actions"
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 18.18
       - uses: actions/checkout@v3
@@ -25,6 +25,8 @@ jobs:
         run: npm install --global vercel@latest
       - name: Install pnpm
         run: npm install -g pnpm
+      - name: Install dependencies
+        run: pnpm install
       - name: Pull Vercel Environment Information
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts

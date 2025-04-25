@@ -17,10 +17,10 @@
   "dependencies": {
     "github-markdown-css": "^5.3.0",
     "junyeol-components": "^0.1.50",
-    "next": "latest",
-    "react": "latest",
+    "next": "14.2.5",
+    "react": "18.2.0",
     "react-datocms": "^4.1.3",
-    "react-dom": "latest",
+    "react-dom": "18.2.0",
     "react-feather": "^2.0.10",
     "react-markdown": "^9.0.0",
     "react-syntax-highlighter": "^15.5.0",
@@ -33,15 +33,15 @@
     "@testing-library/jest-dom": "^6.1.3",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.5",
-    "@types/node": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "@types/node": "22.15.2",
+    "@types/react": "18.2.8",
+    "@types/react-dom": "18.2.8",
     "@types/react-syntax-highlighter": "^15.5.8",
     "@types/rss": "^0.0.32",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "babel-jest": "^29.7.0",
-    "eslint": "latest",
-    "eslint-config-next": "latest",
+    "eslint": "9.25.1",
+    "eslint-config-next": "15.3.1",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^5.0.0",
@@ -61,6 +61,6 @@
     "stylelint-scss": "^3.18.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths-jest": "^0.0.1",
-    "typescript": "latest"
+    "typescript": "5.8.3"
   }
 }
