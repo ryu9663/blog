@@ -16,6 +16,7 @@ const nextConfig = {
       "image4.coupangcdn.com",
     ],
   },
+  crossOrigin: "anonymous",
 };
 
 const shouldAnalyzeBundles = process.env.ANALYZE === "true";
