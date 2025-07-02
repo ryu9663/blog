@@ -8,8 +8,10 @@ import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
 import Link from "next/link";
 import { BASE_URL } from "@/utils/constant";
 import Provider from "@/app/_components/Provider";
-import { Suspense } from "react";
 import Analytics from "@/utils/thirdParty/Analytics";
+import Script from "next/script";
+import { GTM_ID } from "@/libs/gtm";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,6 +60,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          })(window,document,'script','dataLayer','${GTM_ID}');
+  `,
+          }}
+        />
         <meta
           name="google-site-verification"
           content="68-iOKYYrEPp2KDfr6ERlG1WN9dJG3QCWYGBfLja4BA"
@@ -66,6 +81,7 @@ export default function RootLayout({
           name="google-adsense-account"
           content="ca-pub-7611913966171206"
         ></meta>
+
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7611913966171206"
@@ -88,6 +104,14 @@ export default function RootLayout({
           <Analytics />
         </Suspense>
       </body>
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+          height="0"
+          width="0"
+          style={{ display: "none", visibility: "hidden" }}
+        />
+      </noscript>
     </html>
   );
 }
