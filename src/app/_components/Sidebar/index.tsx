@@ -85,6 +85,11 @@ const Sidebar = ({ categories, posts }: SidebarProps) => {
             <li>
               <Link href="/post/198173441">이력서</Link>
             </li>
+            <li>
+              <a href="https://outsourcing.wnsdufdl.com/" target="_blank">
+                랜딩페이지 외주 상담
+              </a>
+            </li>
           </ul>
         </div>
         <SidebarBtn />
