@@ -1,7 +1,7 @@
 import { getPosts } from "@/app/api/dato/getPosts";
 import { Metadata } from "next";
 import { PostType, SearchParamsType } from "@/types";
-import { Posts } from "@/app/_components/Posts";
+import { PostsWithSearch } from "@/app/_components/PostsWithSearch";
 import styles from "./page.module.scss";
 // ** pagination으로 바꿀때 주석 해제 **//
 
@@ -32,9 +32,8 @@ export default async function Home({ searchParams }: SearchParamsType) {
   return (
     <>
       <h2 className={styles.heading}>{`게시글 전체 보기`}</h2>
-
       {/* <Posts posts={paginatedArticles} hasNext={hasNext} hasPrev={hasPrev} /> */}
-      <Posts posts={articles} />
+      <PostsWithSearch initialPosts={articles} />
     </>
   );
 }

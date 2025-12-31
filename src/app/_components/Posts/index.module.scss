@@ -1,7 +1,7 @@
 @use "src/styles/libs" as *;
 
 .post_wrapper {
-  margin: 100px 0 150px;
+  margin: 0px 0 150px;
   @include flex-column-centerize;
 }
 
