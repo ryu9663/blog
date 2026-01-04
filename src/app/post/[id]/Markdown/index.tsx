@@ -22,6 +22,11 @@ export default function Markdown({ markdown }: PostProps) {
       <MarkdownLibrary
         remarkPlugins={[remarkGfm]}
         components={{
+          a: ({ children, href, ...props }) => (
+            <a href={href} {...props} target="_blank" rel="noopener noreferrer">
+              {children}
+            </a>
+          ),
           h3: ({ children }) => <Heading3>{children}</Heading3>,
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
