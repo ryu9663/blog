@@ -32,28 +32,9 @@
   background: transparent;
   font-size: 1rem;
   color: #374151;
-  
+
   &::placeholder {
     color: #9ca3af;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .searchBox {
-    background: #374151;
-    border-color: #4b5563;
-  }
-  
-  .searchIcon {
-    color: #9ca3af;
-  }
-  
-  .searchInput {
-    color: #f9fafb;
-    
-    &::placeholder {
-      color: #9ca3af;
-    }
   }
 }
 
@@ -61,15 +42,15 @@
   .searchContainer {
     margin: 1rem;
   }
-  
+
   .searchBox {
     max-width: none;
   }
-  
+
   .searchIcon {
     padding: 0 0.75rem;
   }
-  
+
   .searchInput {
     padding: 0.75rem 0;
     font-size: 0.9rem;
