@@ -1,6 +1,6 @@
 import { getPosts } from "@/app/api/dato/getPosts";
 import { Metadata } from "next";
-import { PostType, SearchParamsType } from "@/types";
+import { PostType, PostWithoutMarkdownType, SearchParamsType } from "@/types";
 import { PostsWithSearch } from "@/app/_components/PostsWithSearch";
 import styles from "./page.module.scss";
 // ** pagination으로 바꿀때 주석 해제 **//
@@ -19,7 +19,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
   // const pageSize = Number(searchParams.pageSize);
 
   const { allArticles: articles } = await getPosts<{
-    allArticles: PostType[];
+    allArticles: PostWithoutMarkdownType[];
   }>();
   // ** pagination으로 바꿀때 주석 해제 **//
 

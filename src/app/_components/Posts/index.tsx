@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import Cards from "@/app/_components/Cards";
 // import { Pagination } from "@/app/_components/Pagination";
-import { PostType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types";
 
 // ** pagination으로 바꿀때 주석 해제 **//
 
@@ -13,7 +13,7 @@ import { PostType } from "@/types";
 // }
 
 interface ScrolledPostsProps {
-  posts: PostType[];
+  posts: PostWithoutMarkdownType[];
 }
 
 export const Posts = ({ posts }: ScrolledPostsProps) => (
