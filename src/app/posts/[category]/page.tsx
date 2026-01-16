@@ -1,6 +1,6 @@
 import { Posts } from "@/app/_components/Posts";
 import { getPosts } from "@/app/api/dato/getPosts";
-import { PostType, SearchParamsType } from "@/types";
+import { PostWithoutMarkdownType, SearchParamsType } from "@/types";
 import { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
 import React from "react";
@@ -17,7 +17,7 @@ interface PostsPageFilteredByCategory extends SearchParamsType {
 
 export async function generateStaticParams() {
   const { allArticles: categories } = await getCategories<{
-    allArticles: Pick<PostType, "category">[];
+    allArticles: Pick<PostWithoutMarkdownType, "category">[];
   }>(`
   query allArticles {
     allArticles {
@@ -40,7 +40,7 @@ export default async function PostsPageFilteredByCategory({
   // const currentPage = Number(searchParams.currentPage);
   // const pageSize = Number(searchParams.pageSize);
   const { allArticles: articles } = await getPosts<{
-    allArticles: PostType[];
+    allArticles: PostWithoutMarkdownType[];
   }>();
 
   const filteredArticles = articles.filter(

@@ -53,15 +53,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Fuse.js 기반 클라이언트 사이드 검색
 - 서버 요청 없는 즉시 검색 결과 제공
 - 퍼지 검색으로 오타 허용성 제공
-- 검색 가중치: 제목(0.5) > 설명(0.3) > 본문(0.2)
+- 검색 가중치: 제목(0.5), 설명(0.5)
 
 ### 검색 성능 최적화
 ```typescript
 const searchOptions = {
   keys: [
     { name: 'metaField.title', weight: 0.5 },
-    { name: 'metaField.description', weight: 0.3 },
-    { name: 'markdown', weight: 0.2 }
+    { name: 'metaField.description', weight: 0.5 },
   ],
   threshold: 0.4,
   includeScore: true,
@@ -70,7 +69,7 @@ const searchOptions = {
 ```
 
 ### 디바운싱 적용
-- `useDebounce` 훅으로 300ms 지연 적용
+- `useDebounce` 훅으로 500ms 지연 적용
 - 불필요한 검색 연산 최소화
 
 ## 코드베이스 아키텍처
