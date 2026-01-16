@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
-import { PostType } from "@/types";
+import { ClientPostType } from "@/types";
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
 import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { IMAGE_SIZE_IN_POSTS } from "@/utils/constant";
 
 interface CardsProps {
-  articles: Pick<PostType, "id" | "metaField" | "category" | "_createdAt">[];
+  articles: ClientPostType[];
 }
 
 const Cards = ({ articles }: CardsProps) => (

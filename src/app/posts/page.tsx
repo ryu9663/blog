@@ -1,6 +1,6 @@
 import { getPosts } from "@/app/api/dato/getPosts";
 import { Metadata } from "next";
-import { PostType, SearchParamsType } from "@/types";
+import { PostType, ClientPostType, SearchParamsType } from "@/types";
 import { PostsWithSearch } from "@/app/_components/PostsWithSearch";
 import styles from "./page.module.scss";
 // ** pagination으로 바꿀때 주석 해제 **//
@@ -21,6 +21,12 @@ export default async function Home({ searchParams }: SearchParamsType) {
   const { allArticles: articles } = await getPosts<{
     allArticles: PostType[];
   }>();
+
+  // 클라이언트 컴포넌트로 전달 시 markdown 필드 제외하여 직렬화 비용 최소화
+  const clientPosts: ClientPostType[] = articles.map(
+    ({ markdown, ...rest }) => rest
+  );
+
   // ** pagination으로 바꿀때 주석 해제 **//
 
   // const { paginatedArticles, hasNext, hasPrev } = paginatePosts({
@@ -33,7 +39,7 @@ export default async function Home({ searchParams }: SearchParamsType) {
     <>
       <h2 className={styles.heading}>{`게시글 전체 보기`}</h2>
       {/* <Posts posts={paginatedArticles} hasNext={hasNext} hasPrev={hasPrev} /> */}
-      <PostsWithSearch initialPosts={articles} />
+      <PostsWithSearch initialPosts={clientPosts} />
     </>
   );
 }

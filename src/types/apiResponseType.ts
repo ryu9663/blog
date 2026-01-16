@@ -34,3 +34,9 @@ export interface PostType {
   metaField: MetaField;
   isPublic?: boolean;
 }
+
+/**
+ * 클라이언트 컴포넌트용 경량화된 Post 타입
+ * markdown 필드를 제외하여 직렬화 비용 최소화
+ */
+export type ClientPostType = Omit<PostType, "markdown">;
