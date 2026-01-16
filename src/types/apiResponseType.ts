@@ -34,3 +34,5 @@ export interface PostType {
   metaField: MetaField;
   isPublic?: boolean;
 }
+
+export type PostWithoutMarkdownType = Omit<PostType, "markdown">;

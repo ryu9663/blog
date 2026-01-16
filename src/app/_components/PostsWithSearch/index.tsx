@@ -1,18 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { PostType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types";
 import { Posts } from "@/app/_components/Posts";
 import { Search } from "@/app/_components/Search";
 
 interface PostsWithSearchProps {
-  initialPosts: PostType[];
+  initialPosts: PostWithoutMarkdownType[];
 }
 
 export const PostsWithSearch = ({ initialPosts }: PostsWithSearchProps) => {
-  const [filteredPosts, setFilteredPosts] = useState<PostType[]>(initialPosts);
+  const [filteredPosts, setFilteredPosts] =
+    useState<PostWithoutMarkdownType[]>(initialPosts);
 
-  const handleSearchResults = (results: PostType[]) => {
+  const handleSearchResults = (results: PostWithoutMarkdownType[]) => {
     setFilteredPosts(results);
   };
 

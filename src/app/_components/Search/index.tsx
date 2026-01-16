@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo } from "react";
 import Fuse from "fuse.js";
-import { PostType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types";
 import styles from "./index.module.scss";
 import { useDebounce } from "@/utils/hooks/useDebounce";
 
 interface SearchProps {
-  posts: PostType[];
-  onSearchResults: (results: PostType[]) => void;
+  posts: PostWithoutMarkdownType[];
+  onSearchResults: (results: PostWithoutMarkdownType[]) => void;
 }
 
 export const Search = ({ posts, onSearchResults }: SearchProps) => {
@@ -18,8 +18,7 @@ export const Search = ({ posts, onSearchResults }: SearchProps) => {
     const options = {
       keys: [
         { name: "metaField.title", weight: 0.5 },
-        { name: "metaField.description", weight: 0.3 },
-        { name: "markdown", weight: 0.2 },
+        { name: "metaField.description", weight: 0.5 },
       ],
       threshold: 0.4,
       includeScore: true,
