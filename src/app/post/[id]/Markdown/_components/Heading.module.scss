@@ -11,6 +11,9 @@
     bottom: 5px;
     padding: 0 10px;
     margin: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
 
     @include desktop_screen {
       right: -50px;
@@ -26,6 +29,11 @@
         height: 30px;
       }
     }
+  }
+
+  &:hover .linkCopyBtn {
+    opacity: 1;
+    visibility: visible;
   }
 
   .anchor {
