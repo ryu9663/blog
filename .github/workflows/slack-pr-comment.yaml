@@ -1,0 +1,65 @@
+name: Slack PR Comment Notification
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  notify:
+    # PR에 달린 코멘트만 처리 (일반 이슈 제외)
+    if: github.event.issue.pull_request
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Slack notification
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "💬 새로운 PR 코멘트",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*PR:*\n<${{ github.event.issue.pull_request.html_url }}|#${{ github.event.issue.number }} ${{ github.event.issue.title }}>"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*작성자:*\n${{ github.event.comment.user.login }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*코멘트:*\n${{ github.event.comment.body }}"
+                  }
+                },
+                {
+                  "type": "actions",
+                  "elements": [
+                    {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "코멘트 보기",
+                        "emoji": true
+                      },
+                      "url": "${{ github.event.comment.html_url }}"
+                    }
+                  ]
+                }
+              ]
+            }
