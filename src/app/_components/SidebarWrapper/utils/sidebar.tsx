@@ -1,4 +1,4 @@
-import { PostType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types";
 import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { CategoryType, LinkType, SubCategoryType } from "junyeol-components";
 import Link from "next/link";
@@ -50,7 +50,7 @@ export const getPublishedSubCategories = ({
   posts,
   categories,
 }: {
-  posts: PostType[];
+  posts: PostWithoutMarkdownType[];
   categories: {
     category: CategoryType;
     subcategories: SubCategoryType[];

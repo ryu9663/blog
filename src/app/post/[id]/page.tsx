@@ -1,4 +1,3 @@
-import { cache } from "react";
 import { getPostById } from "@/app/api/dato/getPostById";
 import { getPosts } from "@/app/api/dato/getPosts";
 import { HeadingIndexNav } from "@/app/_components/HeadingIndexNav";
@@ -10,11 +9,6 @@ import styles from "./index.module.scss";
 interface PostPageParams {
   params: { id: string };
 }
-
-// React.cache()로 같은 요청 내 중복 호출 방지
-const getCachedPostById = cache(async (postId: string) => {
-  return getPostById<Pick<PostType, "markdown" | "metaField">>({ postId });
-});
 
 export async function generateStaticParams() {
   const { allArticles: articles } = await getPosts<{
@@ -34,7 +28,9 @@ export async function generateStaticParams() {
 export default async function PostPageFilteredById({ params }: PostPageParams) {
   const {
     article: { markdown },
-  } = await getCachedPostById(params.id);
+  } = await getPostById<Pick<PostType, "markdown" | "metaField">>({
+    postId: params.id,
+  });
 
   return (
     <div className={`${styles.post_wrapper}`}>
@@ -47,7 +43,9 @@ export default async function PostPageFilteredById({ params }: PostPageParams) {
 export async function generateMetadata({
   params,
 }: PostPageParams): Promise<Metadata> {
-  const data = await getCachedPostById(params.id);
+  const data = await getPostById<Pick<PostType, "markdown" | "metaField">>({
+    postId: params.id,
+  });
 
   const { metaField } = data.article;
 

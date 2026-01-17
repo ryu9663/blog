@@ -1,5 +1,5 @@
 import React from "react";
-import { PostType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types";
 import { getCategories } from "@/app/api/dato/getCategories";
 
 import { formatSidebarData } from "@/app/_components/SidebarWrapper/utils";
@@ -9,8 +9,10 @@ import Sidebar from "@/app/_components/Sidebar";
 export const SidebarWrapper = async () => {
   // Promise.all로 병렬 실행하여 waterfall 제거
   const [postsResult, categoriesResult] = await Promise.all([
-    getPosts<{ allArticles: PostType[] }>(),
-    getCategories<{ allArticles: Pick<PostType, "category" | "_createdAt">[] }>(),
+    getPosts<{ allArticles: PostWithoutMarkdownType[] }>(),
+    getCategories<{
+      allArticles: Pick<PostWithoutMarkdownType, "category" | "_createdAt">[];
+    }>(),
   ]);
 
   const { allArticles: articles } = postsResult;
