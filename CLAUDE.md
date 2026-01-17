@@ -41,6 +41,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Next.js Image 컴포넌트 필수 사용
 - `next.config.js`에 허용된 이미지 도메인만 사용
 - ISR(Incremental Static Regeneration) 활용: `REVALIDATE_TIME = 10초`
+- **Request Deduplication**: `React.cache()`로 API 중복 호출 자동 제거
+- **병렬 데이터 페칭**: `Promise.all()`로 독립적인 API 호출 동시 실행
 
 ### URL 구조
 - `/post/[id]` - 개별 포스트
@@ -94,6 +96,24 @@ src/
 3. **타입 안정성**: Props와 상태에 대한 엄격한 타입 정의
 4. **재사용성**: 공용 컴포넌트는 `_components/`에 위치
 
+### TypeScript 타입 컨벤션
+1. **타입 정의 위치**: 모든 공용 타입은 `src/types/` 디렉토리에 정의
+2. **명명 규칙**:
+   - 인터페이스/타입명은 PascalCase + `Type` 접미사 (예: `PostType`, `MetaFieldType`)
+   - 변형 타입은 명확한 의미 전달 (예: `PostWithoutMarkdownType`)
+3. **타입 재사용**:
+   - `PostWithoutMarkdownType = Omit<PostType, "markdown">`: markdown 필드가 불필요한 목록/사이드바 컴포넌트에서 사용
+   - 불필요한 데이터 전송 방지 및 타입 안정성 향상
+4. **제네릭 활용**: API 함수는 제네릭으로 응답 타입 지정
+
+```typescript
+// 전체 포스트 타입 (마크다운 포함)
+const post = await getPostById<{ article: PostType }>({ postId });
+
+// 마크다운 제외 타입 (목록/사이드바용)
+const posts = await getPosts<{ allArticles: PostWithoutMarkdownType[] }>();
+```
+
 ### 상태 관리
 - **Zustand**: 사이드바 상태 관리 (`src/app/_components/Sidebar/index.store.tsx`)
 - **React State**: 컴포넌트별 로컬 상태
@@ -140,6 +160,46 @@ styles/
 - ISR: `revalidate: 10초`
 - 이미지 캐싱: Next.js Image 컴포넌트 활용
 - DatoCMS CDN 최적화
+
+## React Server Component 최적화 패턴
+
+### React.cache()를 이용한 요청 중복 제거
+- **위치**: `src/app/api/dato/*.ts` API 함수들
+- **패턴**: 내부 함수를 구현한 후 `React.cache()`로 래핑하여 export
+- **효과**: 동일 렌더링 사이클 내 중복 API 요청 자동 제거
+
+```typescript
+// src/app/api/dato/getPostById.ts 예시
+import { cache } from "react";
+
+const _getPostById = async <T>({ postId }: { postId: string }) => {
+  // API 로직
+};
+
+// React.cache()로 같은 렌더링 요청 내 중복 호출 방지
+export const getPostById = cache(_getPostById);
+```
+
+**적용 규칙**:
+- 모든 DatoCMS API 함수는 `React.cache()` 적용 필수
+- 함수명: 내부 구현은 `_functionName`, export는 `functionName`
+- Server Component에서만 사용 (Client Component에서는 사용 불가)
+
+### Promise.all을 이용한 병렬 데이터 페칭
+- **목적**: Waterfall 패턴 제거로 로딩 시간 단축
+- **적용 대상**: 서로 의존성이 없는 다중 API 호출
+
+```typescript
+// src/app/_components/SidebarWrapper/index.tsx 예시
+const [postsResult, categoriesResult] = await Promise.all([
+  getPosts<{ allArticles: PostWithoutMarkdownType[] }>(),
+  getCategories<{ allArticles: Pick<PostWithoutMarkdownType, "category" | "_createdAt">[] }>(),
+]);
+```
+
+**적용 규칙**:
+- 독립적인 데이터 소스는 반드시 병렬로 fetch
+- 순차 실행이 필요한 경우에만 개별 await 사용
 
 ## 성능 모니터링
 
