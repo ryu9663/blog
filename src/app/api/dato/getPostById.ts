@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { performRequest } from "@/libs/dato";
 
 import { REVALIDATE_TIME } from "@/utils/constant";
@@ -21,7 +22,7 @@ export const GET_POST_BY_ID = `
   }
 `;
 
-export const getPostById = async <T>(
+const _getPostById = async <T>(
   {
     postId,
   }: {
@@ -51,3 +52,6 @@ export const getPostById = async <T>(
     throw new Error("An unknown error occurred.");
   }
 };
+
+// React.cache()로 같은 렌더링 요청 내 중복 호출 방지
+export const getPostById = cache(_getPostById);
