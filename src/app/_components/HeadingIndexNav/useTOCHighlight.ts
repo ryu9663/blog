@@ -6,6 +6,7 @@ export const useTOCHighlight = (headings: HeadingType[]) => {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log(headings);
     const headingElements = headings
       .map((heading) => document.getElementById(heading.id))
       .filter((el): el is HTMLElement => el !== null);
