@@ -8,7 +8,7 @@ import remarkGfm from "remark-gfm";
 import { MarkdownImage } from "@/app/_components/MarkdownImage";
 import styles from "./index.module.scss";
 import { Suspense, lazy } from "react";
-import Heading3 from "@/app/post/[id]/Markdown/_components/Heading3";
+import Heading from "@/app/post/[id]/Markdown/_components/Heading";
 import CommentScript from "@/app/post/[id]/Markdown/_components/CommnetScript";
 
 const Code = lazy(() => import("@/app/post/[id]/Markdown/_components/Code"));
@@ -27,7 +27,10 @@ export default function Markdown({ markdown }: PostProps) {
               {children}
             </a>
           ),
-          h3: ({ children }) => <Heading3>{children}</Heading3>,
+          h2: ({ children }) => <Heading level={2}>{children}</Heading>,
+          h3: ({ children }) => <Heading level={3}>{children}</Heading>,
+          h4: ({ children }) => <Heading level={4}>{children}</Heading>,
+          h5: ({ children }) => <Heading level={5}>{children}</Heading>,
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
             if (match === null) {

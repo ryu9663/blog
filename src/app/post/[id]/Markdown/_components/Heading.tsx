@@ -1,15 +1,22 @@
 "use client";
 import React, { PropsWithChildren, useState } from "react";
-import styles from "./Heading3.module.scss";
+import styles from "./Heading.module.scss";
 import Image from "next/image";
 import LinkCopySvg from "@/assets/link_copy.svg";
 import { usePathname } from "next/navigation";
 import { useToast } from "junyeol-components";
 
-export default function Heading3({ children }: PropsWithChildren) {
+interface HeadingProps extends PropsWithChildren {
+  level: 2 | 3 | 4 | 5;
+}
+
+export default function Heading({ children, level }: HeadingProps) {
   const [isHover, setIsHover] = useState(false);
   const pathname = usePathname();
   const toast = useToast();
+
+  const Tag = `h${level}` as const;
+
   return (
     <div
       className={styles.heading}
@@ -18,7 +25,7 @@ export default function Heading3({ children }: PropsWithChildren) {
     >
       {isHover && (
         <button
-          className={styles.link_copy_btn}
+          className={styles.linkCopyBtn}
           onClick={() => {
             navigator.clipboard
               .writeText(window.location.host + pathname + "#" + children)
@@ -30,14 +37,14 @@ export default function Heading3({ children }: PropsWithChildren) {
               });
           }}
         >
-          <div className={styles.link_copy_btn_wrapper}>
+          <div className={styles.linkCopyBtnWrapper}>
             <Image src={LinkCopySvg} width={30} height={30} alt="링크복사svg" />
           </div>
         </button>
       )}
-      <h3 className={styles.anchor} id={children as string}>
+      <Tag className={styles.anchor} id={children as string}>
         {children}
-      </h3>
+      </Tag>
     </div>
   );
 }

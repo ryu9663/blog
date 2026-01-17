@@ -1,19 +1,18 @@
 import { extractHeadings } from "@/utils/extractHeadings";
 import React from "react";
 import styles from "./index.module.scss";
+import { TOCList } from "./TOCList";
 
 interface HeadingIndexProps {
   markdown: string;
 }
+
 export const HeadingIndexNav = ({ markdown }: HeadingIndexProps) => {
-  const headingIndexes = extractHeadings(markdown);
+  const headings = extractHeadings(markdown);
+
   return (
-    <nav className={styles.heading_index_nav}>
-      {headingIndexes.map((heading, i) => (
-        <li className={styles.heading_index} key={i}>
-          <a href={`#${heading}`}>{`${heading}`}</a>
-        </li>
-      ))}
+    <nav className={styles.headingIndexNav}>
+      <TOCList headings={headings} />
     </nav>
   );
 };

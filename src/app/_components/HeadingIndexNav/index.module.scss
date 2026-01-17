@@ -1,26 +1,14 @@
 @use "src/styles/libs" as *;
 
-.heading_index_nav {
+.headingIndexNav {
   display: none;
+
   @include desktop_screen {
     position: sticky;
     top: 100px;
-    left: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    display: block;
     width: 300px;
     height: fit-content;
     margin-inline: 30px;
-    .heading_index {
-      & a {
-        color: $BLUISH-GRAY-500;
-
-        &:hover {
-          color: $BLUISH-GRAY-800;
-          text-decoration: none;
-        }
-      }
-    }
   }
 }
