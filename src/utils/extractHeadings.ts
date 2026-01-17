@@ -1,15 +1,18 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-export const extractHeadings = (markdown: string): string[] => {
-  const regex = /^(###)\s+(.*)$/gm;
-  const matches = markdown.matchAll(regex);
-  const headings: string[] = [];
-  //   @ts-expect-error
-  for (const match of matches) {
+import { HeadingType } from "@/types";
+
+export const extractHeadings = (markdown: string): HeadingType[] => {
+  const regex = /^(#{2,5})\s+(.*)$/gm;
+  const headings: HeadingType[] = [];
+
+  let match;
+  while ((match = regex.exec(markdown)) !== null) {
     const [, hashes, title] = match;
-    const level = hashes.length - 1;
-    headings.push(`${"#".repeat(level)} ${title}`);
+    headings.push({
+      text: title,
+      level: hashes.length,
+      id: title,
+    });
   }
 
-  const cleanIndexes = headings.map((heading) => heading.replace(/^#+\s*/, ""));
-  return cleanIndexes;
+  return headings;
 };

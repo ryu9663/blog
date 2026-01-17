@@ -95,6 +95,10 @@ src/
 2. **CSS Modules**: 모든 컴포넌트는 `.module.scss` 사용
 3. **타입 안정성**: Props와 상태에 대한 엄격한 타입 정의
 4. **재사용성**: 공용 컴포넌트는 `_components/`에 위치
+5. **내부 링크는 Link 컴포넌트 사용**: `<a>` 태그 대신 `next/link`의 `Link` 컴포넌트 사용
+   - 클라이언트 사이드 네비게이션으로 페이지 전환 성능 향상
+   - prefetch 기능으로 링크 호버 시 미리 로딩
+   - 외부 링크만 `<a target="_blank" rel="noopener noreferrer">` 사용
 
 ### TypeScript 타입 컨벤션
 1. **타입 정의 위치**: 모든 공용 타입은 `src/types/` 디렉토리에 정의
@@ -200,6 +204,60 @@ const [postsResult, categoriesResult] = await Promise.all([
 **적용 규칙**:
 - 독립적인 데이터 소스는 반드시 병렬로 fetch
 - 순차 실행이 필요한 경우에만 개별 await 사용
+
+## TOC (Table of Contents) 아키텍처
+
+### 헤딩 추출 및 타입 정의
+- **위치**: `src/utils/extractHeadings.ts`
+- **지원 레벨**: H2~H5 (정규식: `/^(#{2,5})\s+(.*)$/gm`)
+- **데이터 구조**: `HeadingType` (text, level, id)
+
+```typescript
+// src/types/headingType.ts
+export interface HeadingType {
+  text: string;  // 헤딩 텍스트
+  level: number; // 2, 3, 4, 5
+  id: string;    // 스크롤 타겟 ID (제목 텍스트 사용)
+}
+```
+
+### 통합 Heading 컴포넌트
+- **위치**: `src/app/post/[id]/Markdown/_components/Heading.tsx`
+- **동적 태그 패턴**: `const Tag = \`h${level}\` as const`
+- **기능**: ID 속성 자동 생성, 호버 시 링크 복사 버튼
+
+### TOC 하이라이팅 (Intersection Observer)
+```typescript
+// src/app/_components/HeadingIndexNav/useTOCHighlight.ts
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setActiveId(entry.target.id);
+      }
+    });
+  },
+  {
+    rootMargin: "-$HEADER_HEIGHT 0px -80% 0px", // 고정 헤더 오프셋
+    threshold: 0,
+  }
+);
+```
+
+### 스크롤 오프셋 처리
+- **CSS 방식**: `scroll-margin-top: $HEADER_HEIGHT` (Heading 앵커에 적용)
+- **JS 방식**: `scrollTo(top: elementPosition + scrollY - HEADER_HEIGHT)`
+- **Observer 방식**: `rootMargin`으로 뷰포트 경계 조정
+
+### 컴포넌트 구조
+```
+src/app/_components/HeadingIndexNav/
+├── index.tsx              # 메인 TOC 컴포넌트 (Server)
+├── index.module.scss      # 컨테이너 스타일
+├── TOCList.tsx            # 리스트 렌더링 (Client)
+├── TOCList.module.scss    # 리스트 스타일
+└── useTOCHighlight.ts     # Intersection Observer 훅
+```
 
 ## 성능 모니터링
 

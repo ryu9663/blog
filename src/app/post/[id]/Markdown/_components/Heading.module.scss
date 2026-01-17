@@ -4,19 +4,23 @@
   position: relative;
   width: fit-content;
   cursor: pointer;
-  .link_copy_btn {
+
+  .linkCopyBtn {
     position: absolute;
     right: -35px;
     bottom: 5px;
     padding: 0 10px;
     margin: 0;
+
     @include desktop_screen {
       right: -50px;
       bottom: 10px;
     }
-    &_wrapper {
+
+    &Wrapper {
       width: 20px;
       height: 20px;
+
       @include desktop_screen {
         width: 30px;
         height: 30px;
@@ -25,12 +29,6 @@
   }
 
   .anchor {
-    &:target::before {
-      display: block;
-      height: 86px; /* 헤더의 높이와 동일 */
-      margin-top: -86px; /* 음수 마진으로 헤더 높이만큼 오프셋 조정 */
-      visibility: hidden;
-      content: "";
-    }
+    scroll-margin-top: $HEADER_HEIGHT;
   }
 }

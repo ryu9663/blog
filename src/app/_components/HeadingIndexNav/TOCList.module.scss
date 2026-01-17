@@ -1,0 +1,69 @@
+@use "src/styles/libs" as *;
+
+.tocContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.tocList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tocItem {
+  font-size: 14px;
+  line-height: 1.4;
+  transition: all 0.2s ease;
+
+  a {
+    display: block;
+    color: $BLUISH-GRAY-500;
+    text-decoration: none;
+    padding: 4px 0;
+    padding-left: 12px;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: $BLUISH-GRAY-800;
+    }
+  }
+
+  &.active {
+    a {
+      color: $BLUE-600;
+      border-left-color: $BLUE-600;
+      font-weight: 500;
+    }
+  }
+}
+
+.level2 {
+  a {
+    padding-left: 12px;
+  }
+}
+
+.level3 {
+  a {
+    padding-left: 24px;
+  }
+}
+
+.level4 {
+  a {
+    padding-left: 36px;
+    font-size: 13px;
+  }
+}
+
+.level5 {
+  a {
+    padding-left: 48px;
+    font-size: 13px;
+  }
+}
