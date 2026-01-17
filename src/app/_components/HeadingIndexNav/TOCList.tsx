@@ -24,7 +24,7 @@ export const TOCList = ({ headings }: TOCListProps) => {
               activeId === id ? styles.active : ""
             }`}
           >
-            <Link href={`#${id}`} scroll>
+            <Link href={`#${id}`} replace>
               {text}
             </Link>
           </li>
