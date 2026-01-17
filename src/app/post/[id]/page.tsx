@@ -2,6 +2,7 @@ import { getPostById } from "@/app/api/dato/getPostById";
 import { getPosts } from "@/app/api/dato/getPosts";
 import { HeadingIndexNav } from "@/app/_components/HeadingIndexNav";
 import Markdown from "@/app/post/[id]/Markdown";
+import MixpanelPageView from "@/app/post/[id]/MixpanelPageView";
 import { PostType } from "@/types";
 import { Metadata } from "next";
 import styles from "./index.module.scss";
@@ -27,13 +28,14 @@ export async function generateStaticParams() {
 
 export default async function PostPageFilteredById({ params }: PostPageParams) {
   const {
-    article: { markdown },
+    article: { markdown, metaField },
   } = await getPostById<Pick<PostType, "markdown" | "metaField">>({
     postId: params.id,
   });
 
   return (
     <div className={`${styles.post_wrapper}`}>
+      <MixpanelPageView title={metaField.title} />
       <Markdown markdown={markdown} />
       <HeadingIndexNav markdown={markdown} />
     </div>
