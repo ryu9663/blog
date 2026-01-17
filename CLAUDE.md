@@ -238,16 +238,16 @@ const observer = new IntersectionObserver(
     });
   },
   {
-    rootMargin: "-$HEADER_HEIGHT 0px -80% 0px", // 고정 헤더 오프셋
+    rootMargin: "-86px 0px -80% 0px", // 고정 헤더(86px) 오프셋
     threshold: 0,
   }
 );
 ```
 
 ### 스크롤 오프셋 처리
-- **CSS 방식**: `scroll-margin-top: $HEADER_HEIGHT` (Heading 앵커에 적용)
-- **JS 방식**: `scrollTo(top: elementPosition + scrollY - HEADER_HEIGHT)`
-- **Observer 방식**: `rootMargin`으로 뷰포트 경계 조정
+- **CSS 방식**: `scroll-margin-top: $HEADER_HEIGHT` (SCSS 변수, Heading 앵커에 적용)
+- **JS 방식**: `scrollTo(top: elementPosition + scrollY - 86)`
+- **Observer 방식**: `rootMargin: "-86px 0px -80% 0px"`으로 뷰포트 경계 조정
 
 ### 컴포넌트 구조
 ```
