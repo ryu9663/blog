@@ -17,15 +17,15 @@ export const TOCList = ({ headings }: TOCListProps) => {
   return (
     <div className={styles.tocContainer}>
       <ul className={styles.tocList}>
-        {headings.map((heading, i) => (
+        {headings.map(({ id, level, text }) => (
           <li
-            key={i}
-            className={`${styles.tocItem} ${styles[`level${heading.level}`]} ${
-              activeId === heading.id ? styles.active : ""
+            key={id}
+            className={`${styles.tocItem} ${styles[`level${level}`]} ${
+              activeId === id ? styles.active : ""
             }`}
           >
-            <Link href={`#${heading.id}`} scroll>
-              {heading.text}
+            <Link href={`#${id}`} scroll>
+              {text}
             </Link>
           </li>
         ))}
