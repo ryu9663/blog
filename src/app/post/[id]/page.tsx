@@ -3,6 +3,7 @@ import { getPosts } from "@/app/api/dato/getPosts";
 import { HeadingIndexNav } from "@/app/_components/HeadingIndexNav";
 import Markdown from "@/app/post/[id]/Markdown";
 import MixpanelPageView from "@/app/post/[id]/MixpanelPageView";
+import WebVitalsTracker from "@/app/post/[id]/WebVitalsTracker";
 import { PostType } from "@/types";
 import { Metadata } from "next";
 import styles from "./index.module.scss";
@@ -36,6 +37,7 @@ export default async function PostPageFilteredById({ params }: PostPageParams) {
   return (
     <div className={`${styles.post_wrapper}`}>
       <MixpanelPageView title={metaField.title} />
+      <WebVitalsTracker title={metaField.title} />
       <Markdown markdown={markdown} />
       <HeadingIndexNav markdown={markdown} />
     </div>
