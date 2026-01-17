@@ -7,13 +7,14 @@ import { getPosts } from "@/app/api/dato/getPosts";
 import Sidebar from "@/app/_components/Sidebar";
 
 export const SidebarWrapper = async () => {
-  const { allArticles: articles } = await getPosts<{
-    allArticles: PostType[];
-  }>();
+  // Promise.all로 병렬 실행하여 waterfall 제거
+  const [postsResult, categoriesResult] = await Promise.all([
+    getPosts<{ allArticles: PostType[] }>(),
+    getCategories<{ allArticles: Pick<PostType, "category" | "_createdAt">[] }>(),
+  ]);
 
-  const { allArticles: _subCategories } = await getCategories<{
-    allArticles: Pick<PostType, "category" | "_createdAt">[];
-  }>();
+  const { allArticles: articles } = postsResult;
+  const { allArticles: _subCategories } = categoriesResult;
 
   const subCategories = _subCategories.map(
     ({ category: _category, _createdAt }) => ({

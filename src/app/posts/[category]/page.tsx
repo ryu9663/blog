@@ -7,7 +7,6 @@ import React from "react";
 import styles from "../page.module.scss";
 import { getCategories } from "@/app/api/dato/getCategories";
 import { getCategoriesAndSubCategories } from "@/app/sitemap";
-import { paginatePosts } from "@/libs/paginate";
 
 interface PostsPageFilteredByCategory extends SearchParamsType {
   params: {
@@ -34,7 +33,6 @@ export async function generateStaticParams() {
 
 export default async function PostsPageFilteredByCategory({
   params,
-  searchParams,
 }: PostsPageFilteredByCategory) {
   const { category } = params;
   // const currentPage = Number(searchParams.currentPage);
@@ -44,7 +42,7 @@ export default async function PostsPageFilteredByCategory({
   }>();
 
   const filteredArticles = articles.filter(
-    (article) => !!article.category.category[category],
+    (article) => !!article.category.category[category]
   );
   // ** pagination으로 바꿀때 주석 해제 **//
 
