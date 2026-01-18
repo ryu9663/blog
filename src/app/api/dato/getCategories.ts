@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { performRequest } from "@/libs/dato";
 import { REVALIDATE_TIME } from "@/utils/constant";
 
@@ -10,7 +11,7 @@ export const GET_CATEGORIES = `
   }
 `;
 
-export const getCategories = async <T>(query = GET_CATEGORIES): Promise<T> => {
+const _getCategories = async <T>(query = GET_CATEGORIES): Promise<T> => {
   try {
     const { data } = await performRequest<T>({
       query,
@@ -24,3 +25,5 @@ export const getCategories = async <T>(query = GET_CATEGORIES): Promise<T> => {
     throw new Error("An unknown error occurred.");
   }
 };
+
+export const getCategories = cache(_getCategories);

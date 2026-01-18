@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { performRequest } from "@/libs/dato";
 import { REVALIDATE_TIME } from "@/utils/constant";
 
@@ -9,7 +10,7 @@ export const GET_POSTIDS = `
   }
 `;
 
-export const getPostIds = async <T>(
+const _getPostIds = async <T>(
   query = GET_POSTIDS,
 ): Promise<{ allArticles: T }> => {
   try {
@@ -25,3 +26,5 @@ export const getPostIds = async <T>(
     throw new Error("An unknown error occurred.");
   }
 };
+
+export const getPostIds = cache(_getPostIds);

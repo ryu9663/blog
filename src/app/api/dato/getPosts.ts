@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { performRequest } from "@/libs/dato";
 import { IMAGE_SIZE_IN_POSTS, REVALIDATE_TIME } from "@/utils/constant";
 
@@ -14,7 +15,7 @@ export const GET_META_FIELDS = `
         title
         image {
           responsiveImage(imgixParams: { fit: crop, w: ${IMAGE_SIZE_IN_POSTS.width}, h: ${IMAGE_SIZE_IN_POSTS.height}, auto: format }) {
-            src 
+            src
             sizes
             height
             width
@@ -23,12 +24,12 @@ export const GET_META_FIELDS = `
             base64
           }
         }
-      }    
+      }
     }
   }
 `;
 
-export const getPosts = async <T>(query = GET_META_FIELDS): Promise<T> => {
+const _getPosts = async <T>(query = GET_META_FIELDS): Promise<T> => {
   try {
     const { data } = await performRequest<T>({
       query,
@@ -43,3 +44,5 @@ export const getPosts = async <T>(query = GET_META_FIELDS): Promise<T> => {
     throw new Error("An unknown error occurred.");
   }
 };
+
+export const getPosts = cache(_getPosts);

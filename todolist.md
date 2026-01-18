@@ -6,10 +6,10 @@
 
 ### P0 - Critical (즉시 적용)
 
-- [ ] **React.cache() 전체 API 함수 적용** (`server-cache-react`)
-  - `src/app/api/dato/getPosts.ts` - cache 미적용
-  - `src/app/api/dato/getCategories.ts` - cache 미적용
-  - `src/app/api/dato/getPostIds.ts` - cache 미적용
+- [x] **React.cache() 전체 API 함수 적용** (`server-cache-react`) ✅ 완료
+  - ✅ `src/app/api/dato/getPosts.ts` - 적용 완료
+  - ✅ `src/app/api/dato/getCategories.ts` - 적용 완료
+  - ✅ `src/app/api/dato/getPostIds.ts` - 적용 완료
   - ✅ `src/app/api/dato/getPostById.ts` - 이미 적용됨
   - 효과: 동일 렌더링 사이클 내 중복 API 요청 자동 제거
 
