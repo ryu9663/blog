@@ -16,7 +16,7 @@ import styles from "./index.module.scss";
 import { SidebarBtn } from "@/app/_components/Sidebar/SidebarBtn";
 import { useSidebarStore } from "@/app/_components/Sidebar/index.store";
 import { Menu } from "react-feather";
-import { PostWithoutMarkdownType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { getPublishedSubCategories } from "@/app/_components/SidebarWrapper/utils";
 export interface SidebarProps {
   categories: {

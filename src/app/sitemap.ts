@@ -1,6 +1,6 @@
 import { getPostIds } from "@/app/api/dato/getPostIds";
 import { getPosts } from "@/app/api/dato/getPosts";
-import { PostType } from "@/types";
+import { PostType } from "@/types/apiResponseType";
 import { BASE_URL } from "@/utils/constant";
 import { MetadataRoute } from "next";
 

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { HeadingType } from "@/types";
+import { HeadingType } from "@/types/headingType";
 
 export const useTOCHighlight = (headings: HeadingType[]) => {
   const [activeId, setActiveId] = useState<string | null>(null);
