@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
-import Fuse from "fuse.js";
 import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import styles from "./index.module.scss";
 import { useDebounce } from "@/utils/hooks/useDebounce";
+import { useDynamicFuseSearch } from "@/utils/hooks/useDynamicFuseSearch";
 
 interface SearchProps {
   posts: PostWithoutMarkdownType[];
@@ -14,29 +13,7 @@ interface SearchProps {
 export const Search = ({ posts, onSearchResults }: SearchProps) => {
   const [searchTerm, setSearchTerm, searchQuery] = useDebounce(500);
 
-  const fuse = useMemo(() => {
-    const options = {
-      keys: [
-        { name: "metaField.title", weight: 0.5 },
-        { name: "metaField.description", weight: 0.5 },
-      ],
-      threshold: 0.4,
-      includeScore: true,
-      minMatchCharLength: 2,
-    };
-    return new Fuse(posts, options);
-  }, [posts]);
-
-  useEffect(() => {
-    if (!searchQuery.trim()) {
-      onSearchResults(posts);
-      return;
-    }
-
-    const results = fuse.search(searchQuery);
-    const filteredPosts = results.map((result) => result.item);
-    onSearchResults(filteredPosts);
-  }, [searchQuery, fuse, posts]);
+  useDynamicFuseSearch({ posts, searchQuery, onSearchResults });
 
   return (
     <div className={styles.searchContainer}>

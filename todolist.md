@@ -52,14 +52,15 @@ const highlight = async () => {
 
 ### P2 - Medium (2주 내 적용)
 
-- [ ] **Fuse.js lazy loading** (`bundle-conditional`)
+- [x] **Fuse.js lazy loading** (`bundle-conditional`) ✅ 완료
   - 파일: `src/app/_components/Search/index.tsx`
-  - 문제: 검색 기능이 항상 필요하지 않음
-  - 개선: Search 컴포넌트 진입 시점에 dynamic import 고려
+  - 개선: 검색어 입력 시점에 dynamic import로 Fuse.js 로드
+  - 효과: 초기 번들에서 Fuse.js 제거, 검색 사용 시에만 로드
 
-- [ ] **content-visibility 적용** (`rendering-content-visibility`)
-  - 파일: Posts 컴포넌트 스타일
-  - 적용 시점: 포스트 목록이 많아질 경우
+- [x] **content-visibility 적용** (`rendering-content-visibility`) ✅ 완료
+  - 파일: `src/app/_components/Cards/Card/index.module.scss`
+  - 개선: `.card` 클래스에 `content-visibility: auto` 적용
+  - 효과: 뷰포트 밖 카드 렌더링 지연으로 성능 향상
 
 ---
 
@@ -161,4 +162,4 @@ posts/page.tsx (Server Component)
 
 ---
 
-*Last Updated: 2026-01-18 (P0, P1 완료)*
+*Last Updated: 2026-01-18 (P0, P1, P2 완료)*

@@ -57,9 +57,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 퍼지 검색으로 오타 허용성 제공
 - 검색 가중치: 제목(0.5), 설명(0.5)
 
-### 검색 성능 최적화
+### useDynamicFuseSearch 훅
+- **위치**: `src/utils/hooks/useDynamicFuseSearch.ts`
+- **목적**: Fuse.js 동적 import로 초기 번들 사이즈 최소화
+- **동작**: 검색어 입력 시에만 Fuse.js 라이브러리 로드
+
 ```typescript
-const searchOptions = {
+// src/app/_components/Search/index.tsx
+import { useDynamicFuseSearch } from "@/utils/hooks/useDynamicFuseSearch";
+
+useDynamicFuseSearch({ posts, searchQuery, onSearchResults });
+```
+
+### 검색 옵션 설정
+```typescript
+const fuseOptions = {
   keys: [
     { name: 'metaField.title', weight: 0.5 },
     { name: 'metaField.description', weight: 0.5 },
