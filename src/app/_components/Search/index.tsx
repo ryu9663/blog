@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo } from "react";
 import Fuse from "fuse.js";
-import { PostWithoutMarkdownType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import styles from "./index.module.scss";
 import { useDebounce } from "@/utils/hooks/useDebounce";
 

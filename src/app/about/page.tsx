@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { getPostById } from "@/app/api/dato/getPostById";
-import { PostType } from "@/types";
+import { PostType } from "@/types/apiResponseType";
 import Markdown from "@/app/post/[id]/Markdown";
 
 export default async function About() {

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
-import { PostType } from "@/types";
+import { PostType } from "@/types/apiResponseType";
 import Image from "next/image";
 import { Card } from "@/app/_components/Cards/Card";
 import { devideCategoryObject } from "@/utils/getCategoryLink";

@@ -1,4 +1,4 @@
-import { HeadingType } from "@/types";
+import { HeadingType } from "@/types/headingType";
 
 export const extractHeadings = (markdown: string): HeadingType[] => {
   const regex = /^(#{2,5})\s+(.*)$/gm;

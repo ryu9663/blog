@@ -1,4 +1,4 @@
-import { PostWithoutMarkdownType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { CategoryType, LinkType, SubCategoryType } from "junyeol-components";
 import Link from "next/link";

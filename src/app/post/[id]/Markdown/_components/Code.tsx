@@ -1,6 +1,5 @@
 "use client";
 import React, { PropsWithChildren, useEffect, useState } from "react";
-import { codeToHtml } from "shiki";
 import styles from "./Code.module.scss";
 
 interface CodeProps extends PropsWithChildren {
@@ -14,6 +13,7 @@ export default function Code({ match, children }: CodeProps) {
 
   useEffect(() => {
     const highlight = async () => {
+      const { codeToHtml } = await import("shiki");
       const result = await codeToHtml(code, {
         lang: language,
         theme: "github-dark",

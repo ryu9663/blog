@@ -1,5 +1,5 @@
 import React from "react";
-import { PostWithoutMarkdownType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { getCategories } from "@/app/api/dato/getCategories";
 
 import { formatSidebarData } from "@/app/_components/SidebarWrapper/utils";

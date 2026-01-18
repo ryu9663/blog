@@ -26,24 +26,29 @@ export const getPosts = cache(_getPosts);
 
 ### P1 - High (1주 내 적용)
 
-- [ ] **Shiki dynamic import 적용** (`bundle-dynamic-imports`)
-  - 파일: `src/app/post/[id]/Markdown/_components/Code.tsx`
-  - 문제: shiki는 번들 사이즈가 큰 라이브러리
-  - 개선: dynamic import로 코드 스플리팅
+- [x] **Shiki dynamic import 적용** (`bundle-dynamic-imports`) ✅ 완료
+  - ✅ `src/app/post/[id]/Markdown/_components/Code.tsx` - dynamic import 적용
+  - 효과: shiki 라이브러리 코드 스플리팅으로 초기 번들 사이즈 감소
 
 ```typescript
-const highlightCode = async (code: string, language: string) => {
+// 적용된 코드
+const highlight = async () => {
   const { codeToHtml } = await import("shiki");
-  return codeToHtml(code, { lang: language, theme: "github-dark" });
+  const result = await codeToHtml(code, {
+    lang: language,
+    theme: "github-dark",
+  });
+  setHtml(result);
 };
 ```
 
-- [ ] **Barrel imports 제거** (`bundle-barrel-imports`)
-  - 파일: `src/types/index.ts`
-  - 문제: `export * from` 패턴이 tree-shaking 방해
-  - 개선: 직접 import 사용
-    - Before: `import { PostType } from "@/types"`
-    - After: `import { PostType } from "@/types/apiResponseType"`
+- [x] **Barrel imports 제거** (`bundle-barrel-imports`) ✅ 완료
+  - ✅ `src/types/index.ts` 삭제
+  - ✅ 19개 파일 직접 import로 변경
+  - 효과: Tree-shaking 최적화 활성화
+    - `HeadingType` → `@/types/headingType`
+    - `PostType`, `PostWithoutMarkdownType` → `@/types/apiResponseType`
+    - `SearchParamsType` → `@/types/nextSegmentType`
 
 ### P2 - Medium (2주 내 적용)
 
@@ -156,4 +161,4 @@ posts/page.tsx (Server Component)
 
 ---
 
-*Last Updated: 2026-01-18*
+*Last Updated: 2026-01-18 (P0, P1 완료)*

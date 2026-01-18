@@ -1,6 +1,7 @@
 import { getPosts } from "@/app/api/dato/getPosts";
 import { Metadata } from "next";
-import { PostType, PostWithoutMarkdownType, SearchParamsType } from "@/types";
+import { PostType, PostWithoutMarkdownType } from "@/types/apiResponseType";
+import { SearchParamsType } from "@/types/nextSegmentType";
 import { PostsWithSearch } from "@/app/_components/PostsWithSearch";
 import styles from "./page.module.scss";
 // ** pagination으로 바꿀때 주석 해제 **//

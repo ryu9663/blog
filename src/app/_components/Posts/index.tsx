@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.scss";
 import Cards from "@/app/_components/Cards";
 // import { Pagination } from "@/app/_components/Pagination";
-import { PostWithoutMarkdownType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 
 // ** pagination으로 바꿀때 주석 해제 **//
 

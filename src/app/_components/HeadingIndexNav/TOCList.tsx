@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { HeadingType } from "@/types";
+import { HeadingType } from "@/types/headingType";
 import { useTOCHighlight } from "./useTOCHighlight";
 import styles from "./TOCList.module.scss";
 import Link from "next/link";

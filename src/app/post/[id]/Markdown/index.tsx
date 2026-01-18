@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import { PostType } from "@/types";
+import { PostType } from "@/types/apiResponseType";
 import "github-markdown-css/github-markdown-light.css";
 import MarkdownLibrary from "react-markdown";
 import remarkGfm from "remark-gfm";

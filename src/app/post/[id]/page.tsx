@@ -4,7 +4,7 @@ import { HeadingIndexNav } from "@/app/_components/HeadingIndexNav";
 import Markdown from "@/app/post/[id]/Markdown";
 import MixpanelPageView from "@/app/post/[id]/MixpanelPageView";
 import WebVitalsTracker from "@/app/post/[id]/WebVitalsTracker";
-import { PostType } from "@/types";
+import { PostType } from "@/types/apiResponseType";
 import { Metadata } from "next";
 import styles from "./index.module.scss";
 

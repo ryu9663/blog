@@ -1,5 +1,5 @@
 import { getPosts } from "@/app/api/dato/getPosts";
-import { PostType } from "@/types";
+import { PostType } from "@/types/apiResponseType";
 import { BASE_URL } from "@/utils/constant";
 import Rss from "rss";
 

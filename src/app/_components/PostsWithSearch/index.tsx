@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PostWithoutMarkdownType } from "@/types";
+import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { Posts } from "@/app/_components/Posts";
 import { Search } from "@/app/_components/Search";
 
