@@ -1,6 +1,78 @@
 # React Best Practices 개선 Todo List
 
-`posts/page.tsx` 컴포넌트 트리 분석 결과
+## 전체 코드베이스 성능 분석 (2026-01-18)
+
+**Overall Score: B+**
+
+### P0 - Critical (즉시 적용)
+
+- [ ] **React.cache() 전체 API 함수 적용** (`server-cache-react`)
+  - `src/app/api/dato/getPosts.ts` - cache 미적용
+  - `src/app/api/dato/getCategories.ts` - cache 미적용
+  - `src/app/api/dato/getPostIds.ts` - cache 미적용
+  - ✅ `src/app/api/dato/getPostById.ts` - 이미 적용됨
+  - 효과: 동일 렌더링 사이클 내 중복 API 요청 자동 제거
+
+```typescript
+// 적용 예시
+import { cache } from "react";
+
+const _getPosts = async <T>(query = GET_META_FIELDS): Promise<T> => {
+  // 기존 로직
+};
+
+export const getPosts = cache(_getPosts);
+```
+
+### P1 - High (1주 내 적용)
+
+- [ ] **Shiki dynamic import 적용** (`bundle-dynamic-imports`)
+  - 파일: `src/app/post/[id]/Markdown/_components/Code.tsx`
+  - 문제: shiki는 번들 사이즈가 큰 라이브러리
+  - 개선: dynamic import로 코드 스플리팅
+
+```typescript
+const highlightCode = async (code: string, language: string) => {
+  const { codeToHtml } = await import("shiki");
+  return codeToHtml(code, { lang: language, theme: "github-dark" });
+};
+```
+
+- [ ] **Barrel imports 제거** (`bundle-barrel-imports`)
+  - 파일: `src/types/index.ts`
+  - 문제: `export * from` 패턴이 tree-shaking 방해
+  - 개선: 직접 import 사용
+    - Before: `import { PostType } from "@/types"`
+    - After: `import { PostType } from "@/types/apiResponseType"`
+
+### P2 - Medium (2주 내 적용)
+
+- [ ] **Fuse.js lazy loading** (`bundle-conditional`)
+  - 파일: `src/app/_components/Search/index.tsx`
+  - 문제: 검색 기능이 항상 필요하지 않음
+  - 개선: Search 컴포넌트 진입 시점에 dynamic import 고려
+
+- [ ] **content-visibility 적용** (`rendering-content-visibility`)
+  - 파일: Posts 컴포넌트 스타일
+  - 적용 시점: 포스트 목록이 많아질 경우
+
+---
+
+## 잘 적용된 부분 (전체 분석)
+
+| 패턴 | 위치 | 상태 |
+|------|------|------|
+| Promise.all 병렬 페칭 | `SidebarWrapper/index.tsx:11` | ✅ |
+| Suspense boundaries | `layout.tsx:122`, `Markdown/index.tsx:40` | ✅ |
+| Third-party 지연 로딩 | `layout.tsx:69,81` (afterInteractive) | ✅ |
+| 데이터 직렬화 최적화 | `PostWithoutMarkdownType`, `Pick<>` 사용 | ✅ |
+| Next/Image 사용 | `Cards`, `MarkdownImage`, `Heading` | ✅ |
+| useMemo 적용 | `Search/index.tsx:17` (Fuse 인스턴스) | ✅ |
+| useDebounce 적용 | 검색 입력 최적화 | ✅ |
+
+---
+
+## `posts/page.tsx` 컴포넌트 트리 분석 결과
 
 ## 컴포넌트 트리 구조
 
@@ -84,4 +156,4 @@ posts/page.tsx (Server Component)
 
 ---
 
-*Generated: 2026-01-17*
+*Last Updated: 2026-01-18*
