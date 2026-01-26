@@ -8,6 +8,7 @@ export const GET_META_FIELDS = `
       ispublic: {eq: true}
     },first: "100") {
       id
+      datocmsId: id
       category
       _createdAt
       metaField {
