@@ -1,12 +1,11 @@
 import { Posts } from "@/app/_components/Posts";
-import { getPosts } from "@/app/api/dato/getPosts";
+import { getPosts, getCategories } from "@/app/api";
 import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { SearchParamsType } from "@/types/nextSegmentType";
 import { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
 import React from "react";
 import styles from "../page.module.scss";
-import { getCategories } from "@/app/api/dato/getCategories";
 import { getCategoriesAndSubCategories } from "@/app/sitemap";
 
 interface PostsPageFilteredByCategory extends SearchParamsType {
