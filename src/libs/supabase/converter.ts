@@ -47,7 +47,7 @@ export const toPostType = (row: PostWithRelations): PostType => {
       };
 
   return {
-    id: row.legacy_id || parseInt(row.id.replace(/-/g, "").slice(0, 8), 16),
+    id: row.id, // UUID 직접 사용
     _createdAt: row.created_at,
     category: {
       category: {
