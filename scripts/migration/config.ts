@@ -10,7 +10,7 @@ export const config = {
   datoApiEndpoint: "https://graphql.datocms.com/",
 
   // Supabase
-  supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  supabaseUrl: process.env.SUPABASE_URL!,
   supabaseServiceKey: process.env.SUPABASE_SERVICE_ROLE_KEY!,
 
   // AWS S3
