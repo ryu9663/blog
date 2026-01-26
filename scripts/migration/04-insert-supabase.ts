@@ -190,17 +190,36 @@ async function main() {
   let skippedCount = 0;
 
   for (const post of extractedData.posts) {
-    // Check if post already exists by legacy_id
-    const { data: existing } = await supabase
-      .from("posts")
-      .select("id")
-      .eq("legacy_id", post.id)
-      .single();
+    // DatoCMS ID가 숫자인 경우만 legacy_id로 사용
+    const numericId = parseInt(post.id, 10);
+    const legacyId = !isNaN(numericId) && String(numericId) === post.id ? numericId : null;
 
-    if (existing) {
-      console.log(`Post exists (legacy_id: ${post.id}): ${post.metaField?.title}`);
-      skippedCount++;
-      continue;
+    // Check if post already exists by legacy_id or title
+    if (legacyId) {
+      const { data: existing } = await supabase
+        .from("posts")
+        .select("id")
+        .eq("legacy_id", legacyId)
+        .single();
+
+      if (existing) {
+        console.log(`Post exists (legacy_id: ${post.id}): ${post.metaField?.title}`);
+        skippedCount++;
+        continue;
+      }
+    } else {
+      // 문자열 ID인 경우 title로 중복 체크
+      const { data: existing } = await supabase
+        .from("posts")
+        .select("id")
+        .eq("title", post.metaField?.title || "Untitled")
+        .single();
+
+      if (existing) {
+        console.log(`Post exists (by title): ${post.metaField?.title}`);
+        skippedCount++;
+        continue;
+      }
     }
 
     // Get category ID
@@ -232,7 +251,7 @@ async function main() {
 
     // Insert post
     const { error } = await supabase.from("posts").insert({
-      legacy_id: post.id,
+      legacy_id: legacyId,
       title: post.metaField?.title || "Untitled",
       description: post.metaField?.description || null,
       markdown: post.markdown || "",
