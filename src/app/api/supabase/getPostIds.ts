@@ -2,19 +2,19 @@ import { cache } from "react";
 import { supabase } from "@/libs/supabase";
 
 interface PostId {
-  id: number;
+  id: string;
 }
 
 interface PostIdRow {
   id: string;
-  legacy_id: number | null;
+  datocms_id: string | null;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _getPostIds = async <T>(_query?: string): Promise<{ allArticles: T }> => {
   const { data, error } = await supabase
     .from("posts")
-    .select("id, legacy_id")
+    .select("id, datocms_id")
     .eq("is_public", true)
     .order("created_at", { ascending: false });
 
@@ -26,11 +26,9 @@ const _getPostIds = async <T>(_query?: string): Promise<{ allArticles: T }> => {
     return { allArticles: [] as unknown as T };
   }
 
-  // legacy_id가 있으면 그것을 사용, 없으면 UUID의 일부를 숫자로 변환
+  // datocms_id가 있으면 그것을 사용, 없으면 UUID 사용
   const postIds: PostId[] = (data as PostIdRow[]).map((row) => ({
-    id:
-      row.legacy_id ||
-      parseInt(row.id.replace(/-/g, "").slice(0, 8), 16),
+    id: row.datocms_id || row.id,
   }));
 
   return { allArticles: postIds as unknown as T };
