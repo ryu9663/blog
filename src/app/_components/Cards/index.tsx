@@ -26,7 +26,7 @@ const Cards = ({ articles }: CardsProps) => (
       return (
         metaField.image.responsiveImage && (
           <Card
-            id={id as number}
+            id={id}
             key={metaField.title}
             title={metaField?.title || "no title"}
             description={metaField.description || "no description"}

@@ -25,7 +25,7 @@ export interface ResponsiveImageType {
 }
 
 export interface PostType {
-  id: number;
+  id: string | number;
   _createdAt: string;
   category: {
     category: Partial<Record<CategoryType, string>>;
