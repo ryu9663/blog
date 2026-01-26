@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { getPostById } from "@/app/api/dato/getPostById";
+import { getPostById } from "@/app/api";
 import { PostType } from "@/types/apiResponseType";
 import Markdown from "@/app/post/[id]/Markdown";
 

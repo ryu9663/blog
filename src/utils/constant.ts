@@ -5,8 +5,12 @@ export const IMAGE_SIZE_IN_POSTS = {
   height: 120,
 };
 
+// NO_IMAGE는 DATA_SOURCE에 따라 동적으로 결정되어야 하지만,
+// 빌드 타임에 결정되어야 하므로 CloudFront URL이 없으면 DatoCMS 폴백 사용
 export const NO_IMAGE = {
-  src: "https://www.datocms-assets.com/107137/1699598396-noimage.jpg",
+  src: process.env.CLOUDFRONT_DOMAIN
+    ? `https://${process.env.CLOUDFRONT_DOMAIN}/images/noimage.jpg`
+    : "https://www.datocms-assets.com/107137/1699598396-noimage.jpg",
   alt: "No image",
 };
 

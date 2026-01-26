@@ -1,4 +1,4 @@
-import { getPosts } from "@/app/api/dato/getPosts";
+import { getPosts } from "@/app/api";
 import { Metadata } from "next";
 import { PostType, PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { SearchParamsType } from "@/types/nextSegmentType";

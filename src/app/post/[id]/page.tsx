@@ -1,5 +1,4 @@
-import { getPostById } from "@/app/api/dato/getPostById";
-import { getPosts } from "@/app/api/dato/getPosts";
+import { getPostById, getPosts } from "@/app/api";
 import { HeadingIndexNav } from "@/app/_components/HeadingIndexNav";
 import Markdown from "@/app/post/[id]/Markdown";
 import MixpanelPageView from "@/app/post/[id]/MixpanelPageView";

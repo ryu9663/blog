@@ -1,9 +1,7 @@
 import React from "react";
 import { PostWithoutMarkdownType } from "@/types/apiResponseType";
-import { getCategories } from "@/app/api/dato/getCategories";
-
+import { getCategories, getPosts } from "@/app/api";
 import { formatSidebarData } from "@/app/_components/SidebarWrapper/utils";
-import { getPosts } from "@/app/api/dato/getPosts";
 import Sidebar from "@/app/_components/Sidebar";
 
 export const SidebarWrapper = async () => {
