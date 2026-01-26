@@ -53,7 +53,7 @@ export type ImageUpdate = Partial<ImageInsert>;
 // Post
 export interface PostRow {
   id: string;
-  legacy_id: number | null;
+  datocms_id: string | null;
   title: string;
   description: string | null;
   markdown: string;

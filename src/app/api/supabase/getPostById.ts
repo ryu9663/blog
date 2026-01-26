@@ -13,36 +13,14 @@ const isUuid = (str: string): boolean => {
   return uuidRegex.test(str);
 };
 
-// 숫자 형식인지 확인하는 함수
-const isNumeric = (str: string): boolean => {
-  return /^\d+$/.test(str);
-};
-
 const _getPostById = async <T>({
   postId,
 }: GetPostByIdParams): Promise<{ article: T }> => {
   let data: PostWithRelations | null = null;
   let error: { message: string } | null = null;
 
-  // 숫자 형식이면 legacy_id로 조회
-  if (isNumeric(postId)) {
-    const { data: dataByLegacyId, error: errorByLegacyId } = await supabase
-      .from("posts")
-      .select(
-        `
-        *,
-        category:categories(*),
-        thumbnail:images(*)
-      `,
-      )
-      .eq("legacy_id", parseInt(postId, 10))
-      .single();
-
-    data = dataByLegacyId as PostWithRelations | null;
-    error = errorByLegacyId;
-  }
-  // UUID 형식이면 id로 조회
-  else if (isUuid(postId)) {
+  // UUID 형식이면 Supabase id로 조회
+  if (isUuid(postId)) {
     const { data: dataByUuid, error: errorByUuid } = await supabase
       .from("posts")
       .select(
@@ -58,10 +36,22 @@ const _getPostById = async <T>({
     data = dataByUuid as PostWithRelations | null;
     error = errorByUuid;
   }
-  // 그 외 형식 (DatoCMS 문자열 ID 등)은 title로 조회 시도
+  // 그 외 형식 (DatoCMS ID - 숫자 또는 문자열)은 datocms_id로 조회
   else {
-    // 지원하지 않는 ID 형식
-    error = { message: `Unsupported ID format: ${postId}` };
+    const { data: dataByDatocmsId, error: errorByDatocmsId } = await supabase
+      .from("posts")
+      .select(
+        `
+        *,
+        category:categories(*),
+        thumbnail:images(*)
+      `,
+      )
+      .eq("datocms_id", postId)
+      .single();
+
+    data = dataByDatocmsId as PostWithRelations | null;
+    error = errorByDatocmsId;
   }
 
   if (error || !data) {
