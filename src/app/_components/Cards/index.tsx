@@ -8,7 +8,10 @@ import { devideCategoryObject } from "@/utils/getCategoryLink";
 import { IMAGE_SIZE_IN_POSTS } from "@/utils/constant";
 
 interface CardsProps {
-  articles: Pick<PostType, "id" | "metaField" | "category" | "_createdAt">[];
+  articles: Pick<
+    PostType,
+    "id" | "datocmsId" | "metaField" | "category" | "_createdAt"
+  >[];
 }
 
 const Cards = ({ articles }: CardsProps) => (
@@ -16,7 +19,7 @@ const Cards = ({ articles }: CardsProps) => (
     {articles.map((article, i) => {
       const {
         metaField,
-        id,
+        datocmsId,
         _createdAt,
         category: { category },
       } = article;
@@ -26,7 +29,7 @@ const Cards = ({ articles }: CardsProps) => (
       return (
         metaField.image.responsiveImage && (
           <Card
-            id={id}
+            id={datocmsId}
             key={metaField.title}
             title={metaField?.title || "no title"}
             description={metaField.description || "no description"}

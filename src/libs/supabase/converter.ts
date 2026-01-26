@@ -47,7 +47,8 @@ export const toPostType = (row: PostWithRelations): PostType => {
       };
 
   return {
-    id: row.datocms_id || row.id, // DatoCMS ID 우선, 없으면 UUID
+    id: row.id, // Supabase UUID
+    datocmsId: row.datocms_id || row.id, // URL용 DatoCMS ID
     _createdAt: row.created_at,
     category: {
       category: {

@@ -30,6 +30,7 @@ export interface PostType {
   category: {
     category: Partial<Record<CategoryType, string>>;
   };
+  datocmsId: string;
   markdown: string;
   metaField: MetaField;
   isPublic?: boolean;
