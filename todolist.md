@@ -47,9 +47,9 @@ src/app/api/admin/
   - [x] **GET** - 카테고리 목록
   - [x] **POST** - 카테고리 생성 (`{ main_category, sub_category }`)
 
-- [ ] `src/app/api/admin/categories/[id]/route.ts`
-  - [ ] **PUT** - 카테고리 수정
-  - [ ] **DELETE** - 카테고리 삭제
+- [x] `src/app/api/admin/categories/[id]/route.ts`
+  - [x] **PUT** - 카테고리 수정
+  - [x] **DELETE** - 카테고리 삭제
 
 ### 4. 이미지 업로드 API
 - [ ] `src/app/api/admin/upload/route.ts`
