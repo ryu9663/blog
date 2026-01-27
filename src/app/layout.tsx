@@ -2,16 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "junyeol-components/style.css";
 import "@/styles/_global.scss";
-import { Footer } from "@/app/_components/Footer";
-import styles from "./layout.module.scss";
-import { SidebarWrapper } from "@/app/_components/SidebarWrapper";
-import Link from "next/link";
 import { BASE_URL } from "@/utils/constant";
-import Provider from "@/app/_components/Provider";
-import Analytics from "@/utils/thirdParty/Analytics";
 import Script from "next/script";
 import { GTM_ID } from "@/libs/gtm";
-import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -108,29 +101,16 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon-32x32.png" />
       </head>
       <body className={inter.className}>
-        <SidebarWrapper />
-        <Provider>
-          <Link className={styles.link} href="/">
-            <h1 className={`${styles.heading_1} ${styles["priority-0"]}`}>
-              개발자
-              <br /> 류준열
-            </h1>
-          </Link>
-          {children}
-        </Provider>
-        <Footer />
-        <Suspense>
-          <Analytics />
-        </Suspense>
+        {children}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
       </body>
-      <noscript>
-        <iframe
-          src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-          height="0"
-          width="0"
-          style={{ display: "none", visibility: "hidden" }}
-        />
-      </noscript>
     </html>
   );
 }

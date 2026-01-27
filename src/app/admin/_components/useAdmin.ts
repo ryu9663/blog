@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useCallback, useContext } from "react";
 import { AdminAuthContext } from "./AdminAuthProvider";
 
 export function useAdmin() {
@@ -12,19 +12,21 @@ export function useAdmin() {
 
   const { token, logout, isAuthenticated } = context;
 
-  // Wrapper function that auto-adds Authorization header
-  const apiFetch = async (url: string, options: RequestInit = {}) => {
-    const headers = new Headers(options.headers);
+  const apiFetch = useCallback(
+    async (url: string, options: RequestInit = {}) => {
+      const headers = new Headers(options.headers);
 
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
-    }
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
 
-    return fetch(url, {
-      ...options,
-      headers,
-    });
-  };
+      return fetch(url, {
+        ...options,
+        headers,
+      });
+    },
+    [token]
+  );
 
   return {
     token,
