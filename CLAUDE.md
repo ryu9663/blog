@@ -40,7 +40,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### 성능 최적화
 - Next.js Image 컴포넌트 필수 사용
 - `next.config.js`에 허용된 이미지 도메인만 사용
-- ISR(Incremental Static Regeneration) 활용: `REVALIDATE_TIME = 10초`
+- ISR(Incremental Static Regeneration): DatoCMS는 `REVALIDATE_TIME = 10초`, Supabase는 Next.js 기본 캐싱
 - **Request Deduplication**: `React.cache()`로 API 중복 호출 자동 제거
 - **병렬 데이터 페칭**: `Promise.all()`로 독립적인 API 호출 동시 실행
 
@@ -93,13 +93,21 @@ const fuseOptions = {
 src/
 ├── app/                    # App Router 구조
 │   ├── _components/        # 공용 컴포넌트
-│   ├── api/dato/          # DatoCMS API 엔드포인트
+│   ├── api/               # 데이터 레이어
+│   │   ├── index.ts       # 통합 API 파사드 (Feature Flag 기반 전환)
+│   │   ├── dato/          # DatoCMS API (롤백용 유지)
+│   │   └── supabase/      # Supabase API (현재 주력)
 │   ├── post/[id]/         # 동적 포스트 페이지
 │   └── posts/             # 카테고리별 포스트 목록
-├── libs/dato/             # DatoCMS GraphQL 클라이언트
+├── config/                # 설정 (dataSource.ts 등)
+├── libs/
+│   ├── dato/              # DatoCMS GraphQL 클라이언트 (롤백용)
+│   └── supabase/          # Supabase 클라이언트, 타입, 컨버터
 ├── utils/                 # 유틸리티 함수
 ├── types/                 # TypeScript 타입 정의
 └── styles/               # 글로벌 SCSS 스타일
+scripts/
+└── migration/             # DatoCMS → Supabase 마이그레이션 스크립트
 ```
 
 ### 컴포넌트 설계 원칙
@@ -161,31 +169,94 @@ styles/
 - BEM 방법론 적용하되 Module 스코핑 활용
 - 전역 스타일은 최소한으로 제한
 
-## DatoCMS 연동 가이드
+## 데이터 소스 아키텍처
 
-### GraphQL 쿼리 최적화
-- 필요한 필드만 요청
-- 이미지 최적화: `responsiveImage` 활용
-- 페이지네이션: `first: "100"` 제한
+### Feature Flag 기반 이중 데이터 소스
+DatoCMS에서 Supabase로 마이그레이션 완료. Feature Flag로 롤백 가능.
+
+```typescript
+// src/config/dataSource.ts
+export const DATA_SOURCE = process.env.DATA_SOURCE || "datocms"; // "datocms" | "supabase"
+
+// src/app/api/index.ts - 통합 API 파사드
+const api = DATA_SOURCE === "supabase" ? supabase : dato;
+export const { getPosts, getPostById, getCategories, getPostIds } = api;
+```
+
+**규칙**: 컴포넌트에서는 반드시 `src/app/api/index.ts`에서 import. 직접 dato/supabase 모듈 참조 금지.
+
+### Supabase 스키마
+```
+Tables:
+├── posts        # id(UUID), datocms_id, title, description, markdown, category_id, thumbnail_id, is_public
+├── categories   # id(UUID), main_category, sub_category
+└── images       # id(UUID), s3_key, alt, title, width, height, blur_data_url
+```
+
+### 데이터 컨버터 패턴
+- **위치**: `src/libs/supabase/converter.ts`
+- Supabase 행 데이터를 기존 `PostType`/`PostWithoutMarkdownType`으로 변환
+- 컴포넌트 계층에 대한 변경 없이 데이터 소스 교체 가능
+
+### URL ID 이중 해석
+```typescript
+// src/app/api/supabase/getPostById.ts
+if (isUuid(postId)) → supabase "id" 필드로 조회 (신규 포스트)
+else               → supabase "datocms_id" 필드로 조회 (마이그레이션된 포스트)
+```
+
+### 이미지 호스팅: AWS S3 + CloudFront
+- DatoCMS assets → S3 저장 + CloudFront CDN 배포
+- `converter.ts`에서 `s3_key` → CloudFront URL 자동 생성
+- `blur_data_url`로 블러 플레이스홀더 제공
+- `next.config.js`에 CloudFront 도메인 동적 등록
+
+### DatoCMS (롤백용 유지)
+- `src/libs/dato/` - GraphQL 클라이언트
+- `src/app/api/dato/` - 기존 API 함수들
+- `DATA_SOURCE=datocms`로 즉시 롤백 가능
 
 ### 환경변수 관리
-- `API_TOKEN`: DatoCMS API 토큰
-- `GTM_ID`: Google Tag Manager ID
+```bash
+# Data Source 전환
+DATA_SOURCE=datocms          # "datocms" | "supabase"
+
+# Supabase
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=   # 서버 전용 (마이그레이션 스크립트 등)
+
+# AWS S3 / CloudFront (이미지)
+AWS_REGION=
+S3_BUCKET=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+CLOUDFRONT_DOMAIN=
+
+# DatoCMS (롤백용)
+API_TOKEN=
+
+# Admin
+ADMIN_PASSWORD=
+
+# Analytics
+GTM_ID=
+```
 
 ### 캐싱 전략
-- ISR: `revalidate: 10초`
-- 이미지 캐싱: Next.js Image 컴포넌트 활용
-- DatoCMS CDN 최적화
+- DatoCMS: ISR `revalidate: 10초`
+- Supabase: React.cache()로 렌더링 사이클 내 중복 제거, Next.js 기본 캐싱 활용
+- 이미지 캐싱: Next.js Image 컴포넌트 + CloudFront CDN
 
 ## React Server Component 최적화 패턴
 
 ### React.cache()를 이용한 요청 중복 제거
-- **위치**: `src/app/api/dato/*.ts` API 함수들
+- **위치**: `src/app/api/dato/*.ts` 및 `src/app/api/supabase/*.ts` API 함수들
 - **패턴**: 내부 함수를 구현한 후 `React.cache()`로 래핑하여 export
 - **효과**: 동일 렌더링 사이클 내 중복 API 요청 자동 제거
 
 ```typescript
-// src/app/api/dato/getPostById.ts 예시
+// DatoCMS / Supabase 모두 동일 패턴 적용
 import { cache } from "react";
 
 const _getPostById = async <T>({ postId }: { postId: string }) => {
@@ -197,7 +268,7 @@ export const getPostById = cache(_getPostById);
 ```
 
 **적용 규칙**:
-- 모든 DatoCMS API 함수는 `React.cache()` 적용 필수
+- 모든 API 함수 (DatoCMS, Supabase 모두)는 `React.cache()` 적용 필수
 - 함수명: 내부 구현은 `_functionName`, export는 `functionName`
 - Server Component에서만 사용 (Client Component에서는 사용 불가)
 
@@ -287,6 +358,8 @@ src/app/_components/HeadingIndexNav/
 - WebP 포맷 우선 사용
 - 적절한 사이즈 지정
 - Lazy Loading 기본 적용
+- Supabase: S3 + CloudFront CDN 배포, blur placeholder 지원
+- DatoCMS (롤백용): `responsiveImage` GraphQL 필드 활용
 
 ## 보안 및 접근성
 
