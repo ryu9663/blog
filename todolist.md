@@ -52,8 +52,8 @@ src/app/api/admin/
   - [x] **DELETE** - 카테고리 삭제
 
 ### 4. 이미지 업로드 API
-- [ ] `src/app/api/admin/upload/route.ts`
-  - [ ] **POST** - 이미지 업로드
+- [x] `src/app/api/admin/upload/route.ts`
+  - [x] **POST** - 이미지 업로드
     - FormData로 파일 수신
     - `@aws-sdk/client-s3` PutObjectCommand로 S3 업로드
     - images 테이블에 레코드 insert (s3_key, alt, width, height)
