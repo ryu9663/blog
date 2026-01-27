@@ -14,3 +14,13 @@ export const createServiceClient = () => {
   }
   return createClient<Database>(supabaseUrl, serviceRoleKey);
 };
+
+// Untyped client for admin CRUD - Database generic's Insert/Update types
+// are incompatible with @supabase/postgrest-js@2.91.1 (resolves to never)
+export const createAdminClient = () => {
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!serviceRoleKey) {
+    throw new Error("SUPABASE_SERVICE_ROLE_KEY is not set");
+  }
+  return createClient(supabaseUrl, serviceRoleKey);
+};
