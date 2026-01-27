@@ -37,10 +37,10 @@ src/app/api/admin/
     - body: `{ title, description, markdown, category_id, thumbnail_id?, is_public }`
     - posts 테이블 insert
 
-- [ ] `src/app/api/admin/posts/[id]/route.ts`
-  - [ ] **GET** - 단일 포스트 상세 (UUID로 조회)
-  - [ ] **PUT** - 포스트 수정 (`Partial<PostInsert>`)
-  - [ ] **DELETE** - 포스트 삭제 (hard delete)
+- [x] `src/app/api/admin/posts/[id]/route.ts`
+  - [x] **GET** - 단일 포스트 상세 (UUID로 조회)
+  - [x] **PUT** - 포스트 수정 (`Partial<PostInsert>`)
+  - [x] **DELETE** - 포스트 삭제 (hard delete)
 
 ### 3. 카테고리 API
 - [ ] `src/app/api/admin/categories/route.ts`
