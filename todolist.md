@@ -1,77 +1,27 @@
-# Admin CRUD API 구현 TODO
+# Admin UI 구현 TODO
 
-## 개요
-Supabase 기반 어드민 CRUD API를 Next.js Route Handlers로 구현.
-ADMIN_PASSWORD 기반 인증, 이미지 업로드(S3) 포함.
+## 1. 인증 시스템
+- [x] AdminAuthProvider (Context + localStorage 토큰 관리)
+- [x] useAdmin 훅 (토큰 가져오기, 로그아웃, 인증 API 호출 헬퍼)
+- [x] /admin/login 페이지
 
-## API 라우트 구조
-```
-src/app/api/admin/
-├── auth.ts                    # 인증 헬퍼 (validateAdmin)
-├── posts/
-│   ├── route.ts               # GET (목록), POST (생성)
-│   └── [id]/
-│       └── route.ts           # GET (상세), PUT (수정), DELETE (삭제)
-├── categories/
-│   ├── route.ts               # GET (목록), POST (생성)
-│   └── [id]/
-│       └── route.ts           # PUT (수정), DELETE (삭제)
-└── upload/
-    └── route.ts               # POST (S3 이미지 업로드)
-```
+## 2. 어드민 레이아웃
+- [x] /admin/layout.tsx (인증 체크, 네비게이션)
 
----
+## 3. 포스트 목록 (대시보드)
+- [x] /admin/page.tsx (포스트 목록 테이블, 삭제 버튼)
+- [x] PostList 컴포넌트
 
-## TODO
+## 4. 글 작성/수정 폼
+- [x] PostForm 공용 컴포넌트 (title, description, category, thumbnail, markdown, is_public)
+- [x] 마크다운 에디터 + 실시간 미리보기
+- [x] 이미지 업로드 연동 (썸네일 + 본문 이미지)
 
-### 1. 인증 헬퍼
-- [x] `src/app/api/admin/auth.ts` 생성
-  - `Authorization: Bearer <ADMIN_PASSWORD>` 검증 함수
-  - 실패 시 401 응답 반환 헬퍼
+## 5. 글 작성 페이지
+- [x] /admin/posts/new/page.tsx
 
-### 2. 포스트 API
-- [x] `src/app/api/admin/posts/route.ts`
-  - [x] **GET** - 전체 포스트 목록 (is_public 무관, 어드민용)
-    - `createAdminClient()` 사용, posts + categories + images 조인
-  - [x] **POST** - 포스트 생성
-    - body: `{ title, description, markdown, category_id, thumbnail_id?, is_public }`
-    - posts 테이블 insert
+## 6. 글 수정 페이지
+- [x] /admin/posts/[id]/edit/page.tsx
 
-- [x] `src/app/api/admin/posts/[id]/route.ts`
-  - [x] **GET** - 단일 포스트 상세 (UUID로 조회)
-  - [x] **PUT** - 포스트 수정 (`Partial<PostInsert>`)
-  - [x] **DELETE** - 포스트 삭제 (hard delete)
-
-### 3. 카테고리 API
-- [x] `src/app/api/admin/categories/route.ts`
-  - [x] **GET** - 카테고리 목록
-  - [x] **POST** - 카테고리 생성 (`{ main_category, sub_category }`)
-
-- [x] `src/app/api/admin/categories/[id]/route.ts`
-  - [x] **PUT** - 카테고리 수정
-  - [x] **DELETE** - 카테고리 삭제
-
-### 4. 이미지 업로드 API
-- [x] `src/app/api/admin/upload/route.ts`
-  - [x] **POST** - 이미지 업로드
-    - FormData로 파일 수신
-    - `@aws-sdk/client-s3` PutObjectCommand로 S3 업로드
-    - images 테이블에 레코드 insert (s3_key, alt, width, height)
-    - CloudFront URL + image record 반환
-
----
-
-## 기술 사항
-
-| 항목 | 결정 |
-|------|------|
-| 인증 | `ADMIN_PASSWORD` 환경변수, Bearer 토큰 방식 |
-| DB 클라이언트 | `createServiceClient()` (service role key, RLS 우회) |
-| 이미지 저장 | AWS S3 + CloudFront CDN |
-| 라우트 방식 | Next.js App Router Route Handlers |
-| 기존 코드 영향 | 없음 (기존 읽기 API와 독립적) |
-
-## 검증 방법
-- [x] `pnpm build` 빌드 오류 확인
-- [ ] curl로 각 엔드포인트 호출 테스트
-- [ ] 인증 실패 시 401 응답 확인
+## 7. 빌드 검증
+- [x] pnpm build 통과 확인

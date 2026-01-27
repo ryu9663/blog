@@ -1,0 +1,287 @@
+@import "@/styles/libs/_palette.scss";
+@import "@/styles/libs/_vars.scss";
+
+.container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $NORMAL;
+
+  thead {
+    background: $GRAY-50;
+    border-bottom: 2px solid $GRAY-200;
+
+    tr {
+      th {
+        padding: 16px 12px;
+        text-align: left;
+        font-weight: 600;
+        color: $GRAY-700;
+        font-size: $SMALL;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid $GRAY-100;
+      transition: background 0.15s ease;
+
+      &:hover {
+        background: $GRAY-10;
+      }
+
+      td {
+        padding: 16px 12px;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+.titleCell {
+  max-width: 400px;
+}
+
+.titleContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-weight: 600;
+  color: $GRAY-900;
+  line-height: 1.4;
+}
+
+.description {
+  font-size: $SMALL;
+  color: $GRAY-600;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 350px;
+}
+
+.categoryCell {
+  white-space: nowrap;
+}
+
+.category {
+  display: inline-block;
+  padding: 4px 12px;
+  background: $BLUISH-GRAY-50;
+  color: $BLUISH-GRAY-700;
+  border-radius: 6px;
+  font-size: $SMALL;
+  font-weight: 500;
+}
+
+.statusCell {
+  white-space: nowrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: $SMALL;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+
+  &.public {
+    background: $GREEN-100;
+    color: $GREEN-700;
+  }
+
+  &.draft {
+    background: $GRAY-200;
+    color: $GRAY-700;
+  }
+}
+
+.dateCell {
+  color: $GRAY-600;
+  font-size: $SMALL;
+  white-space: nowrap;
+}
+
+.actionsCell {
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.editButton {
+  padding: 8px 16px;
+  font-size: $SMALL;
+  font-weight: 600;
+  color: white;
+  background: $BLUE-500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: $BLUE-600;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($BLUE-500, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.deleteButton {
+  padding: 8px 16px;
+  font-size: $SMALL;
+  font-weight: 600;
+  color: white;
+  background: $PEACH-500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+
+  &:hover {
+    background: $PEACH-600;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($PEACH-500, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: $GRAY-600;
+
+  p {
+    font-size: $MEDIUM;
+    margin: 0 0 24px 0;
+  }
+}
+
+.emptyLink {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: $NORMAL;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .table {
+    font-size: $SMALL;
+
+    thead tr th {
+      padding: 12px 8px;
+      font-size: $SMALL2X;
+    }
+
+    tbody tr td {
+      padding: 12px 8px;
+    }
+  }
+
+  .titleCell {
+    max-width: 250px;
+  }
+
+  .description {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .table {
+    thead {
+      display: none;
+    }
+
+    tbody {
+      tr {
+        display: block;
+        margin-bottom: 16px;
+        border: 1px solid $GRAY-200;
+        border-radius: 8px;
+        padding: 16px;
+
+        &:hover {
+          background: white;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        td {
+          display: block;
+          padding: 8px 0;
+          border: none;
+          text-align: left;
+
+          &::before {
+            content: attr(data-label);
+            display: block;
+            font-weight: 600;
+            font-size: $SMALL2X;
+            color: $GRAY-600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  .titleCell,
+  .description {
+    max-width: 100%;
+  }
+
+  .description {
+    white-space: normal;
+  }
+
+  .actions {
+    margin-top: 8px;
+  }
+
+  .editButton,
+  .deleteButton {
+    flex: 1;
+    text-align: center;
+  }
+}
