@@ -13,16 +13,10 @@ interface PostPageParams {
 
 export async function generateStaticParams() {
   const { allArticles: articles } = await getPosts<{
-    allArticles: Pick<PostType, "id">[];
-  }>(`
-  query allArticles {
-    allArticles(orderBy: _createdAt_DESC) {
-      id
-    }
-  }
-`);
-  return articles.map(({ id }) => ({
-    postId: id,
+    allArticles: Pick<PostType, "id" | "datocmsId">[];
+  }>();
+  return articles.map(({ datocmsId }) => ({
+    id: datocmsId,
   }));
 }
 
