@@ -37,3 +37,9 @@ next-env.d.ts
 
 # etc
 /src/__mocks__/dato.ts
+
+# MCP config
+.mcp.json
+
+# migration output
+scripts/migration/output/

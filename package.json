@@ -31,6 +31,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "remark-gfm": "^4.0.0",
     "rss": "^1.2.2",
+    "sharp": "^0.34.5",
     "shiki": "^3.21.0",
     "web-vitals": "^5.1.0",
     "zustand": "^4.4.3"
