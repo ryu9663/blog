@@ -248,6 +248,52 @@ GTM_ID=
 - Supabase: React.cache()로 렌더링 사이클 내 중복 제거, Next.js 기본 캐싱 활용
 - 이미지 캐싱: Next.js Image 컴포넌트 + CloudFront CDN
 
+## Admin API 엔드포인트
+
+모든 Admin API는 Bearer 토큰 인증 필수 (`Authorization: Bearer <ADMIN_PASSWORD>`).
+인증 로직: `src/app/api/admin/auth.ts` (timing-safe comparison).
+
+### Posts API
+
+| 엔드포인트 | 메서드 | 설명 |
+|-----------|--------|------|
+| `/api/admin/posts` | GET | 전체 포스트 목록 (카테고리, 썸네일 포함) |
+| `/api/admin/posts` | POST | 새 포스트 생성 |
+| `/api/admin/posts/[id]` | GET | 단일 포스트 조회 (UUID) |
+| `/api/admin/posts/[id]` | PUT | 포스트 수정 (부분 업데이트 가능) |
+| `/api/admin/posts/[id]` | DELETE | 포스트 삭제 |
+
+**POST/PUT Body 필드**: `title`, `description`, `markdown`, `category_id`, `thumbnail_id`, `is_public`, `datocms_id`
+
+### Categories API
+
+| 엔드포인트 | 메서드 | 설명 |
+|-----------|--------|------|
+| `/api/admin/categories` | GET | 전체 카테고리 목록 |
+| `/api/admin/categories` | POST | 새 카테고리 생성 |
+| `/api/admin/categories/[id]` | PUT | 카테고리 수정 |
+| `/api/admin/categories/[id]` | DELETE | 카테고리 삭제 |
+
+**POST/PUT Body 필드**: `main_category`, `sub_category`
+
+### Upload API
+
+| 엔드포인트 | 메서드 | 설명 |
+|-----------|--------|------|
+| `/api/admin/upload` | POST | 이미지 업로드 (S3 + Supabase images 테이블) |
+
+- **Content-Type**: `multipart/form-data`
+- **Form 필드**: `file` (필수), `alt`, `title`, `width`, `height`
+- **허용 타입**: JPEG, PNG, WebP, GIF (최대 10MB)
+- **S3 키**: `uploads/{timestamp}-{random}.{ext}`
+- **응답**: `{ image: {...}, url: "https://{CLOUDFRONT_DOMAIN}/..." }`
+
+### RSS 피드
+
+| 엔드포인트 | 메서드 | 설명 |
+|-----------|--------|------|
+| `/rss.xml` | GET | RSS XML 피드 (인증 불필요, `force-dynamic`) |
+
 ## React Server Component 최적화 패턴
 
 ### React.cache()를 이용한 요청 중복 제거
