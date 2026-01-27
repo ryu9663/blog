@@ -43,9 +43,9 @@ src/app/api/admin/
   - [x] **DELETE** - 포스트 삭제 (hard delete)
 
 ### 3. 카테고리 API
-- [ ] `src/app/api/admin/categories/route.ts`
-  - [ ] **GET** - 카테고리 목록
-  - [ ] **POST** - 카테고리 생성 (`{ main_category, sub_category }`)
+- [x] `src/app/api/admin/categories/route.ts`
+  - [x] **GET** - 카테고리 목록
+  - [x] **POST** - 카테고리 생성 (`{ main_category, sub_category }`)
 
 - [ ] `src/app/api/admin/categories/[id]/route.ts`
   - [ ] **PUT** - 카테고리 수정
