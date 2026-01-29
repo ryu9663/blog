@@ -19,6 +19,7 @@ export const Card = ({
   createdAt,
   subCategory,
 }: CardProps) => {
+  //채
   return (
     <Link href={`/post/${id}`}>
       <div className={`${styles.card} ${styles["card_box-shadow"]} `}>
