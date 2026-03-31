@@ -41,5 +41,9 @@ next-env.d.ts
 # MCP config
 .mcp.json
 
+# Claude Code / OMC
+.claude/
+.omc/
+
 # migration output
 scripts/migration/output/
