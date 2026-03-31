@@ -12,6 +12,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 3. **SEO 최적화**: 검색 엔진 최적화를 통한 콘텐츠 도달률 극대화
 4. **코드 품질**: 타입 안정성과 유지보수성을 최우선으로 고려
 
+### Git 커밋 규칙
+- 커밋 메시지에 `Co-Authored-By` 등 광고성 문구를 절대 포함하지 않는다
+
 ## Development Commands
 
 - **Development**: `pnpm dev` - Next.js 개발 서버 시작

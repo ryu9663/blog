@@ -8,10 +8,10 @@ import remarkGfm from "remark-gfm";
 import { MarkdownImage } from "@/app/_components/MarkdownImage";
 import styles from "./index.module.scss";
 import { Suspense, lazy } from "react";
-import Heading from "@/app/post/[id]/Markdown/_components/Heading";
-import CommentScript from "@/app/post/[id]/Markdown/_components/CommnetScript";
+import Heading from "@/app/(blog)/post/[id]/Markdown/_components/Heading";
+import CommentScript from "@/app/(blog)/post/[id]/Markdown/_components/CommnetScript";
 
-const Code = lazy(() => import("@/app/post/[id]/Markdown/_components/Code"));
+const Code = lazy(() => import("@/app/(blog)/post/[id]/Markdown/_components/Code"));
 
 interface PostProps {
   markdown: PostType["markdown"];

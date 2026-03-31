@@ -7,15 +7,17 @@ const nextConfig = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: [
-      "drive.google.com",
-      "prod-files-secure.s3.us-west-2.amazonaws.com",
-      "junesdevlog-s3.s3.ap-northeast-2.amazonaws.com",
-      "img1.daumcdn.net",
-      "www.datocms-assets.com", // 롤백용 유지
-      "image4.coupangcdn.com",
+    remotePatterns: [
+      { hostname: "drive.google.com" },
+      { hostname: "prod-files-secure.s3.us-west-2.amazonaws.com" },
+      { hostname: "junesdevlog-s3.s3.ap-northeast-2.amazonaws.com" },
+      { hostname: "img1.daumcdn.net" },
+      { hostname: "www.datocms-assets.com" }, // 롤백용 유지
+      { hostname: "image4.coupangcdn.com" },
     ].concat(
-      process.env.CLOUDFRONT_DOMAIN ? [process.env.CLOUDFRONT_DOMAIN] : [],
+      process.env.CLOUDFRONT_DOMAIN
+        ? [{ hostname: process.env.CLOUDFRONT_DOMAIN }]
+        : [],
     ),
   },
   crossOrigin: "anonymous",

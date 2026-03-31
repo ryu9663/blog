@@ -6,7 +6,7 @@ import { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
 import React from "react";
 import styles from "../../page.module.scss";
-import { getCategoriesAndSubCategories } from "@/app/sitemap";
+import { getCategoriesAndSubCategories } from "@/app/(blog)/sitemap";
 import { paginatePosts } from "@/libs/paginate";
 
 interface PostsPageFilteredBySubCategory extends SearchParamsType {

@@ -37,7 +37,9 @@ export const useDynamicFuseSearch = ({
     const performSearch = async () => {
       if (!fuse && !fuseLoadingRef.current) {
         fuseLoadingRef.current = true;
-        const FuseModule = await import("fuse.js");
+        const FuseModule = await import(
+          /* webpackChunkName: "fuse" */ "fuse.js"
+        );
         const fuseInstance = new FuseModule.default(posts, fuseOptions);
         setFuse(fuseInstance);
         fuseLoadingRef.current = false;
@@ -56,5 +58,5 @@ export const useDynamicFuseSearch = ({
     };
 
     performSearch();
-  }, [searchQuery, fuse, posts, onSearchResults]);
+  }, [searchQuery, fuse]);
 };

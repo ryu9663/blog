@@ -1,4 +1,4 @@
-import { generateRss } from "@/app/rss.xml/generateRss";
+import { generateRss } from "@/app/(blog)/rss.xml/generateRss";
 
 export const dynamic = "force-dynamic"; // defaults to force-static
 
