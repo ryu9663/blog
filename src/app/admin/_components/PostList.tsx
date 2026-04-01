@@ -2,36 +2,10 @@
 
 import Link from "next/link";
 import styles from "./PostList.module.scss";
-
-interface Category {
-  id: string;
-  main_category: string;
-  sub_category: string | null;
-}
-
-interface Thumbnail {
-  id: string;
-  s3_key: string;
-  alt: string | null;
-  title: string | null;
-  width: number;
-  height: number;
-  blur_data_url: string | null;
-}
-
-interface Post {
-  id: string;
-  title: string;
-  description: string | null;
-  is_public: boolean;
-  created_at: string;
-  updated_at: string;
-  category: Category;
-  thumbnail: Thumbnail | null;
-}
+import { AdminCategoryType, AdminPostType } from "@/types/adminType";
 
 interface PostListProps {
-  posts: Post[];
+  posts: AdminPostType[];
   onDelete: (id: string) => Promise<void>;
 }
 
@@ -45,7 +19,7 @@ export default function PostList({ posts, onDelete }: PostListProps) {
     });
   };
 
-  const getCategoryLabel = (category: Category) => {
+  const getCategoryLabel = (category: AdminCategoryType) => {
     if (category.sub_category) {
       return `${category.main_category} / ${category.sub_category}`;
     }

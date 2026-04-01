@@ -4,26 +4,11 @@ import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { useAdmin } from "./useAdmin";
 import MarkdownPreview from "./MarkdownPreview";
 import styles from "./PostForm.module.scss";
-
-interface Category {
-  id: string;
-  main_category: string;
-  sub_category: string;
-}
-
-interface PostFormData {
-  title: string;
-  description: string;
-  markdown: string;
-  category_id: string;
-  thumbnail_id: string | null;
-  is_public: boolean;
-  datocms_id?: string | null;
-}
+import { AdminCategoryType, PostFormDataType } from "@/types/adminType";
 
 interface PostFormProps {
-  initialData?: PostFormData;
-  onSubmit: (formData: PostFormData) => Promise<void>;
+  initialData?: PostFormDataType;
+  onSubmit: (formData: PostFormDataType) => Promise<void>;
 }
 
 export default function PostForm({ initialData, onSubmit }: PostFormProps) {
@@ -31,7 +16,7 @@ export default function PostForm({ initialData, onSubmit }: PostFormProps) {
   const isEditMode = !!initialData;
 
   // Form state
-  const [formData, setFormData] = useState<PostFormData>({
+  const [formData, setFormData] = useState<PostFormDataType>({
     title: initialData?.title || "",
     description: initialData?.description || "",
     markdown: initialData?.markdown || "",
@@ -42,7 +27,7 @@ export default function PostForm({ initialData, onSubmit }: PostFormProps) {
   });
 
   // UI state
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<AdminCategoryType[]>([]);
   const [thumbnailPreviewUrl, setThumbnailPreviewUrl] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
