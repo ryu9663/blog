@@ -22,11 +22,31 @@ export default function Markdown({ markdown }: PostProps) {
       <MarkdownLibrary
         remarkPlugins={[remarkGfm]}
         components={{
-          a: ({ children, href, ...props }) => (
-            <a href={href} {...props} target="_blank" rel="noopener noreferrer">
-              {children}
-            </a>
-          ),
+          a: ({ children, href, ...props }) => {
+            const isSamePageLink = (() => {
+              if (!href) return false;
+
+              try {
+                const currentUrl = new URL(window.location.href);
+                const linkUrl = new URL(href, window.location.href);
+
+                return currentUrl.origin === linkUrl.origin && currentUrl.pathname === linkUrl.pathname && Boolean(linkUrl.hash);
+              } catch {
+                return false;
+              }
+            })();
+
+            return (
+              <a
+                href={href}
+                {...props}
+                target={isSamePageLink ? undefined : "_blank"}
+                rel={isSamePageLink ? undefined : "noopener noreferrer"}
+              >
+                {children}
+              </a>
+            );
+          },
           h2: ({ children }) => <Heading level={2}>{children}</Heading>,
           h3: ({ children }) => <Heading level={3}>{children}</Heading>,
           h4: ({ children }) => <Heading level={4}>{children}</Heading>,
