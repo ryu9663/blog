@@ -4,7 +4,7 @@ import styles from "./Heading.module.scss";
 import Image from "next/image";
 import LinkCopySvg from "@/assets/link_copy.svg";
 import { usePathname } from "next/navigation";
-import { useToast } from "junyeol-components";
+import { toast, useToast } from "junyeol-components";
 
 interface HeadingProps extends PropsWithChildren {
   level: 2 | 3 | 4 | 5;
@@ -12,7 +12,6 @@ interface HeadingProps extends PropsWithChildren {
 
 export default function Heading({ children, level }: HeadingProps) {
   const pathname = usePathname();
-  const toast = useToast();
 
   const Tag = `h${level}` as const;
 
@@ -24,22 +23,16 @@ export default function Heading({ children, level }: HeadingProps) {
           navigator.clipboard
             .writeText(window.location.host + pathname + "#" + children)
             .then(() => {
-              toast({
-                children: "링크가 복사되었습니다.",
-                type: "success",
-              });
+              toast.success("링크가 복사되었습니다.");
             })
             .catch(() => {
-              toast({
-                children: (
-                  <>
-                    링크 복사에 실패했습니다.
-                    <br />
-                    홈페이지 하단의 연락처로 제보주세요
-                  </>
-                ),
-                type: "fail",
-              });
+              toast.error(
+                <>
+                  링크 복사에 실패했습니다.
+                  <br />
+                  홈페이지 하단의 연락처로 제보주세요
+                </>,
+              );
             });
         }}
       >
