@@ -1,4 +1,4 @@
-import { CategoryType } from "junyeol-components";
+import type { CategoryType } from "junyeol-components";
 
 export type NestedObject = {
   //* 몇 depth인지 모르는 객체 *//

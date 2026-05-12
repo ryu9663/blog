@@ -10,7 +10,9 @@ interface AdminAuthContextType {
   isAuthenticated: boolean;
 }
 
-export const AdminAuthContext = createContext<AdminAuthContextType | null>(null);
+export const AdminAuthContext = createContext<AdminAuthContextType | null>(
+  null,
+);
 
 const STORAGE_KEY = "admin_token";
 
@@ -75,5 +77,9 @@ export function AdminAuthProvider({ children }: { children: React.ReactNode }) {
     return null;
   }
 
-  return <AdminAuthContext.Provider value={value}>{children}</AdminAuthContext.Provider>;
+  return (
+    <AdminAuthContext.Provider value={value}>
+      {children}
+    </AdminAuthContext.Provider>
+  );
 }

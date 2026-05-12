@@ -3,18 +3,18 @@
 
 .form {
   max-width: 1400px;
-  margin: 0 auto;
   padding: 24px;
+  margin: 0 auto;
 }
 
 .error {
-  background-color: $PEACH-50;
-  color: $PEACH-600;
   padding: 12px 16px;
-  border-radius: 8px;
   margin-bottom: 24px;
-  border: 1px solid $PEACH-200;
   font-size: $SMALL;
+  color: $PEACH-600;
+  background-color: $PEACH-50;
+  border: 1px solid $PEACH-200;
+  border-radius: 8px;
 }
 
 .formGroup {
@@ -24,16 +24,16 @@
 .label {
   display: block;
   margin-bottom: 8px;
+  font-size: $NORMAL;
   font-weight: 600;
   color: $GRAY-800;
-  font-size: $NORMAL;
 }
 
 .hint {
-  font-weight: 400;
-  color: $GRAY-600;
   font-size: $SMALL;
   font-style: italic;
+  font-weight: 400;
+  color: $GRAY-600;
 }
 
 .input,
@@ -41,15 +41,15 @@
 .select {
   width: 100%;
   padding: 12px 16px;
+  font-family: inherit;
+  font-size: $NORMAL;
   border: 1px solid $GRAY-300;
   border-radius: 8px;
-  font-size: $NORMAL;
-  font-family: inherit;
   transition: border-color 0.2s;
 
   &:focus {
-    outline: none;
     border-color: $BLUE-500;
+    outline: none;
     box-shadow: 0 0 0 3px rgba($BLUE-500, 0.1);
   }
 
@@ -59,9 +59,9 @@
 }
 
 .textarea {
-  resize: vertical;
   font-family: inherit;
   line-height: 1.6;
+  resize: vertical;
 }
 
 .select {
@@ -77,8 +77,8 @@
   cursor: pointer;
 
   &:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 }
 
@@ -89,25 +89,25 @@
 }
 
 .thumbnailPreview {
+  max-width: 400px;
+  padding: 8px;
   margin-top: 16px;
+  background-color: $GRAY-50;
   border: 1px solid $GRAY-300;
   border-radius: 8px;
-  padding: 8px;
-  background-color: $GRAY-50;
-  max-width: 400px;
 
   img {
+    display: block;
     width: 100%;
     height: auto;
-    display: block;
     border-radius: 4px;
   }
 }
 
 .checkboxLabel {
   display: flex;
-  align-items: center;
   gap: 8px;
+  align-items: center;
   cursor: pointer;
   user-select: none;
 
@@ -145,11 +145,11 @@
 }
 
 .paneTitle {
+  padding-bottom: 8px;
+  margin-bottom: 12px;
   font-size: $MEDIUM;
   font-weight: 600;
   color: $GRAY-800;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
   border-bottom: 2px solid $GRAY-300;
 }
 
@@ -157,18 +157,18 @@
   width: 100%;
   min-height: 500px;
   padding: 16px;
-  border: 1px solid $GRAY-300;
-  border-radius: 8px;
   font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
   font-size: $SMALL;
   line-height: 1.6;
   resize: vertical;
   background-color: $GRAY-10;
+  border: 1px solid $GRAY-300;
+  border-radius: 8px;
   transition: border-color 0.2s;
 
   &:focus {
-    outline: none;
     border-color: $BLUE-500;
+    outline: none;
     box-shadow: 0 0 0 3px rgba($BLUE-500, 0.1);
   }
 
@@ -208,10 +208,10 @@
   font-size: $NORMAL;
   font-weight: 600;
   color: $WHITE;
+  cursor: pointer;
   background-color: $BLUE-600;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   transition: background-color 0.2s;
 
   &:hover:not(:disabled) {
@@ -219,8 +219,8 @@
   }
 
   &:disabled {
-    opacity: 0.5;
     cursor: not-allowed;
+    opacity: 0.5;
   }
 
   &:focus {

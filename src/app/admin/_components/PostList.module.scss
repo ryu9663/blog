@@ -7,8 +7,8 @@
 
 .table {
   width: 100%;
-  border-collapse: collapse;
   font-size: $NORMAL;
+  border-collapse: collapse;
 
   thead {
     background: $GRAY-50;
@@ -17,10 +17,10 @@
     tr {
       th {
         padding: 16px 12px;
-        text-align: left;
+        font-size: $SMALL;
         font-weight: 600;
         color: $GRAY-700;
-        font-size: $SMALL;
+        text-align: left;
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
@@ -56,18 +56,18 @@
 
 .title {
   font-weight: 600;
-  color: $GRAY-900;
   line-height: 1.4;
+  color: $GRAY-900;
 }
 
 .description {
-  font-size: $SMALL;
-  color: $GRAY-600;
-  line-height: 1.4;
+  max-width: 350px;
   overflow: hidden;
+  font-size: $SMALL;
+  line-height: 1.4;
+  color: $GRAY-600;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 350px;
 }
 
 .categoryCell {
@@ -77,11 +77,11 @@
 .category {
   display: inline-block;
   padding: 4px 12px;
-  background: $BLUISH-GRAY-50;
-  color: $BLUISH-GRAY-700;
-  border-radius: 6px;
   font-size: $SMALL;
   font-weight: 500;
+  color: $BLUISH-GRAY-700;
+  background: $BLUISH-GRAY-50;
+  border-radius: 6px;
 }
 
 .statusCell {
@@ -91,26 +91,26 @@
 .badge {
   display: inline-block;
   padding: 4px 12px;
-  border-radius: 6px;
   font-size: $SMALL;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.3px;
+  border-radius: 6px;
 
   &.public {
-    background: $GREEN-100;
     color: $GREEN-700;
+    background: $GREEN-100;
   }
 
   &.draft {
-    background: $GRAY-200;
     color: $GRAY-700;
+    background: $GRAY-200;
   }
 }
 
 .dateCell {
-  color: $GRAY-600;
   font-size: $SMALL;
+  color: $GRAY-600;
   white-space: nowrap;
 }
 
@@ -124,22 +124,22 @@
 }
 
 .editButton {
+  display: inline-block;
   padding: 8px 16px;
   font-size: $SMALL;
   font-weight: 600;
   color: white;
+  text-decoration: none;
+  cursor: pointer;
   background: $BLUE-500;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
 
   &:hover {
     background: $BLUE-600;
-    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba($BLUE-500, 0.3);
+    transform: translateY(-1px);
   }
 
   &:active {
@@ -149,20 +149,20 @@
 
 .deleteButton {
   padding: 8px 16px;
+  font-family: inherit;
   font-size: $SMALL;
   font-weight: 600;
   color: white;
+  cursor: pointer;
   background: $PEACH-500;
   border: none;
   border-radius: 6px;
-  cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
 
   &:hover {
     background: $PEACH-600;
-    transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba($PEACH-500, 0.3);
+    transform: translateY(-1px);
   }
 
   &:active {
@@ -171,13 +171,13 @@
 }
 
 .empty {
-  text-align: center;
   padding: 60px 20px;
   color: $GRAY-600;
+  text-align: center;
 
   p {
-    font-size: $MEDIUM;
     margin: 0 0 24px 0;
+    font-size: $MEDIUM;
   }
 }
 
@@ -187,14 +187,14 @@
   font-size: $NORMAL;
   font-weight: 600;
   color: white;
+  text-decoration: none;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 8px;
-  text-decoration: none;
   transition: all 0.2s ease;
 
   &:hover {
-    transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
   }
 
   &:active {
@@ -235,10 +235,10 @@
     tbody {
       tr {
         display: block;
+        padding: 16px;
         margin-bottom: 16px;
         border: 1px solid $GRAY-200;
         border-radius: 8px;
-        padding: 16px;
 
         &:hover {
           background: white;
@@ -248,18 +248,18 @@
         td {
           display: block;
           padding: 8px 0;
-          border: none;
           text-align: left;
+          border: none;
 
           &::before {
-            content: attr(data-label);
             display: block;
-            font-weight: 600;
+            margin-bottom: 4px;
             font-size: $SMALL2X;
+            font-weight: 600;
             color: $GRAY-600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 4px;
+            content: attr(data-label);
           }
         }
       }

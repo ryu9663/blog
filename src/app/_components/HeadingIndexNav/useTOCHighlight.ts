@@ -23,7 +23,7 @@ export const useTOCHighlight = (headings: HeadingType[]) => {
       {
         rootMargin: "-86px 0px -80% 0px",
         threshold: 0,
-      }
+      },
     );
 
     headingElements.forEach((el) => observer.observe(el));

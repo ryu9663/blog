@@ -4,7 +4,7 @@ import { validateAdmin } from "../../auth";
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const unauthorized = validateAdmin(request);
   if (unauthorized) return unauthorized;
@@ -15,11 +15,23 @@ export async function PUT(
 
   const { main_category, sub_category } = body;
 
-  if (main_category !== undefined && (typeof main_category !== "string" || main_category.trim() === "")) {
-    return NextResponse.json({ error: "main_category must be a non-empty string" }, { status: 400 });
+  if (
+    main_category !== undefined &&
+    (typeof main_category !== "string" || main_category.trim() === "")
+  ) {
+    return NextResponse.json(
+      { error: "main_category must be a non-empty string" },
+      { status: 400 },
+    );
   }
-  if (sub_category !== undefined && (typeof sub_category !== "string" || sub_category.trim() === "")) {
-    return NextResponse.json({ error: "sub_category must be a non-empty string" }, { status: 400 });
+  if (
+    sub_category !== undefined &&
+    (typeof sub_category !== "string" || sub_category.trim() === "")
+  ) {
+    return NextResponse.json(
+      { error: "sub_category must be a non-empty string" },
+      { status: 400 },
+    );
   }
 
   const updates: Record<string, unknown> = {};
@@ -35,7 +47,10 @@ export async function PUT(
 
   if (error) {
     if (error.code === "PGRST116") {
-      return NextResponse.json({ error: "Category not found" }, { status: 404 });
+      return NextResponse.json(
+        { error: "Category not found" },
+        { status: 404 },
+      );
     }
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
@@ -45,7 +60,7 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const unauthorized = validateAdmin(request);
   if (unauthorized) return unauthorized;
@@ -53,10 +68,7 @@ export async function DELETE(
   const { id } = await params;
   const supabase = createAdminClient();
 
-  const { error } = await supabase
-    .from("categories")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("categories").delete().eq("id", id);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

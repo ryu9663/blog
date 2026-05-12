@@ -3,51 +3,51 @@
 
 .container {
   min-height: 100vh;
-  background: $GRAY-50;
   padding: 24px;
+  background: $GRAY-50;
 }
 
 .header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  margin-bottom: 24px;
   background: white;
   border-radius: 12px;
   box-shadow: $NORMAL-BOX-SHADOW;
-  padding: 24px 32px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
 }
 
 .title {
+  margin: 0;
   font-size: $LARGE3X;
   font-weight: 700;
   color: $GRAY-900;
-  margin: 0;
 }
 
 .actions {
   display: flex;
-  align-items: center;
   gap: 12px;
+  align-items: center;
 }
 
 .createButton {
+  display: inline-block;
   padding: 12px 24px;
   font-size: $NORMAL;
   font-weight: 600;
   color: white;
+  text-decoration: none;
+  cursor: pointer;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   transition: all 0.2s ease;
-  text-decoration: none;
-  display: inline-block;
 
   &:hover {
-    transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+    transform: translateY(-2px);
   }
 
   &:active {
@@ -57,15 +57,15 @@
 
 .logoutButton {
   padding: 12px 24px;
+  font-family: inherit;
   font-size: $NORMAL;
   font-weight: 600;
   color: $GRAY-700;
+  cursor: pointer;
   background: white;
   border: 2px solid $GRAY-300;
   border-radius: 8px;
-  cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
 
   &:hover {
     background: $GRAY-50;
@@ -78,28 +78,28 @@
 }
 
 .main {
+  padding: 32px;
   background: white;
   border-radius: 12px;
   box-shadow: $NORMAL-BOX-SHADOW;
-  padding: 32px;
 }
 
 .error {
   padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: $NORMAL;
+  color: $PEACH-600;
+  text-align: center;
   background: $PEACH-50;
   border: 1px solid $PEACH-300;
   border-radius: 8px;
-  color: $PEACH-600;
-  font-size: $NORMAL;
-  margin-bottom: 24px;
-  text-align: center;
 }
 
 .loading {
   padding: 60px 20px;
-  text-align: center;
-  color: $GRAY-600;
   font-size: $MEDIUM;
+  color: $GRAY-600;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

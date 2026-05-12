@@ -2,18 +2,17 @@ import { Posts } from "@/app/_components/Posts";
 import { getPosts, getCategories } from "@/app/api";
 import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { SearchParamsType } from "@/types/nextSegmentType";
-import { CategoryType } from "junyeol-components";
+import type { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
 import React from "react";
 import styles from "../../page.module.scss";
 import { getCategoriesAndSubCategories } from "@/app/(blog)/sitemap";
-import { paginatePosts } from "@/libs/paginate";
 
 interface PostsPageFilteredBySubCategory extends SearchParamsType {
-  params: {
+  params: Promise<{
     category: CategoryType;
     subCategory: string;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -40,11 +39,8 @@ export async function generateStaticParams() {
 
 export default async function PostsPageFilteredBySubCategory({
   params,
-  searchParams,
 }: PostsPageFilteredBySubCategory) {
-  const { category, subCategory } = params;
-  const currentPage = Number(searchParams.currentPage);
-  const pageSize = Number(searchParams.pageSize);
+  const { category, subCategory } = await params;
 
   const { allArticles: articles } = await getPosts<{
     allArticles: PostWithoutMarkdownType[];
@@ -76,7 +72,7 @@ export default async function PostsPageFilteredBySubCategory({
 export async function generateMetadata({
   params,
 }: PostsPageFilteredBySubCategory): Promise<Metadata> {
-  const { subCategory } = params;
+  const { subCategory } = await params;
 
   return {
     title: subCategory,

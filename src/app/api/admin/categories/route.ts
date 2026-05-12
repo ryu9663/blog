@@ -31,10 +31,16 @@ export async function POST(request: Request) {
   const { main_category, sub_category } = body;
 
   if (!main_category || typeof main_category !== "string") {
-    return NextResponse.json({ error: "main_category must be a non-empty string" }, { status: 400 });
+    return NextResponse.json(
+      { error: "main_category must be a non-empty string" },
+      { status: 400 },
+    );
   }
   if (!sub_category || typeof sub_category !== "string") {
-    return NextResponse.json({ error: "sub_category must be a non-empty string" }, { status: 400 });
+    return NextResponse.json(
+      { error: "sub_category must be a non-empty string" },
+      { status: 400 },
+    );
   }
 
   const { data, error } = await supabase

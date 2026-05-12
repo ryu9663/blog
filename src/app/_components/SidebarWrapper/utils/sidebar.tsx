@@ -1,6 +1,10 @@
 import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { devideCategoryObject } from "@/utils/getCategoryLink";
-import { CategoryType, LinkType, SubCategoryType } from "junyeol-components";
+import type {
+  CategoryType,
+  LinkType,
+  SubCategoryType,
+} from "junyeol-components";
 import Link from "next/link";
 
 export const formatSidebarData = (
@@ -63,16 +67,13 @@ export const getPublishedSubCategories = ({
   const allPublishedCategories: {
     category: CategoryType;
     subcategories: SubCategoryType[];
-  }[] = categories.map(({ category, subcategories }) => {
-    return {
-      category,
-      subcategories: subcategories.filter((e) => {
-        return !!publishedSubCategories.includes(
-          e.subCategoryLink.props.children,
-        );
-      }),
-    };
-  });
+  }[] = categories.map(({ category, subcategories }) => ({
+    category,
+    subcategories: subcategories.filter(
+      (e) =>
+        !!publishedSubCategories.includes(e.subCategoryLink.props.children),
+    ),
+  }));
 
   return allPublishedCategories;
 };

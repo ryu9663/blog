@@ -16,5 +16,5 @@ export interface NextSegmentType {
 }
 
 export interface SearchParamsType {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }

@@ -43,7 +43,10 @@ export async function POST(request: Request) {
   const height = heightStr ? parseInt(heightStr, 10) : null;
 
   if ((widthStr && isNaN(width!)) || (heightStr && isNaN(height!))) {
-    return NextResponse.json({ error: "Invalid width or height" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Invalid width or height" },
+      { status: 400 },
+    );
   }
 
   const fileBuffer = Buffer.from(await file.arrayBuffer());
@@ -63,10 +66,7 @@ export async function POST(request: Request) {
     await s3Client.send(uploadCommand);
   } catch (error) {
     console.error("S3 upload error:", error);
-    return NextResponse.json(
-      { error: "Upload failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Upload failed" }, { status: 500 });
   }
 
   const { data, error: dbError } = await supabase
@@ -84,16 +84,13 @@ export async function POST(request: Request) {
     .single();
 
   if (dbError) {
-    return NextResponse.json(
-      { error: dbError.message },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: dbError.message }, { status: 500 });
   }
 
   const cloudfrontUrl = `https://${process.env.CLOUDFRONT_DOMAIN}/${s3Key}`;
 
   return NextResponse.json(
     { image: data, url: cloudfrontUrl },
-    { status: 201 }
+    { status: 201 },
   );
 }

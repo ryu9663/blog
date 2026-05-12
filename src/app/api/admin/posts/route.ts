@@ -15,7 +15,7 @@ export async function GET(request: Request) {
       *,
       category:categories(*),
       thumbnail:images(*)
-    `
+    `,
     )
     .order("created_at", { ascending: false });
 
@@ -33,20 +33,40 @@ export async function POST(request: Request) {
   const supabase = createAdminClient();
   const body = await request.json();
 
-  const { title, description, markdown, category_id, thumbnail_id, is_public, datocms_id } = body;
+  const {
+    title,
+    description,
+    markdown,
+    category_id,
+    thumbnail_id,
+    is_public,
+    datocms_id,
+  } = body;
 
   // Input validation
   if (!title || typeof title !== "string") {
-    return NextResponse.json({ error: "title must be a non-empty string" }, { status: 400 });
+    return NextResponse.json(
+      { error: "title must be a non-empty string" },
+      { status: 400 },
+    );
   }
   if (!markdown || typeof markdown !== "string") {
-    return NextResponse.json({ error: "markdown must be a non-empty string" }, { status: 400 });
+    return NextResponse.json(
+      { error: "markdown must be a non-empty string" },
+      { status: 400 },
+    );
   }
   if (!category_id || typeof category_id !== "string") {
-    return NextResponse.json({ error: "category_id must be a non-empty string" }, { status: 400 });
+    return NextResponse.json(
+      { error: "category_id must be a non-empty string" },
+      { status: 400 },
+    );
   }
   if (typeof is_public !== "boolean") {
-    return NextResponse.json({ error: "is_public must be a boolean" }, { status: 400 });
+    return NextResponse.json(
+      { error: "is_public must be a boolean" },
+      { status: 400 },
+    );
   }
 
   const { data, error } = await supabase
@@ -65,7 +85,7 @@ export async function POST(request: Request) {
       *,
       category:categories(*),
       thumbnail:images(*)
-    `
+    `,
     )
     .single();
 

@@ -25,7 +25,7 @@ export function useAdmin() {
         headers,
       });
     },
-    [token]
+    [token],
   );
 
   return {

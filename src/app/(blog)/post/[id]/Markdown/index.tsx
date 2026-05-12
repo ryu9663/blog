@@ -11,7 +11,9 @@ import { Suspense, lazy } from "react";
 import Heading from "@/app/(blog)/post/[id]/Markdown/_components/Heading";
 import CommentScript from "@/app/(blog)/post/[id]/Markdown/_components/CommnetScript";
 
-const Code = lazy(() => import("@/app/(blog)/post/[id]/Markdown/_components/Code"));
+const Code = lazy(
+  () => import("@/app/(blog)/post/[id]/Markdown/_components/Code"),
+);
 
 interface PostProps {
   markdown: PostType["markdown"];
@@ -30,7 +32,11 @@ export default function Markdown({ markdown }: PostProps) {
                 const currentUrl = new URL(window.location.href);
                 const linkUrl = new URL(href, window.location.href);
 
-                return currentUrl.origin === linkUrl.origin && currentUrl.pathname === linkUrl.pathname && Boolean(linkUrl.hash);
+                return (
+                  currentUrl.origin === linkUrl.origin &&
+                  currentUrl.pathname === linkUrl.pathname &&
+                  Boolean(linkUrl.hash)
+                );
               } catch {
                 return false;
               }

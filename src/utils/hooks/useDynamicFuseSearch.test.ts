@@ -80,7 +80,7 @@ describe("useDynamicFuseSearch", () => {
         posts: mockPosts,
         searchQuery: "",
         onSearchResults,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -96,7 +96,7 @@ describe("useDynamicFuseSearch", () => {
         posts: mockPosts,
         searchQuery: "   ",
         onSearchResults,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -112,7 +112,7 @@ describe("useDynamicFuseSearch", () => {
         posts: mockPosts,
         searchQuery: "React",
         onSearchResults,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -133,7 +133,7 @@ describe("useDynamicFuseSearch", () => {
         posts: mockPosts,
         searchQuery: "TypeScript",
         onSearchResults,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -141,9 +141,9 @@ describe("useDynamicFuseSearch", () => {
       const results = onSearchResults.mock.calls[
         onSearchResults.mock.calls.length - 1
       ][0] as PostWithoutMarkdownType[];
-      expect(results.some((r) => r.metaField.title.includes("TypeScript"))).toBe(
-        true
-      );
+      expect(
+        results.some((r) => r.metaField.title.includes("TypeScript")),
+      ).toBe(true);
     });
   });
 
@@ -155,7 +155,7 @@ describe("useDynamicFuseSearch", () => {
         posts: mockPosts,
         searchQuery: "REST API",
         onSearchResults,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -164,7 +164,7 @@ describe("useDynamicFuseSearch", () => {
         onSearchResults.mock.calls.length - 1
       ][0] as PostWithoutMarkdownType[];
       expect(
-        results.some((r) => r.metaField.description.includes("REST API"))
+        results.some((r) => r.metaField.description.includes("REST API")),
       ).toBe(true);
     });
   });
@@ -177,7 +177,7 @@ describe("useDynamicFuseSearch", () => {
         posts: mockPosts,
         searchQuery: "존재하지않는검색어xyz123",
         onSearchResults,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -199,7 +199,7 @@ describe("useDynamicFuseSearch", () => {
           searchQuery,
           onSearchResults,
         }),
-      { initialProps: { searchQuery: "React" } }
+      { initialProps: { searchQuery: "React" } },
     );
 
     await waitFor(() => {
@@ -213,13 +213,15 @@ describe("useDynamicFuseSearch", () => {
     });
 
     await waitFor(() => {
-      expect(onSearchResults.mock.calls.length).toBeGreaterThan(initialCallCount);
+      expect(onSearchResults.mock.calls.length).toBeGreaterThan(
+        initialCallCount,
+      );
       const results = onSearchResults.mock.calls[
         onSearchResults.mock.calls.length - 1
       ][0] as PostWithoutMarkdownType[];
-      expect(results.some((r) => r.metaField.title.includes("TypeScript"))).toBe(
-        true
-      );
+      expect(
+        results.some((r) => r.metaField.title.includes("TypeScript")),
+      ).toBe(true);
     });
   });
 
@@ -231,7 +233,7 @@ describe("useDynamicFuseSearch", () => {
         posts: mockPosts,
         searchQuery: "Reakt", // React의 오타
         onSearchResults,
-      })
+      }),
     );
 
     await waitFor(() => {

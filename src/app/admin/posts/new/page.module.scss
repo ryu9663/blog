@@ -3,40 +3,40 @@
 
 .container {
   min-height: 100vh;
-  background: $GRAY-50;
   padding: 24px;
+  background: $GRAY-50;
 }
 
 .header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 32px;
+  margin-bottom: 24px;
   background: white;
   border-radius: 12px;
   box-shadow: $NORMAL-BOX-SHADOW;
-  padding: 24px 32px;
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
 }
 
 .title {
+  margin: 0;
   font-size: $LARGE3X;
   font-weight: 700;
   color: $GRAY-900;
-  margin: 0;
 }
 
 .backLink {
+  display: inline-block;
   padding: 12px 24px;
   font-size: $NORMAL;
   font-weight: 600;
   color: $GRAY-700;
+  text-decoration: none;
   background: white;
   border: 2px solid $GRAY-300;
   border-radius: 8px;
-  text-decoration: none;
   transition: all 0.2s ease;
-  display: inline-block;
 
   &:hover {
     background: $GRAY-50;
@@ -49,10 +49,10 @@
 }
 
 .main {
+  padding: 32px;
   background: white;
   border-radius: 12px;
   box-shadow: $NORMAL-BOX-SHADOW;
-  padding: 32px;
 }
 
 @media (max-width: 768px) {

@@ -20,26 +20,24 @@ export const Card = ({
   description,
   createdAt,
   subCategory,
-}: CardProps) => {
-  return (
-    <Link href={`/post/${id}`}>
-      <div className={`${styles.card} ${styles["card_box-shadow"]} `}>
-        {Thumbnail}
-        <div className={styles["card_content"]}>
-          <h3 className={`${styles["card_content-title"]}`}>{title}</h3>
-          <div className={`${styles["card_content-description"]}`}>
-            <p>{description}</p>
+}: CardProps) => (
+  <Link href={`/post/${id}`}>
+    <div className={`${styles.card} ${styles["card_box-shadow"]} `}>
+      {Thumbnail}
+      <div className={styles["card_content"]}>
+        <h3 className={`${styles["card_content-title"]}`}>{title}</h3>
+        <div className={`${styles["card_content-description"]}`}>
+          <p>{description}</p>
+        </div>
+        <div className={`${styles["card_content-tagbox"]}`}>
+          <div className={`${styles["card_content-tagbox-createdAt"]}`}>
+            {createdAt}
           </div>
-          <div className={`${styles["card_content-tagbox"]}`}>
-            <div className={`${styles["card_content-tagbox-createdAt"]}`}>
-              {createdAt}
-            </div>
-            <div className={`${styles["card_content-tagbox-tag"]}`}>
-              {subCategory}
-            </div>
+          <div className={`${styles["card_content-tagbox-tag"]}`}>
+            {subCategory}
           </div>
         </div>
       </div>
-    </Link>
-  );
-};
+    </div>
+  </Link>
+);

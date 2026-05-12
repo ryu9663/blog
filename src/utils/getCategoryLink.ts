@@ -1,4 +1,4 @@
-import { CategoryType } from "junyeol-components";
+import type { CategoryType } from "junyeol-components";
 
 export const devideCategoryObject = (
   _category: Partial<Record<CategoryType, string>>,

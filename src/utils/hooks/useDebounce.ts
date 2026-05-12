@@ -9,12 +9,12 @@ import {
 import debounce from "lodash/debounce";
 
 export const useDebounce = (
-  millisec: number = 500
+  millisec: number = 500,
 ): [
   string,
   Dispatch<SetStateAction<string>>,
   string,
-  Dispatch<SetStateAction<string>>
+  Dispatch<SetStateAction<string>>,
 ] => {
   const [input, setInput] = useState<string>("");
   const [query, setQuery] = useState<string>("");
@@ -27,7 +27,7 @@ export const useDebounce = (
     debounce((input: string) => {
       setQuery(input);
     }, millisec),
-    []
+    [],
   );
 
   return [input, setInput, query, setQuery];

@@ -2,7 +2,7 @@ import React from "react";
 import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { getCategories, getPosts } from "@/app/api";
 import { formatSidebarData } from "@/app/_components/SidebarWrapper/utils";
-import Sidebar from "@/app/_components/Sidebar";
+import { SidebarClient } from "@/app/_components/SidebarWrapper/SidebarClient";
 
 export const SidebarWrapper = async () => {
   // Promise.all로 병렬 실행하여 waterfall 제거
@@ -25,5 +25,5 @@ export const SidebarWrapper = async () => {
 
   const transformedCategories = formatSidebarData(subCategories);
 
-  return <Sidebar posts={articles} categories={transformedCategories} />;
+  return <SidebarClient posts={articles} categories={transformedCategories} />;
 };

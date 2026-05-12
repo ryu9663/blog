@@ -69,7 +69,7 @@ export default function PostForm({ initialData, onSubmit }: PostFormProps) {
 
   // Handle text/select input changes
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value, type } = e.target;
 
@@ -255,7 +255,11 @@ export default function PostForm({ initialData, onSubmit }: PostFormProps) {
       </div>
 
       <div className={styles.actions}>
-        <button type="submit" className={styles.submitButton} disabled={isSubmitting}>
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={isSubmitting}
+        >
           {isSubmitting ? "저장 중..." : isEditMode ? "수정" : "저장"}
         </button>
       </div>

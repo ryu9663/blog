@@ -4,7 +4,7 @@ import { validateAdmin } from "../../auth";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const unauthorized = validateAdmin(request);
   if (unauthorized) return unauthorized;
@@ -19,7 +19,7 @@ export async function GET(
       *,
       category:categories(*),
       thumbnail:images(*)
-    `
+    `,
     )
     .eq("id", id)
     .single();
@@ -36,7 +36,7 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const unauthorized = validateAdmin(request);
   if (unauthorized) return unauthorized;
@@ -45,13 +45,30 @@ export async function PUT(
   const supabase = createAdminClient();
   const body = await request.json();
 
-  const { title, description, markdown, category_id, thumbnail_id, is_public, datocms_id } = body;
+  const {
+    title,
+    description,
+    markdown,
+    category_id,
+    thumbnail_id,
+    is_public,
+    datocms_id,
+  } = body;
 
-  if (title !== undefined && (typeof title !== "string" || title.trim() === "")) {
-    return NextResponse.json({ error: "title must be a non-empty string" }, { status: 400 });
+  if (
+    title !== undefined &&
+    (typeof title !== "string" || title.trim() === "")
+  ) {
+    return NextResponse.json(
+      { error: "title must be a non-empty string" },
+      { status: 400 },
+    );
   }
   if (is_public !== undefined && typeof is_public !== "boolean") {
-    return NextResponse.json({ error: "is_public must be a boolean" }, { status: 400 });
+    return NextResponse.json(
+      { error: "is_public must be a boolean" },
+      { status: 400 },
+    );
   }
 
   const updates: Record<string, unknown> = {};
@@ -72,7 +89,7 @@ export async function PUT(
       *,
       category:categories(*),
       thumbnail:images(*)
-    `
+    `,
     )
     .single();
 
@@ -88,7 +105,7 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const unauthorized = validateAdmin(request);
   if (unauthorized) return unauthorized;
@@ -96,10 +113,7 @@ export async function DELETE(
   const { id } = await params;
   const supabase = createAdminClient();
 
-  const { error } = await supabase
-    .from("posts")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("posts").delete().eq("id", id);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

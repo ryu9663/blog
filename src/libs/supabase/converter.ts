@@ -1,4 +1,4 @@
-import { CategoryType } from "junyeol-components";
+import type { CategoryType } from "junyeol-components";
 import { CLOUDFRONT_DOMAIN } from "@/config/dataSource";
 import { IMAGE_SIZE_IN_POSTS } from "@/utils/constant";
 import type {
@@ -22,9 +22,7 @@ const getCloudFrontUrl = (s3Key: string): string => {
  * Supabase PostRow를 기존 PostType으로 변환
  */
 export const toPostType = (row: PostWithRelations): PostType => {
-  const imageUrl = row.thumbnail
-    ? getCloudFrontUrl(row.thumbnail.s3_key)
-    : "";
+  const imageUrl = row.thumbnail ? getCloudFrontUrl(row.thumbnail.s3_key) : "";
 
   const responsiveImage: ResponsiveImageType = row.thumbnail
     ? {
@@ -86,13 +84,11 @@ export const toPostWithoutMarkdownType = (
  */
 export const toCategoryFormat = (
   row: CategoryRow,
-): Pick<PostWithoutMarkdownType, "category" | "_createdAt"> => {
-  return {
-    _createdAt: row.created_at,
+): Pick<PostWithoutMarkdownType, "category" | "_createdAt"> => ({
+  _createdAt: row.created_at,
+  category: {
     category: {
-      category: {
-        [row.main_category as CategoryType]: row.sub_category,
-      },
+      [row.main_category as CategoryType]: row.sub_category,
     },
-  };
-};
+  },
+});

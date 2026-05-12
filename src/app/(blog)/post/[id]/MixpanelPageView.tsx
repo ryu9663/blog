@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import "@/types/mixpanel.d";
 
 interface MixpanelPageViewProps {
   title: string;

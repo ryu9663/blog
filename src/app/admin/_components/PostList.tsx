@@ -82,12 +82,16 @@ export default function PostList({ posts, onDelete }: PostListProps) {
                 <div className={styles.titleContent}>
                   <span className={styles.title}>{post.title}</span>
                   {post.description && (
-                    <span className={styles.description}>{post.description}</span>
+                    <span className={styles.description}>
+                      {post.description}
+                    </span>
                   )}
                 </div>
               </td>
               <td className={styles.categoryCell}>
-                <span className={styles.category}>{getCategoryLabel(post.category)}</span>
+                <span className={styles.category}>
+                  {getCategoryLabel(post.category)}
+                </span>
               </td>
               <td className={styles.statusCell}>
                 <span
@@ -101,7 +105,10 @@ export default function PostList({ posts, onDelete }: PostListProps) {
               <td className={styles.dateCell}>{formatDate(post.created_at)}</td>
               <td className={styles.actionsCell}>
                 <div className={styles.actions}>
-                  <Link href={`/admin/posts/${post.id}/edit`} className={styles.editButton}>
+                  <Link
+                    href={`/admin/posts/${post.id}/edit`}
+                    className={styles.editButton}
+                  >
                     수정
                   </Link>
                   <button

@@ -1,7 +1,6 @@
 import { getPosts } from "@/app/api";
 import { Metadata } from "next";
-import { PostType, PostWithoutMarkdownType } from "@/types/apiResponseType";
-import { SearchParamsType } from "@/types/nextSegmentType";
+import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { PostsWithSearch } from "@/app/_components/PostsWithSearch";
 import styles from "./page.module.scss";
 // ** pagination으로 바꿀때 주석 해제 **//
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
   description: "개발자 류준열의 기술 블로그",
 };
 
-export default async function Home({ searchParams }: SearchParamsType) {
+export default async function Home() {
   // ** pagination으로 바꿀때 주석 해제 **//
 
   // const currentPage = Number(searchParams.currentPage);

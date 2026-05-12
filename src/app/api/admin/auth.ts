@@ -22,10 +22,7 @@ export function validateAdmin(request: Request): NextResponse | null {
 
   // Check for Bearer token pattern
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // Extract token from "Bearer <token>"
@@ -35,10 +32,7 @@ export function validateAdmin(request: Request): NextResponse | null {
   const adminPassword = process.env.ADMIN_PASSWORD;
 
   if (!adminPassword) {
-    return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // Use timing-safe comparison to prevent timing attacks
@@ -50,23 +44,14 @@ export function validateAdmin(request: Request): NextResponse | null {
     if (tokenBuffer.length !== passwordBuffer.length) {
       const dummyBuffer = Buffer.alloc(passwordBuffer.length);
       timingSafeEqual(passwordBuffer, dummyBuffer);
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     if (!timingSafeEqual(tokenBuffer, passwordBuffer)) {
-      return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
   } catch {
-    return NextResponse.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
   // Authentication successful

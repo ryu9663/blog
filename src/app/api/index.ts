@@ -8,4 +8,7 @@ const api = DATA_SOURCE === "supabase" ? supabase : dato;
 export const { getPosts, getPostById, getCategories, getPostIds } = api;
 
 // 타입 re-export (기존 코드 호환성 유지)
-export type { PostType, PostWithoutMarkdownType } from "@/types/apiResponseType";
+export type {
+  PostType,
+  PostWithoutMarkdownType,
+} from "@/types/apiResponseType";

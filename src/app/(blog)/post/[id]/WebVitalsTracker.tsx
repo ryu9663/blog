@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { onLCP, onFCP, onCLS, onINP, onTTFB, Metric } from "web-vitals";
-import "@/types/mixpanel.d";
 
 interface WebVitalsTrackerProps {
   title: string;

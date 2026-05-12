@@ -6,32 +6,32 @@
 
 .searchBox {
   position: relative;
-  width: 100%;
-  max-width: 600px;
   display: flex;
   align-items: center;
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
   background: white;
+  border: 1px solid #e2e8f0;
   border-radius: 50px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  overflow: hidden;
 }
 
 .searchIcon {
-  padding: 0 1rem;
-  color: #9ca3af;
-  font-size: 1.2rem;
   flex-shrink: 0;
+  padding: 0 1rem;
+  font-size: 1.2rem;
+  color: #9ca3af;
 }
 
 .searchInput {
   flex: 1;
   padding: 1rem 0;
-  border: none;
-  outline: none;
-  background: transparent;
   font-size: 1rem;
   color: #374151;
+  background: transparent;
+  border: none;
+  outline: none;
 
   &::placeholder {
     color: #9ca3af;

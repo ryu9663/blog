@@ -1,5 +1,5 @@
 type WindowWithDataLayer = Window & {
-  dataLayer: Record<string, any>[];
+  dataLayer: { event: string; page: string }[];
 };
 
 declare const window: WindowWithDataLayer;

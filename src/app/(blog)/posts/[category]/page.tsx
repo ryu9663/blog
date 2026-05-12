@@ -2,16 +2,16 @@ import { Posts } from "@/app/_components/Posts";
 import { getPosts, getCategories } from "@/app/api";
 import { PostWithoutMarkdownType } from "@/types/apiResponseType";
 import { SearchParamsType } from "@/types/nextSegmentType";
-import { CategoryType } from "junyeol-components";
+import type { CategoryType } from "junyeol-components";
 import { Metadata } from "next";
 import React from "react";
 import styles from "../page.module.scss";
 import { getCategoriesAndSubCategories } from "@/app/(blog)/sitemap";
 
 interface PostsPageFilteredByCategory extends SearchParamsType {
-  params: {
+  params: Promise<{
     category: CategoryType;
-  };
+  }>;
 }
 
 export async function generateStaticParams() {
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 export default async function PostsPageFilteredByCategory({
   params,
 }: PostsPageFilteredByCategory) {
-  const { category } = params;
+  const { category } = await params;
   // const currentPage = Number(searchParams.currentPage);
   // const pageSize = Number(searchParams.pageSize);
   const { allArticles: articles } = await getPosts<{
@@ -42,7 +42,7 @@ export default async function PostsPageFilteredByCategory({
   }>();
 
   const filteredArticles = articles.filter(
-    (article) => !!article.category.category[category]
+    (article) => !!article.category.category[category],
   );
   // ** pagination으로 바꿀때 주석 해제 **//
 
@@ -65,7 +65,7 @@ export default async function PostsPageFilteredByCategory({
 export async function generateMetadata({
   params,
 }: PostsPageFilteredByCategory): Promise<Metadata> {
-  const { category } = params;
+  const { category } = await params;
 
   return {
     title: category,

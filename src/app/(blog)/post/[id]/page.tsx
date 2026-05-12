@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import styles from "./index.module.scss";
 
 interface PostPageParams {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function generateStaticParams() {
@@ -21,10 +21,11 @@ export async function generateStaticParams() {
 }
 
 export default async function PostPageFilteredById({ params }: PostPageParams) {
+  const { id } = await params;
   const {
     article: { markdown, metaField },
   } = await getPostById<Pick<PostType, "markdown" | "metaField">>({
-    postId: params.id,
+    postId: id,
   });
 
   return (
@@ -40,8 +41,9 @@ export default async function PostPageFilteredById({ params }: PostPageParams) {
 export async function generateMetadata({
   params,
 }: PostPageParams): Promise<Metadata> {
+  const { id } = await params;
   const data = await getPostById<Pick<PostType, "markdown" | "metaField">>({
-    postId: params.id,
+    postId: id,
   });
 
   const { metaField } = data.article;
